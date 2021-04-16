@@ -58,9 +58,17 @@
                 "NU1605"
               ]
             },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
               "version": "[5.0.5, )"
+            },
+            "Microsoft.Graph": {
+              "target": "Package",
+              "version": "[3.29.0, )"
             },
             "Microsoft.Identity.Web": {
               "target": "Package",

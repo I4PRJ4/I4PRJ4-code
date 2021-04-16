@@ -23,8 +23,6 @@ C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\n
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Connections.Abstractions.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.AspNetCore.CookiePolicy.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Cors.dll
-C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Cryptography.Internal.dll
-C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.AspNetCore.DataProtection.Abstractions.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.AspNetCore.DataProtection.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.AspNetCore.DataProtection.Extensions.dll
@@ -99,7 +97,6 @@ C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\n
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.Configuration.UserSecrets.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.Configuration.Xml.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.Diagnostics.HealthChecks.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.FileProviders.Abstractions.dll
@@ -110,8 +107,6 @@ C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\n
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.Hosting.Abstractions.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.Hosting.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.Http.dll
-C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.Identity.Core.dll
-C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.Localization.Abstractions.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.Localization.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\Microsoft.Extensions.Logging.Abstractions.dll
@@ -157,7 +152,6 @@ C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\n
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\System.Data.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\System.Diagnostics.Contracts.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\System.Diagnostics.Debug.dll
-C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\System.Diagnostics.DiagnosticSource.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\System.Diagnostics.EventLog.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\System.Diagnostics.FileVersionInfo.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\refs\System.Diagnostics.Process.dll
@@ -376,3 +370,18 @@ C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\obj\Debug\n
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\obj\Debug\net5.0\ref\StudieTips.dll
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\obj\Debug\net5.0\StudieTips.pdb
 C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\obj\Debug\net5.0\StudieTips.genruntimeconfig.cache
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\Microsoft.Graph.dll
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\Microsoft.Graph.Core.dll
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\obj\Debug\net5.0\Razor\Views\Role\Create.cshtml.g.cs
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\obj\Debug\net5.0\Razor\Views\Role\Index.cshtml.g.cs
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\Marius\source\repos\semester4\Projekt\StudieTips\StudieTips\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
