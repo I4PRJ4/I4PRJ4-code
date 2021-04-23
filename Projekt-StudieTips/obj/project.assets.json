@@ -6146,11 +6146,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\EE199\\OneDrive\\Skrivebord\\PRJ4\\code\\I4PRJ4-code\\I4PRJ4-code\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
+      "projectUniqueName": "C:\\Users\\EE199\\OneDrive\\Skrivebord\\PRJ4\\I4PRJ4-code\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
       "projectName": "Projekt-StudieTips",
-      "projectPath": "C:\\Users\\EE199\\OneDrive\\Skrivebord\\PRJ4\\code\\I4PRJ4-code\\I4PRJ4-code\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
+      "projectPath": "C:\\Users\\EE199\\OneDrive\\Skrivebord\\PRJ4\\I4PRJ4-code\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
       "packagesPath": "C:\\Users\\EE199\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\EE199\\OneDrive\\Skrivebord\\PRJ4\\code\\I4PRJ4-code\\I4PRJ4-code\\Projekt-StudieTips\\obj\\",
+      "outputPath": "C:\\Users\\EE199\\OneDrive\\Skrivebord\\PRJ4\\I4PRJ4-code\\Projekt-StudieTips\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\EE199\\AppData\\Roaming\\NuGet\\NuGet.Config",
