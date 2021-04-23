@@ -13,6 +13,8 @@ namespace Projekt_StudieTips.Data
             : base(options) { }
         public DbSet<Degree> Degrees { get; set; }
 
+        public DbSet<Course> Courses { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

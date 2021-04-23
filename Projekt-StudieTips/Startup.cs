@@ -29,6 +29,7 @@ namespace Projekt_StudieTips
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddScoped<DegreeRepository>();
+            services.AddScoped<CourseRepository>();
 
             services.AddDefaultIdentity<IdentityUser>(options => {
                 options.SignIn.RequireConfirmedAccount = false;
