@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Projekt_StudieTips.Models.Degree>
+
+@{
+    ViewData["Title"] = "Studieretninger";
+}
+
+<h1>Studieretninger</h1>
+
+@if (User.HasClaim(c => c.Type == "Admin"))
+{
+<p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <div>
+        <select name="DegreeId">
+            @if (Model != null)
+            {
+
+                foreach (var item in Model)
+                {
+                    <option value="@item.DegreeId">@item.DegreeName</option>
+                }
+            }
+
+        </select>
+
+       
+        <input type="submit" value="OK"/>
+
+
+        <p><a asp-controller="Home" asp-action="Index">Tilbage</a></p>
+    </div>
+}
