@@ -461,3 +461,8 @@ C:\IKT\Semesterprojekt4\Projekt-StudieTips\obj\Debug\net5.0\Razor\Views\Courses\
 C:\IKT\Semesterprojekt4\Projekt-StudieTips\obj\Debug\net5.0\Razor\Views\Courses\Details.cshtml.g.cs
 C:\IKT\Semesterprojekt4\Projekt-StudieTips\obj\Debug\net5.0\Razor\Views\Courses\Edit.cshtml.g.cs
 C:\IKT\Semesterprojekt4\Projekt-StudieTips\obj\Debug\net5.0\Razor\Views\Courses\Index.cshtml.g.cs
+C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\obj\Debug\net5.0\Razor\Views\Courses\Create.cshtml.g.cs
+C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\obj\Debug\net5.0\Razor\Views\Courses\Delete.cshtml.g.cs
+C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\obj\Debug\net5.0\Razor\Views\Courses\Details.cshtml.g.cs
+C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\obj\Debug\net5.0\Razor\Views\Courses\Edit.cshtml.g.cs
+C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\obj\Debug\net5.0\Razor\Views\Courses\Index.cshtml.g.cs
