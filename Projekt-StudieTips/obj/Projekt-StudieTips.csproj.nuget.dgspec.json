@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\augus\\OneDrive - Aarhus Universitet\\4SEMESTER\\PRJ\\Studietips\\Projekt-StudieTips\\Projekt-StudieTips.csproj": {}
+    "C:\\IKT\\Semesterprojekt4\\Projekt-StudieTips\\Projekt-StudieTips.csproj": {}
   },
   "projects": {
-    "C:\\Users\\augus\\OneDrive - Aarhus Universitet\\4SEMESTER\\PRJ\\Studietips\\Projekt-StudieTips\\Projekt-StudieTips.csproj": {
+    "C:\\IKT\\Semesterprojekt4\\Projekt-StudieTips\\Projekt-StudieTips.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\augus\\OneDrive - Aarhus Universitet\\4SEMESTER\\PRJ\\Studietips\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
+        "projectUniqueName": "C:\\IKT\\Semesterprojekt4\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
         "projectName": "Projekt-StudieTips",
-        "projectPath": "C:\\Users\\augus\\OneDrive - Aarhus Universitet\\4SEMESTER\\PRJ\\Studietips\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
-        "packagesPath": "C:\\Users\\augus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\augus\\OneDrive - Aarhus Universitet\\4SEMESTER\\PRJ\\Studietips\\Projekt-StudieTips\\obj\\",
+        "projectPath": "C:\\IKT\\Semesterprojekt4\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
+        "packagesPath": "C:\\Users\\Peter\\.nuget\\packages\\",
+        "outputPath": "C:\\IKT\\Semesterprojekt4\\Projekt-StudieTips\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\augus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Peter\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
