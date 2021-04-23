@@ -19,9 +19,8 @@ namespace Projekt_StudieTips.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(int DegreeId)
+        public IActionResult Index()
         {
-            ViewBag.Degree = DegreeId;
             return View();
         }
 
