@@ -26,8 +26,8 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="CourseId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="hidden" name="id" value="@Model.CourseId"/>
+        <input type="submit" value="" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>

@@ -20,7 +20,7 @@ namespace Projekt_StudieTips.Controllers
         {
             _context = context;
             _degreeRepository = degreeRepository;
-            CreateDegrees();
+           // CreateDegrees();
         }
 
         private void CreateDegrees()

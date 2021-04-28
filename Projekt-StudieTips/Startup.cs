@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Projekt_StudieTips.Data;
 using System.Linq;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 using Projekt_StudieTips.Repository;
 
 namespace Projekt_StudieTips
@@ -92,6 +93,10 @@ namespace Projekt_StudieTips
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "courses",
+                    pattern: "{controller=Courses}/{action=Index}/{DegreeId?}");
                 endpoints.MapRazorPages();
             });
         }

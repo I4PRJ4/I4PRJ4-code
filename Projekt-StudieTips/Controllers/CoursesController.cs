@@ -20,7 +20,7 @@ namespace Projekt_StudieTips.Controllers
         {
             _context = context;
             _courseRepository = courseRepository;
-            CreateCourses();
+           // CreateCourses();
 
         }
 
@@ -36,9 +36,9 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Courses
-        public IActionResult Index(int DegreeId)
+        public async Task<IActionResult> Index(int? DegreeId)
         {
-            List<Course> courses = getCourses(DegreeId);
+            List<Course> courses = await _context.Courses.Where(i => i.DegreeId == DegreeId).ToListAsync();
 
             return View(courses);
         }
