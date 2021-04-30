@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Projekt_StudieTips.Data;
 using Projekt_StudieTips.Models;
+using Projekt_StudieTips.Models.ViewModels;
 using Projekt_StudieTips.Repository;
 
 namespace Projekt_StudieTips.Controllers
@@ -78,9 +79,13 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Courses/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            DegreeCourse ViewModeDegreeCourse = new DegreeCourse();
+
+            ViewModeDegreeCourse.Degrees = await _context.Degrees.ToListAsync();
+
+            return View(ViewModeDegreeCourse);
         }
 
         // POST: Courses/Create
@@ -94,9 +99,10 @@ namespace Projekt_StudieTips.Controllers
             {
                 _context.Add(course);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId});
             }
-            return View(course);
+            return View();
         }
 
         // GET: Courses/Edit/5
