@@ -1,6 +1,7 @@
-﻿@model IEnumerable<Projekt_StudieTips.Models.Course>
+﻿@using Microsoft.CodeAnalysis
+@model IEnumerable<Projekt_StudieTips.Models.Course>
 
-    <link rel="stylesheet" href="~/css/course.css" />
+<link rel="stylesheet" href="~/css/course.css" />
 
 @{
     ViewData["Title"] = "Index";
@@ -21,14 +22,46 @@
 </div>
 }
 
+
 <div id="CenterEverything">
     <select name="Course" id="Courses">
         @foreach (var item in Model)
         {
-            <option value="@Html.DisplayFor(modelItem => item.CourseName)">@Html.DisplayFor(modelItem => item.CourseName)</option>
+            <option value="@Html.DisplayFor(modelItem => item.CourseId)">@Html.DisplayFor(modelItem => item.CourseName)</option>
         }
-    </select>
+        </select>
     <br />
     <br />
     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><input class="gotobtn" type="submit" value="Gå til"></a>
-</div>
+    </div>
+
+
+@if (User.HasClaim(c => c.Type == "Admin"))
+{
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderBy(d => d.CourseName))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseName)
+                    </td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CourseId">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.CourseId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
