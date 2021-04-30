@@ -13,14 +13,14 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
-#line 1 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\_ViewImports.cshtml"
+#line 1 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\_ViewImports.cshtml"
 using Projekt_StudieTips;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\_ViewImports.cshtml"
+#line 2 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\_ViewImports.cshtml"
 using Projekt_StudieTips.Models;
 
 #line default
@@ -60,7 +60,7 @@ using Projekt_StudieTips.Models;
         {
             WriteLiteral("\r\n");
 #nullable restore
-#line 3 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 3 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
   
     ViewData["Title"] = "Studieretninger";
 
@@ -69,7 +69,7 @@ using Projekt_StudieTips.Models;
 #nullable disable
             WriteLiteral("\r\n<h1>Studieretninger</h1>\r\n\r\n");
 #nullable restore
-#line 9 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 9 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
  if (User.HasClaim(c => c.Type == "Admin"))
 {
 
@@ -94,14 +94,14 @@ using Projekt_StudieTips.Models;
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n    </p>\r\n");
 #nullable restore
-#line 14 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 14 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
 }
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 15 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 15 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
  using (Html.BeginForm("Index", "Courses", FormMethod.Post))
 {
 
@@ -110,7 +110,7 @@ using Projekt_StudieTips.Models;
 #nullable disable
             WriteLiteral("    <div>\r\n        <select name=\"DegreeId\">\r\n");
 #nullable restore
-#line 19 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 19 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
              if (Model != null)
             {
 
@@ -123,7 +123,7 @@ using Projekt_StudieTips.Models;
             WriteLiteral("                    ");
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "abc429c7f49a5a25cf7a717feb5793be3dd92c476974", async() => {
 #nullable restore
-#line 24 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 24 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
                                               Write(item.DegreeName);
 
 #line default
@@ -135,7 +135,7 @@ using Projekt_StudieTips.Models;
             __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_TagHelpers_OptionTagHelper);
             BeginWriteTagHelperAttribute();
 #nullable restore
-#line 24 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 24 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
                        WriteLiteral(item.DegreeId);
 
 #line default
@@ -153,7 +153,7 @@ using Projekt_StudieTips.Models;
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
 #nullable restore
-#line 25 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 25 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
                 }
             }
 
@@ -180,7 +180,7 @@ using Projekt_StudieTips.Models;
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("</p>\r\n    </div>\r\n");
 #nullable restore
-#line 36 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 36 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
 }
 
 #line default

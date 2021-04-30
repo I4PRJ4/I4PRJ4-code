@@ -15,9 +15,11 @@
 
 @if (User.HasClaim(c => c.Type == "Admin"))
 {
-    <p id="CenterEverything">
-        <a asp-action="Create" asp-route-DegreeId="@ViewBag.DegreeId">Create New</a>
+<div id="CenterEverything">
+    <p>
+        <a asp-action="Create">Create New</a>
     </p>
+</div>
 }
 
 
