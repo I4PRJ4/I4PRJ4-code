@@ -12,6 +12,13 @@
 <br />
 <br />
 
+@if (User.HasClaim(c => c.Type == "Admin"))
+{
+    <p id="CenterEverything">
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
 <div id="CenterEverything">
     <select name="Course" id="Courses">
         @foreach (var item in Model)
