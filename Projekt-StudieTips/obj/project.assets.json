@@ -7816,19 +7816,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shynt\\.nuget\\packages\\": {}
+    "C:\\Users\\augus\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\shynt\\source\\repos\\Projekt\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
+      "projectUniqueName": "C:\\Users\\augus\\OneDrive - Aarhus Universitet\\4SEMESTER\\PRJ\\Studietips\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
       "projectName": "Projekt-StudieTips",
-      "projectPath": "C:\\Users\\shynt\\source\\repos\\Projekt\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
-      "packagesPath": "C:\\Users\\shynt\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shynt\\source\\repos\\Projekt\\Projekt-StudieTips\\obj\\",
+      "projectPath": "C:\\Users\\augus\\OneDrive - Aarhus Universitet\\4SEMESTER\\PRJ\\Studietips\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
+      "packagesPath": "C:\\Users\\augus\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\augus\\OneDrive - Aarhus Universitet\\4SEMESTER\\PRJ\\Studietips\\Projekt-StudieTips\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\shynt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\augus\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
