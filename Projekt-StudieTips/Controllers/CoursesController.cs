@@ -41,6 +41,8 @@ namespace Projekt_StudieTips.Controllers
         {
             List<Course> courses = await _context.Courses.Where(i => i.DegreeId == DegreeId).ToListAsync();
 
+            ViewBag.DegreeId = DegreeId;
+
             return View(courses);
         }
 
@@ -79,9 +81,11 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Courses/Create
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int? DegreeId)
         {
             DegreeCourse ViewModeDegreeCourse = new DegreeCourse();
+
+            ViewBag.DegreeId = DegreeId;
 
             ViewModeDegreeCourse.Degrees = await _context.Degrees.ToListAsync();
 
@@ -151,7 +155,7 @@ namespace Projekt_StudieTips.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId });    
             }
             return View(course);
         }
@@ -182,7 +186,7 @@ namespace Projekt_StudieTips.Controllers
             var course = await _context.Courses.FindAsync(id);
             _context.Courses.Remove(course);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId });
         }
 
         private bool CourseExists(int id)

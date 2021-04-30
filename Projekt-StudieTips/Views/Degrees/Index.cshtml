@@ -19,7 +19,7 @@
             @if (Model != null)
             {
 
-                foreach (var item in Model)
+                foreach (var item in Model.OrderBy(d=>d.DegreeName))
                 {
                     <option value="@item.DegreeId">@item.DegreeName</option>
                 }

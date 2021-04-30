@@ -16,36 +16,42 @@
 @if (User.HasClaim(c => c.Type == "Admin"))
 {
     <p id="CenterEverything">
-        <a asp-action="Create">Create New</a>
+        <a asp-action="Create" asp-route-DegreeId="@ViewBag.DegreeId">Create New</a>
     </p>
 }
 
 
 <div id="CenterEverything">
     <select name="Course" id="Courses">
-        @foreach (var item in Model)
+        @foreach (var item in Model.OrderBy(d=> d.CourseName))
         {
             <option value="@Html.DisplayFor(modelItem => item.CourseId)">@Html.DisplayFor(modelItem => item.CourseName)</option>
         }
-        </select>
+    </select>
     <br />
     <br />
     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><input class="gotobtn" type="submit" value="Gå til"></a>
-    </div>
+</div>
 
 
-@if (User.HasClaim(c => c.Type == "Admin"))
-{
-    <table>
-        <thead>
+<br />
+<br />
+<br />
+<br />
+
+<div>
+    @if (User.HasClaim(c => c.Type == "Admin"))
+    {
+        <table>
+            <thead>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.CourseName)
                 </th>
                 <th></th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             @foreach (var item in Model.OrderBy(d => d.CourseName))
             {
                 <tr>
@@ -59,7 +65,7 @@
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
-}
-
+            </tbody>
+        </table>
+    }
+</div>
