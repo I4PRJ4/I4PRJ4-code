@@ -44,22 +44,6 @@ namespace Projekt_StudieTips.Controllers
             return View(courses);
         }
 
-        private List<Course> getCourses(int DegreeId)
-        {
-            List<Course> courses = new List<Course>();
-
-            foreach (var c in _context.Courses)
-            {
-                if (DegreeId == c.DegreeId)
-                {
-                    courses.Add(c);
-                }
-
-            }
-
-            return courses;
-        }
-
         // GET: Courses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
