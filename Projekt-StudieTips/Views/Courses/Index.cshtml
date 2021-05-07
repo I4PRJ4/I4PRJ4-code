@@ -24,7 +24,7 @@
 
 @using (Html.BeginForm("Redirect", "Courses", FormMethod.Post))
 {
-<div class="CenterEverything">
+<div id="CenterEverything">
     <select name="CourseId">
         @foreach (var item in Model.OrderBy(d => d.CourseName))
         {
@@ -41,6 +41,8 @@
         <input class="gotobtn" type="submit" name="submit" value="Edit">
         <input class="gotobtn" type="submit" name="submit" value="Delete">
     }
+    <br/>
+    <br/>
     <p><a asp-controller="Degrees" asp-route-id="@ViewBag.DegreeId" asp-action="Index">Tilbage</a></p>
 </div>
 }
