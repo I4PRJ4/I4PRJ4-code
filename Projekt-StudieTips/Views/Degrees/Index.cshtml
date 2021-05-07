@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Projekt_StudieTips.Models.Degree>
 
+    <link rel="stylesheet" href="~/css/course.css" />
+
 @{
     ViewData["Title"] = "Studieretninger";
 }
@@ -28,7 +30,7 @@
         </select>
 
        
-        <input type="submit" value="OK"/>
+        <input class="gotobtn" type="submit" value="OK" />
 
 
         <p><a asp-controller="Home" asp-action="Index">Tilbage</a></p>

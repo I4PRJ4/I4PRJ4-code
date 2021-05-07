@@ -13,26 +13,28 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
-#line 1 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\_ViewImports.cshtml"
+#line 1 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\_ViewImports.cshtml"
 using Projekt_StudieTips;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\_ViewImports.cshtml"
+#line 2 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\_ViewImports.cshtml"
 using Projekt_StudieTips.Models;
 
 #line default
 #line hidden
 #nullable disable
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"abc429c7f49a5a25cf7a717feb5793be3dd92c47", @"/Views/Degrees/Index.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5128d5f7fef834c7d2e033c3dc13326ca3fab111", @"/Views/Degrees/Index.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"384616d1f7b15a11f453361d921f37866509c653", @"/Views/_ViewImports.cshtml")]
     public class Views_Degrees_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Projekt_StudieTips.Models.Degree>>
     {
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Create", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_1 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Home", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_2 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Index", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("rel", new global::Microsoft.AspNetCore.Html.HtmlString("stylesheet"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_1 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("href", new global::Microsoft.AspNetCore.Html.HtmlString("~/css/course.css"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_2 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Create", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_3 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Home", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_4 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Index", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         #line hidden
         #pragma warning disable 0649
         private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext __tagHelperExecutionContext;
@@ -53,14 +55,30 @@ using Projekt_StudieTips.Models;
                 return __backed__tagHelperScopeManager;
             }
         }
+        private global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper;
         private global::Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper;
         private global::Microsoft.AspNetCore.Mvc.TagHelpers.OptionTagHelper __Microsoft_AspNetCore_Mvc_TagHelpers_OptionTagHelper;
         #pragma warning disable 1998
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
-            WriteLiteral("\r\n");
+            WriteLiteral("\r\n    ");
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "5128d5f7fef834c7d2e033c3dc13326ca3fab1115136", async() => {
+            }
+            );
+            __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
+            __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper);
+            __tagHelperExecutionContext.AddHtmlAttribute(__tagHelperAttribute_0);
+            __tagHelperExecutionContext.AddHtmlAttribute(__tagHelperAttribute_1);
+            await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+            if (!__tagHelperExecutionContext.Output.IsContentModified)
+            {
+                await __tagHelperExecutionContext.SetOutputContentAsync();
+            }
+            Write(__tagHelperExecutionContext.Output);
+            __tagHelperExecutionContext = __tagHelperScopeManager.End();
+            WriteLiteral("\r\n\r\n");
 #nullable restore
-#line 3 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 5 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
   
     ViewData["Title"] = "Studieretninger";
 
@@ -69,7 +87,7 @@ using Projekt_StudieTips.Models;
 #nullable disable
             WriteLiteral("\r\n<h1>Studieretninger</h1>\r\n\r\n");
 #nullable restore
-#line 9 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 11 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
  if (User.HasClaim(c => c.Type == "Admin"))
 {
 
@@ -83,8 +101,8 @@ using Projekt_StudieTips.Models;
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper>();
             __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper);
-            __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper.Action = (string)__tagHelperAttribute_0.Value;
-            __tagHelperExecutionContext.AddTagHelperAttribute(__tagHelperAttribute_0);
+            __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper.Action = (string)__tagHelperAttribute_2.Value;
+            __tagHelperExecutionContext.AddTagHelperAttribute(__tagHelperAttribute_2);
             await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
             if (!__tagHelperExecutionContext.Output.IsContentModified)
             {
@@ -94,14 +112,14 @@ using Projekt_StudieTips.Models;
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n    </p>\r\n");
 #nullable restore
-#line 14 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 16 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
 }
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 15 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 17 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
  using (Html.BeginForm("Index", "Courses", FormMethod.Post))
 {
 
@@ -110,7 +128,7 @@ using Projekt_StudieTips.Models;
 #nullable disable
             WriteLiteral("    <div>\r\n        <select name=\"DegreeId\">\r\n");
 #nullable restore
-#line 19 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 21 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
              if (Model != null)
             {
 
@@ -123,7 +141,7 @@ using Projekt_StudieTips.Models;
             WriteLiteral("                    ");
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "abc429c7f49a5a25cf7a717feb5793be3dd92c476606", async() => {
 #nullable restore
-#line 24 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 26 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
                                               Write(item.DegreeName);
 
 #line default
@@ -135,7 +153,7 @@ using Projekt_StudieTips.Models;
             __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_TagHelpers_OptionTagHelper);
             BeginWriteTagHelperAttribute();
 #nullable restore
-#line 24 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 26 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
                        WriteLiteral(item.DegreeId);
 
 #line default
@@ -153,7 +171,7 @@ using Projekt_StudieTips.Models;
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
 #nullable restore
-#line 25 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 27 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
                 }
             }
 
@@ -167,10 +185,10 @@ using Projekt_StudieTips.Models;
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper>();
             __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper);
-            __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper.Controller = (string)__tagHelperAttribute_1.Value;
-            __tagHelperExecutionContext.AddTagHelperAttribute(__tagHelperAttribute_1);
-            __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper.Action = (string)__tagHelperAttribute_2.Value;
-            __tagHelperExecutionContext.AddTagHelperAttribute(__tagHelperAttribute_2);
+            __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper.Controller = (string)__tagHelperAttribute_3.Value;
+            __tagHelperExecutionContext.AddTagHelperAttribute(__tagHelperAttribute_3);
+            __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper.Action = (string)__tagHelperAttribute_4.Value;
+            __tagHelperExecutionContext.AddTagHelperAttribute(__tagHelperAttribute_4);
             await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
             if (!__tagHelperExecutionContext.Output.IsContentModified)
             {
@@ -180,7 +198,7 @@ using Projekt_StudieTips.Models;
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("</p>\r\n    </div>\r\n");
 #nullable restore
-#line 36 "C:\IKT\Semesterprojekt4\Projekt-StudieTips\Views\Degrees\Index.cshtml"
+#line 38 "C:\Users\augus\OneDrive - Aarhus Universitet\4SEMESTER\PRJ\Studietips\Projekt-StudieTips\Views\Degrees\Index.cshtml"
 }
 
 #line default

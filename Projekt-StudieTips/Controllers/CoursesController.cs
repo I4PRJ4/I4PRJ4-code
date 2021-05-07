@@ -46,6 +46,35 @@ namespace Projekt_StudieTips.Controllers
             return View(courses);
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Redirect(int? CourseId)
+        {
+            ViewBag.CourseId = CourseId;
+            var hello = 10;
+
+            if(hello == 1)
+            {
+                return RedirectToAction("Index", "Home", new {id = CourseId});
+            }
+
+            else if(hello == 2)
+            {
+                return RedirectToAction("Edit", "Courses", new { id = CourseId });
+            }
+
+            else if(hello == 3)
+            {
+                return RedirectToAction("Delete", "Courses", new { id = CourseId });
+            }
+            else
+            {
+                return NotFound();
+            }
+
+        }
+
         // GET: Courses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
