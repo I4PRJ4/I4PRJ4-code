@@ -34,9 +34,12 @@
     <br />
     <br />
     <input class="gotobtn" type="submit" name="submit" value="Gå til">
+    
+@if (User.HasClaim(c => c.Type == "Admin"))
+{
     <input class="gotobtn" type="submit" name="submit" value="Edit">
     <input class="gotobtn" type="submit" name="submit" value="Delete">
-
+}
 
 
     @*@if (User.HasClaim(c => c.Type == "Admin"))
