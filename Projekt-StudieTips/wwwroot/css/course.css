@@ -104,3 +104,9 @@ body {
     font-size: 16px;
     font-weight: bold;
 }
+
+.row{
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+}

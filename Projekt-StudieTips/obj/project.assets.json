@@ -7816,19 +7816,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Peter\\.nuget\\packages\\": {}
+    "C:\\Users\\shynt\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\IKT\\Semesterprojekt4\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
+      "projectUniqueName": "C:\\Users\\shynt\\OneDrive\\Skrivebord\\Semesterprojekt 4\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
       "projectName": "Projekt-StudieTips",
-      "projectPath": "C:\\IKT\\Semesterprojekt4\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
-      "packagesPath": "C:\\Users\\Peter\\.nuget\\packages\\",
-      "outputPath": "C:\\IKT\\Semesterprojekt4\\Projekt-StudieTips\\obj\\",
+      "projectPath": "C:\\Users\\shynt\\OneDrive\\Skrivebord\\Semesterprojekt 4\\Projekt-StudieTips\\Projekt-StudieTips.csproj",
+      "packagesPath": "C:\\Users\\shynt\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\shynt\\OneDrive\\Skrivebord\\Semesterprojekt 4\\Projekt-StudieTips\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Peter\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\shynt\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7910,5 +7910,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\shynt\\OneDrive\\Skrivebord\\Semesterprojekt 4\\Projekt-StudieTips\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
