@@ -37,8 +37,10 @@ namespace Projekt_StudieTips.Controllers
         public async Task<IActionResult> Index()
         {
             ViewBag.DegreeId = 0;
+
             return View(await _context.Degrees.ToListAsync());
         }
+
 
         // GET: Degrees/Details/5
         public async Task<IActionResult> Details(int? id)

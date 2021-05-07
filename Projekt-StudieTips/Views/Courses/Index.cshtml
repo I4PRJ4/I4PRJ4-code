@@ -27,7 +27,8 @@
     <select name="Course" id="Courses">
         @foreach (var item in Model.OrderBy(d=> d.CourseName))
         {
-            <option value="@Html.DisplayFor(modelItem => item.CourseId)">@Html.DisplayFor(modelItem => item.CourseName)</option>
+            <option value="@item.CourseId)">@item.CourseName)</option>
+            
         }
     </select>
     <br />
