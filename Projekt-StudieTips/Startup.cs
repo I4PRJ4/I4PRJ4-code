@@ -31,7 +31,7 @@ namespace Projekt_StudieTips
                 options.SignIn.RequireConfirmedAccount = false;
 
                 // Password Settings
-                options.Password.RequiredLength = 8;
+                options.Password.RequiredLength = 6;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireUppercase = true;
                 options.Password.RequiredUniqueChars = 4;
