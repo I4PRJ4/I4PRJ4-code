@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Projekt_StudieTips.Data;
 using System.Linq;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
+using Projekt_StudieTips.Repository;
 
 namespace Projekt_StudieTips
 {
@@ -24,8 +26,11 @@ namespace Projekt_StudieTips
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer("server=[::1],1433; User Id=SA; Password=password_123; database=StudieTipsDB; trusted_connection=false;"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddScoped<DegreeRepository>();
+            services.AddScoped<CourseRepository>();
 
             services.AddDefaultIdentity<IdentityUser>(options => {
                 options.SignIn.RequireConfirmedAccount = false;
@@ -54,6 +59,9 @@ namespace Projekt_StudieTips
             });
 
             services.AddControllersWithViews();
+
+            services.AddDbContext<DatabaseContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("AppContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,6 +93,10 @@ namespace Projekt_StudieTips
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "courses",
+                    pattern: "{controller=Courses}/{action=Index}/{DegreeId?}");
                 endpoints.MapRazorPages();
             });
         }
