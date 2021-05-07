@@ -129,12 +129,18 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses.FindAsync(id);
-            if (course == null)
+            DegreeCourse ViewModelDegreeCourse = new DegreeCourse();
+
+            ViewModelDegreeCourse.Degrees = await _context.Degrees.ToListAsync();
+            ViewModelDegreeCourse.Courses = await _context.Courses.FindAsync(id);
+
+            ViewBag.Course = await _context.Courses.FindAsync(id);
+
+            if (ViewModelDegreeCourse.Courses == null)
             {
                 return NotFound();
             }
-            return View(course);
+            return View(ViewModelDegreeCourse);
         }
 
         // POST: Courses/Edit/5
@@ -144,10 +150,10 @@ namespace Projekt_StudieTips.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CourseId,CourseName,DegreeId")] Course course)
         {
-            if (id != course.CourseId)
-            {
-                return NotFound();
-            }
+
+            var oldCourse = await _context.Courses.FindAsync(id);
+            _context.Courses.Remove(oldCourse);
+            await _context.SaveChangesAsync();
 
             if (ModelState.IsValid)
             {
@@ -169,7 +175,7 @@ namespace Projekt_StudieTips.Controllers
                 }
                 return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId });    
             }
-            return View(course);
+            return View();
         }
 
         // GET: Courses/Delete/5
