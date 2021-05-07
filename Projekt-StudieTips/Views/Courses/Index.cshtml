@@ -24,18 +24,26 @@
 
 @using (Html.BeginForm("Redirect", "Courses", FormMethod.Post))
 {
-<div id="CenterEverything">
-    <select name="CourseId">
-        @foreach (var item in Model.OrderBy(d => d.CourseName))
-        {
-            <option value="@item.CourseId">@item.CourseName</option>
-        }
-    </select>
-    <br />
-    <br />
-    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><input class="gotobtn" type="submit" value="Gå til"></a>
-</div>
+    <div id="CenterEverything">
+        <select name="CourseId">
+            @foreach (var item in Model.OrderBy(d => d.CourseName))
+            {
+                <option value="@item.CourseId">@item.CourseName</option>
+            }
+        </select>
+        <br />
+        <br />
+        <input class="gotobtn" type="submit" value="Gå til">
 
+
+
+        @*@if (User.HasClaim(c => c.Type == "Admin"))
+        {
+            <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Edit"><input class="gotobtn" type="submit" value="Edit"></a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Delete"><input class="gotobtn" type="submit" value="Delete"></a>
+        }*@
+    </div>
+    }
 
     <br />
     <br />
