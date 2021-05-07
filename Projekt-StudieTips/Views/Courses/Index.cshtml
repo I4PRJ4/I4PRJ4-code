@@ -24,7 +24,7 @@
 
 @using (Html.BeginForm("Redirect", "Courses", FormMethod.Post))
 {
-<div id="CenterEverything">
+<div class="CenterEverything">
     <select name="CourseId">
         @foreach (var item in Model.OrderBy(d => d.CourseName))
         {
@@ -33,57 +33,14 @@
     </select>
     <br />
     <br />
+
     <input class="gotobtn" type="submit" name="submit" value="Gå til">
-    
-@if (User.HasClaim(c => c.Type == "Admin"))
-{
-    <input class="gotobtn" type="submit" name="submit" value="Edit">
-    <input class="gotobtn" type="submit" name="submit" value="Delete">
-}
-    
-    // HEJ
 
-
-    @*@if (User.HasClaim(c => c.Type == "Admin"))
-        {
-            <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Edit"><input class="gotobtn" type="submit" value="Edit"></a>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Delete"><input class="gotobtn" type="submit" value="Delete"></a>
-        }*@
-</div>
+    @if (User.HasClaim(c => c.Type == "Admin"))
+    {
+        <input class="gotobtn" type="submit" name="submit" value="Edit">
+        <input class="gotobtn" type="submit" name="submit" value="Delete">
     }
-
-    <br />
-    <br />
-    <br />
-    <br />
-
-    <div>
-        @if (User.HasClaim(c => c.Type == "Admin"))
-        {
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CourseName)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.OrderBy(d => d.CourseName))
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CourseName)
-                            </td>
-
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.CourseId">Edit</a> |
-                                <a asp-action="Delete" asp-route-id="@item.CourseId">Delete</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-    </div>
+    <p><a asp-controller="Degrees" asp-route-id="@ViewBag.DegreeId" asp-action="Index">Tilbage</a></p>
+</div>
+}

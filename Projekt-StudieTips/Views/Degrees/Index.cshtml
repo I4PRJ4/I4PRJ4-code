@@ -14,25 +14,33 @@
         <a asp-action="Create">Create New</a>
     </p>
 }
+
+
 @using (Html.BeginForm("Index", "Courses", FormMethod.Post))
 {
-    <div>
-        <select name="DegreeId">
-            @if (Model != null)
+<div class="border">
+    <select name="DegreeId">
+        @if (Model != null)
+        {
+
+            foreach (var item in Model.OrderBy(d => d.DegreeName))
             {
-
-                foreach (var item in Model.OrderBy(d=>d.DegreeName))
-                {
-                    <option value="@item.DegreeId">@item.DegreeName</option>
-                }
+                <option value="@item.DegreeId">@item.DegreeName</option>
             }
+        }
 
-        </select>
+    </select>
+    <br />
+    <br />
 
-       
-        <input class="gotobtn" type="submit" value="OK" />
+    <input class="gotobtn" type="submit" value="OK" />
 
+    @if (User.HasClaim(c => c.Type == "Admin"))
+    {
+        <input class="gotobtn" type="submit" name="submit" value="Edit">
+        <input class="gotobtn" type="submit" name="submit" value="Delete">
+    }
 
-        <p><a asp-controller="Home" asp-action="Index">Tilbage</a></p>
-    </div>
+    <p><a asp-controller="Home" asp-action="Index">Tilbage</a></p>
+</div>
 }
