@@ -49,22 +49,22 @@ namespace Projekt_StudieTips.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Redirect(int? CourseId)
+        public async Task<IActionResult> Redirect(int? CourseId, string? submit)
         {
             ViewBag.CourseId = CourseId;
             var hello = 10;
 
-            if(hello == 1)
+            if(submit == "Gå til")
             {
                 return RedirectToAction("Index", "Home", new {id = CourseId});
             }
 
-            else if(hello == 2)
+            else if(submit == "Edit")
             {
                 return RedirectToAction("Edit", "Courses", new { id = CourseId });
             }
 
-            else if(hello == 3)
+            else if(submit == "Delete")
             {
                 return RedirectToAction("Delete", "Courses", new { id = CourseId });
             }
