@@ -15,28 +15,26 @@
 
 @if (User.HasClaim(c => c.Type == "Admin"))
 {
-<div id="CenterEverything">
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-</div>
+    <div id="CenterEverything">
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    </div>
 }
 
-
+@using (Html.BeginForm("Redirect", "Courses", FormMethod.Post))
+{
 <div id="CenterEverything">
-    <select name="Course" id="Courses">
+    <select name="CourseId">
         @foreach (var item in Model.OrderBy(d => d.CourseName))
         {
-            <option value="@Html.DisplayFor(modelItem => item.CourseId)">@Html.DisplayFor(modelItem => item.CourseName)</option>
+            <option value="@item.CourseId">@item.CourseName</option>
         }
     </select>
     <br />
     <br />
-    <div class="row">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><input class="gotobtn" type="submit" value="Gå til"></a>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Course" asp-action="Edit"><input class="gotobtn" type="submit" value="Edit"></a>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Course" asp-action="Delete"><input class="gotobtn" type="submit" value="Delete"></a>
-    </div>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><input class="gotobtn" type="submit" value="Gå til"></a>
+</div>
 
 
     <br />
