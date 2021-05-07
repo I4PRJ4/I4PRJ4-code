@@ -25,49 +25,52 @@
 
 <div id="CenterEverything">
     <select name="Course" id="Courses">
-        @foreach (var item in Model.OrderBy(d=> d.CourseName))
+        @foreach (var item in Model.OrderBy(d => d.CourseName))
         {
             <option value="@Html.DisplayFor(modelItem => item.CourseId)">@Html.DisplayFor(modelItem => item.CourseName)</option>
         }
     </select>
     <br />
     <br />
-    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><input class="gotobtn" type="submit" value="Gå til"></a>
-</div>
+    <div class="row">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><input class="gotobtn" type="submit" value="Gå til"></a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Course" asp-action="Edit"><input class="gotobtn" type="submit" value="Edit"></a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Course" asp-action="Delete"><input class="gotobtn" type="submit" value="Delete"></a>
+    </div>
 
 
-<br />
-<br />
-<br />
-<br />
+    <br />
+    <br />
+    <br />
+    <br />
 
-<div>
-    @if (User.HasClaim(c => c.Type == "Admin"))
-    {
-        <table>
-            <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.CourseName)
-                </th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var item in Model.OrderBy(d => d.CourseName))
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CourseName)
-                    </td>
+    <div>
+        @if (User.HasClaim(c => c.Type == "Admin"))
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CourseName)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderBy(d => d.CourseName))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CourseName)
+                            </td>
 
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.CourseId">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.CourseId">Delete</a>
-                    </td>
-                </tr>
-            }
-            </tbody>
-        </table>
-    }
-</div>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.CourseId">Edit</a> |
+                                <a asp-action="Delete" asp-route-id="@item.CourseId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
