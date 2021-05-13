@@ -44,7 +44,7 @@ namespace Projekt_StudieTips.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Redirect(int? DegreeId, string? submit)
+        public IActionResult Redirect(int? DegreeId, string? submit)
         {
             ViewBag.DegreeId = DegreeId;
 
@@ -149,6 +149,7 @@ namespace Projekt_StudieTips.Controllers
                     Console.WriteLine(e);
                     throw;
                 }
+                try
                 {
                     _context.Update(degree);
                     await _context.SaveChangesAsync();

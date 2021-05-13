@@ -49,7 +49,7 @@ namespace Projekt_StudieTips.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Redirect(int? CourseId, string? submit)
+        public IActionResult Redirect(int? CourseId, string? submit)
         {
             ViewBag.CourseId = CourseId;
 
