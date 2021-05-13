@@ -42,6 +42,32 @@ namespace Projekt_StudieTips.Controllers
             return View(await _context.Degrees.ToListAsync());
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Redirect(int? DegreeId, string? submit)
+        {
+            ViewBag.DegreeId = DegreeId;
+
+            if (submit == "Gå til")
+            {
+                return RedirectToAction("Index", "Courses", new { DegreeId = DegreeId });
+            }
+
+            else if (submit == "Edit")
+            {
+                return RedirectToAction("Edit", "Degrees", new { id = DegreeId });
+            }
+
+            else if (submit == "Delete")
+            {
+                return RedirectToAction("Delete", "Degrees", new { id = DegreeId });
+            }
+            else
+            {
+                return NotFound();
+            }
+
+        }
 
         // GET: Degrees/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -115,6 +141,14 @@ namespace Projekt_StudieTips.Controllers
             if (ModelState.IsValid)
             {
                 try
+                {
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
                 {
                     _context.Update(degree);
                     await _context.SaveChangesAsync();

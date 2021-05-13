@@ -16,7 +16,7 @@
 }
 
 
-@using (Html.BeginForm("Index", "Courses", FormMethod.Post))
+@using (Html.BeginForm("Redirect", "Degrees", FormMethod.Post))
 {
 <div id="CenterEverything">
     <select name="DegreeId">
@@ -33,7 +33,7 @@
     <br />
     <br />
 
-    <input class="gotobtn" type="submit" value="OK" />
+    <input class="gotobtn" type="submit" name="submit" value="Gå til" />
 
     @if (User.HasClaim(c => c.Type == "Admin"))
     {
