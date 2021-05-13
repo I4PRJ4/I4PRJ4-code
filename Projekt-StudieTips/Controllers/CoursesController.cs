@@ -55,7 +55,7 @@ namespace Projekt_StudieTips.Controllers
 
             if(submit == "Gå til")
             {
-                return RedirectToAction("Index", "Home", new {id = CourseId});
+                return RedirectToAction("Index", "Tips", new {id = CourseId});
             }
 
             else if(submit == "Edit")

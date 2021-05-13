@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -23,17 +24,17 @@ namespace Projekt_StudieTips.Controllers
         public async Task<IActionResult> Index(int? id)
         {
             //Default page
-            if (id == null)
-            {
-                id = 1;
-            }
+            //if (id == null)
+            //{
+            //    id = 1;
+            //}
 
 
             var tip = await _context.Tips.FindAsync(id);
-            if (tip == null)
-            {
-                return NotFound();
-            }
+            //if (tip == null)
+            //{
+            //    return NotFound();
+            //}
 
             var context = _context.Tips
                 .Include(t => t.Course)
@@ -49,8 +50,9 @@ namespace Projekt_StudieTips.Controllers
             }
             catch (ArgumentOutOfRangeException e)
             {
-                ViewBag.CourseName = "This course does not exist";
-                ViewBag.CourseId = "This id does not exist";
+                var course = await _context.Courses.Where(c => c.CourseId == id).FirstAsync();
+                ViewBag.CourseName = $"{course.CourseName} har ingen tips. Tryk Add Tip for at tilføje";
+                ViewBag.CourseId = id;
             }
 
             return View(list);
@@ -77,6 +79,7 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Tip/Create
+        [Authorize]
         public IActionResult Create(int? value)
         {
             ViewBag.CourseId = value;
@@ -90,6 +93,7 @@ namespace Projekt_StudieTips.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("TipId,UserId,CourseId,Date,Headline,Text")] Tip tip)
         {
             tip.Date = DateTime.Now;

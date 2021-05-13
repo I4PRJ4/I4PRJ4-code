@@ -15,7 +15,7 @@ namespace Projekt_StudieTips.Models
         public string CourseName { get; set; }
         
         
-        //[ForeignKey("Degree")]
+        [ForeignKey("Degree")]
         public int DegreeId { get; set; }
         public Degree Degrees { get; set; }
 
