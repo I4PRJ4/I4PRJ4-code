@@ -140,6 +140,14 @@ namespace Projekt_StudieTips.Controllers
             {
                 try
                 {
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                {
                     _context.Update(degree);
                     await _context.SaveChangesAsync();
                 }

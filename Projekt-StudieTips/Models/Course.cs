@@ -19,4 +19,4 @@ namespace Projekt_StudieTips.Models
         public int DegreeId { get; set; }
         public Degree Degrees { get; set; }
     }
-}
+}   
