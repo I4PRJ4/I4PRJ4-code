@@ -14,6 +14,7 @@ namespace Projekt_StudieTips.Controllers
     public class TipsController : Controller
     {
         private readonly DatabaseContext _context;
+        private readonly ApplicationDbContext _appContext;
 
         public TipsController(DatabaseContext context)
         {

@@ -9,6 +9,7 @@ namespace Projekt_StudieTips.Data
         {
             const string adminEmail = "Admin@localhost";
             const string adminPassword = "Secret7/";
+            const string adminName = "Admin";
 
             if (userManager.FindByNameAsync(adminEmail).Result == null)
             {
