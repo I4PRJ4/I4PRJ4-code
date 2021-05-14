@@ -14,24 +14,13 @@ namespace Projekt_StudieTips.Controllers
 {
     public class DegreesController : Controller
     {
-        private readonly DatabaseContext _context;
-        private readonly DegreeRepository _degreeRepository;
+       
+        private readonly DegreeRepository _repository;
 
-        public DegreesController(DatabaseContext context, DegreeRepository degreeRepository)
+        public DegreesController(DegreeRepository degreeRepository)
         {
-            _context = context;
-            _degreeRepository = degreeRepository;
-           // CreateDegrees();
-        }
-
-        private void CreateDegrees()
-        {
-            _degreeRepository.AddDegree("ST");
-            _degreeRepository.AddDegree("IKT");
-            _degreeRepository.AddDegree("Medicin");
-            _degreeRepository.AddDegree("Idræt");
-            _degreeRepository.AddDegree("Pædagog");
-            _degreeRepository.AddDegree("Psykologi");
+            
+            _repository = degreeRepository;
         }
 
         // GET: Degrees
@@ -39,7 +28,7 @@ namespace Projekt_StudieTips.Controllers
         {
             ViewBag.DegreeId = 0;
 
-            return View(await _context.Degrees.ToListAsync());
+            return View(await _repository.Context.Degrees.ToListAsync());
         }
 
         [HttpPost]
@@ -77,7 +66,7 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var degree = await _context.Degrees
+            var degree = await _repository.Context.Degrees
                 .FirstOrDefaultAsync(m => m.DegreeId == id);
             if (degree == null)
             {
@@ -103,8 +92,8 @@ namespace Projekt_StudieTips.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(degree);
-                await _context.SaveChangesAsync();
+                _repository.Context.Add(degree);
+                await _repository.Context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(degree);
@@ -118,7 +107,7 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var degree = await _context.Degrees.FindAsync(id);
+            var degree = await _repository.Context.Degrees.FindAsync(id);
             if (degree == null)
             {
                 return NotFound();
@@ -151,8 +140,8 @@ namespace Projekt_StudieTips.Controllers
                 }
                 try
                 {
-                    _context.Update(degree);
-                    await _context.SaveChangesAsync();
+                    _repository.Context.Update(degree);
+                    await _repository.Context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -178,7 +167,7 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var degree = await _context.Degrees
+            var degree = await _repository.Context.Degrees
                 .FirstOrDefaultAsync(m => m.DegreeId == id);
             if (degree == null)
             {
@@ -193,15 +182,15 @@ namespace Projekt_StudieTips.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var degree = await _context.Degrees.FindAsync(id);
-            _context.Degrees.Remove(degree);
-            await _context.SaveChangesAsync();
+            var degree = await _repository.Context.Degrees.FindAsync(id);
+            _repository.Context.Degrees.Remove(degree);
+            await _repository.Context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DegreeExists(int id)
         {
-            return _context.Degrees.Any(e => e.DegreeId == id);
+            return _repository.Context.Degrees.Any(e => e.DegreeId == id);
         }
     }
 }

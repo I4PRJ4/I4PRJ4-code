@@ -10,24 +10,12 @@ namespace Projekt_StudieTips.Repository
 {
     public class CourseRepository
     {
-        private DatabaseContext _context;
+
+        public DatabaseContext Context { get; set; }
 
         public CourseRepository(DatabaseContext context)
         {
-            _context = context;
-        }
-
-        public void AddCourse(string name, int id)
-        {
-            if (!_context.Courses.Any(s => s.CourseName == name))
-            {
-                Course course = new Course()
-                    { CourseName = name, DegreeId = id};
-
-
-                _context.Courses.Add(course);
-                _context.SaveChanges();
-            }
+            Context = context;
         }
     }
 }

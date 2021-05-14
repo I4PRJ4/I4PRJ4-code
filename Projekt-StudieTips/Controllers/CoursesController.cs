@@ -14,32 +14,19 @@ namespace Projekt_StudieTips.Controllers
 {
     public class CoursesController : Controller
     {
-        private readonly DatabaseContext _context;
-        private readonly CourseRepository _courseRepository;
+        
+        private readonly CourseRepository _repository;
 
-        public CoursesController(DatabaseContext context, CourseRepository courseRepository)
+        public CoursesController(CourseRepository courseRepository)
         {
-            _context = context;
-            _courseRepository = courseRepository;
-           // CreateCourses();
-
-        }
-
-        private void CreateCourses()
-        {
-            _courseRepository.AddCourse("I4DAB-01 Databaser", 1);
-            _courseRepository.AddCourse("I4GUI-01 GUI-programmering", 1);
-            _courseRepository.AddCourse("I4NGK-01 Netværksprogrammering og grundlæggende kommunikationsnetværk", 1);
-            _courseRepository.AddCourse("I4PRJ4-02 Semesterprojekt 4", 1);
-            _courseRepository.AddCourse("I4SWD-01 Software design", 1);
-            _courseRepository.AddCourse("I4SWT-02 Software test", 1);
-
+            
+            _repository = courseRepository;
         }
 
         // GET: Courses
         public async Task<IActionResult> Index(int? DegreeId)
         {
-            List<Course> courses = await _context.Courses.Where(i => i.DegreeId == DegreeId).ToListAsync();
+            List<Course> courses = await _repository.Context.Courses.Where(i => i.DegreeId == DegreeId).ToListAsync();
 
             ViewBag.DegreeId = DegreeId;
 
@@ -82,7 +69,7 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
+            var course = await _repository.Context.Courses
                 .FirstOrDefaultAsync(m => m.CourseId == id);
             if (course == null)
             {
@@ -99,7 +86,7 @@ namespace Projekt_StudieTips.Controllers
 
             ViewBag.DegreeId = DegreeId;
 
-            ViewModeDegreeCourse.Degrees = await _context.Degrees.ToListAsync();
+            ViewModeDegreeCourse.Degrees = await _repository.Context.Degrees.ToListAsync();
 
             return View(ViewModeDegreeCourse);
         }
@@ -113,8 +100,8 @@ namespace Projekt_StudieTips.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(course);
-                await _context.SaveChangesAsync();
+                _repository.Context.Add(course);
+                await _repository.Context.SaveChangesAsync();
 
                 return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId});
             }
@@ -131,10 +118,10 @@ namespace Projekt_StudieTips.Controllers
 
             DegreeCourse ViewModelDegreeCourse = new DegreeCourse();
 
-            ViewModelDegreeCourse.Degrees = await _context.Degrees.ToListAsync();
-            ViewModelDegreeCourse.Courses = await _context.Courses.FindAsync(id);
+            ViewModelDegreeCourse.Degrees = await _repository.Context.Degrees.ToListAsync();
+            ViewModelDegreeCourse.Courses = await _repository.Context.Courses.FindAsync(id);
 
-            ViewBag.Course = await _context.Courses.FindAsync(id);
+            ViewBag.Course = await _repository.Context.Courses.FindAsync(id);
 
             if (ViewModelDegreeCourse.Courses == null)
             {
@@ -151,16 +138,16 @@ namespace Projekt_StudieTips.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("CourseId,CourseName,DegreeId")] Course course)
         {
 
-            var oldCourse = await _context.Courses.FindAsync(id);
-            _context.Courses.Remove(oldCourse);
-            await _context.SaveChangesAsync();
+            var oldCourse = await _repository.Context.Courses.FindAsync(id);
+            _repository.Context.Courses.Remove(oldCourse);
+            await _repository.Context.SaveChangesAsync();
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(course);
-                    await _context.SaveChangesAsync();
+                    _repository.Context.Update(course);
+                    await _repository.Context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -186,7 +173,7 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
+            var course = await _repository.Context.Courses
                 .FirstOrDefaultAsync(m => m.CourseId == id);
             if (course == null)
             {
@@ -201,15 +188,15 @@ namespace Projekt_StudieTips.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var course = await _context.Courses.FindAsync(id);
-            _context.Courses.Remove(course);
-            await _context.SaveChangesAsync();
+            var course = await _repository.Context.Courses.FindAsync(id);
+            _repository.Context.Courses.Remove(course);
+            await _repository.Context.SaveChangesAsync();
             return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId });
         }
 
         private bool CourseExists(int id)
         {
-            return _context.Courses.Any(e => e.CourseId == id);
+            return _repository.Context.Courses.Any(e => e.CourseId == id);
         }
     }
 }
