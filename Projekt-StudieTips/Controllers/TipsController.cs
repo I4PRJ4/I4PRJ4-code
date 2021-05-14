@@ -30,7 +30,7 @@ namespace Projekt_StudieTips.Controllers
             }
 
 
-            var tip = await _context.Tips.FindAsync(id);
+            //var tip = await _context.Tips.FindAsync(id);
             //if (tip == null)
             //{
             //    return NotFound();
@@ -50,9 +50,18 @@ namespace Projekt_StudieTips.Controllers
             }
             catch (ArgumentOutOfRangeException e)
             {
-                var course = await _context.Courses.Where(c => c.CourseId == id).FirstAsync();
-                ViewBag.CourseName = $"{course.CourseName} har ingen tips. Tryk Add Tip for at tilføje";
-                ViewBag.CourseId = id;
+
+                try
+                {
+                    var course = await _context.Courses.Where(c => c.CourseId == id).FirstAsync();
+                    ViewBag.CourseName = $"{course.CourseName} har ingen tips. Tryk Add Tip for at tilføje";
+                    ViewBag.CourseId = id;
+                }
+                catch (InvalidOperationException a)
+                {
+                    return NotFound();
+                }
+                
             }
 
             return View(context);

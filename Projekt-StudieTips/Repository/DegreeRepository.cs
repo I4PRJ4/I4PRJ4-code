@@ -9,23 +9,12 @@ namespace Projekt_StudieTips.Repository
 {
     public class DegreeRepository
     {
-        private DatabaseContext _context;
+        public DatabaseContext Context { get; set; }
 
         public DegreeRepository(DatabaseContext context)
         {
-            _context = context;
+            Context = context;
         }
-        public void AddDegree(string name)
-        {
-            if (!_context.Degrees.Any(s => s.DegreeName == name))
-            {
-                Degree degree = new Degree()
-                    { DegreeName = name };
-
-
-                _context.Degrees.Add(degree);
-                _context.SaveChanges();
-            }
-        }
+        
     }
 }
