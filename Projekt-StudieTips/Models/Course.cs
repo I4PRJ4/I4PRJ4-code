@@ -22,4 +22,4 @@ namespace Projekt_StudieTips.Models
         // One-To-Many relationship with Tip
         public List<Tip> Tips { get; set; }
     }
-}
+}   

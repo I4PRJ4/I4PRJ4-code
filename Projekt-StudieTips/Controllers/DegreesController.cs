@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,32 @@ namespace Projekt_StudieTips.Controllers
             return View(await _context.Degrees.ToListAsync());
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Redirect(int? DegreeId, string? submit)
+        {
+            ViewBag.DegreeId = DegreeId;
+
+            if (submit == "Gå til")
+            {
+                return RedirectToAction("Index", "Courses", new { DegreeId = DegreeId });
+            }
+
+            else if (submit == "Edit")
+            {
+                return RedirectToAction("Edit", "Degrees", new { id = DegreeId });
+            }
+
+            else if (submit == "Delete")
+            {
+                return RedirectToAction("Delete", "Degrees", new { id = DegreeId });
+            }
+            else
+            {
+                return NotFound();
+            }
+
+        }
 
         // GET: Degrees/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -71,6 +98,7 @@ namespace Projekt_StudieTips.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize("IsAdmin")]
         public async Task<IActionResult> Create([Bind("DegreeId,DegreeName")] Degree degree)
         {
             if (ModelState.IsValid)
@@ -112,6 +140,15 @@ namespace Projekt_StudieTips.Controllers
 
             if (ModelState.IsValid)
             {
+                try
+                {
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
                 try
                 {
                     _context.Update(degree);
