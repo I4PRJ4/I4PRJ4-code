@@ -24,9 +24,9 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Courses
-        public async Task<IActionResult> Index(int? DegreeId)
+        public IActionResult Index(int? DegreeId)
         {
-            List<Course> courses = await _repository.Context.Courses.Where(i => i.DegreeId == DegreeId).ToListAsync();
+            List<Course> courses = _repository.FindCourses(DegreeId);
 
             ViewBag.DegreeId = DegreeId;
 
@@ -61,24 +61,6 @@ namespace Projekt_StudieTips.Controllers
 
         }
 
-        // GET: Courses/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var course = await _repository.Context.Courses
-                .FirstOrDefaultAsync(m => m.CourseId == id);
-            if (course == null)
-            {
-                return NotFound();
-            }
-
-            return View(course);
-        }
-
         // GET: Courses/Create
         public async Task<IActionResult> Create(int? DegreeId)
         {
@@ -86,7 +68,7 @@ namespace Projekt_StudieTips.Controllers
 
             ViewBag.DegreeId = DegreeId;
 
-            ViewModeDegreeCourse.Degrees = await _repository.Context.Degrees.ToListAsync();
+            ViewModeDegreeCourse.Degrees = _repository.GetDegrees();
 
             return View(ViewModeDegreeCourse);
         }
@@ -100,8 +82,8 @@ namespace Projekt_StudieTips.Controllers
         {
             if (ModelState.IsValid)
             {
-                _repository.Context.Add(course);
-                await _repository.Context.SaveChangesAsync();
+                await _repository.AddDegree(course);
+              
 
                 return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId});
             }
@@ -118,10 +100,10 @@ namespace Projekt_StudieTips.Controllers
 
             DegreeCourse ViewModelDegreeCourse = new DegreeCourse();
 
-            ViewModelDegreeCourse.Degrees = await _repository.Context.Degrees.ToListAsync();
-            ViewModelDegreeCourse.Courses = await _repository.Context.Courses.FindAsync(id);
+            ViewModelDegreeCourse.Degrees = _repository.GetDegrees();
+            ViewModelDegreeCourse.Courses = _repository.GetCourse(id);
 
-            ViewBag.Course = await _repository.Context.Courses.FindAsync(id);
+            ViewBag.Course = _repository.GetCourse(id);
 
             if (ViewModelDegreeCourse.Courses == null)
             {
@@ -138,16 +120,15 @@ namespace Projekt_StudieTips.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("CourseId,CourseName,DegreeId")] Course course)
         {
 
-            var oldCourse = await _repository.Context.Courses.FindAsync(id);
-            _repository.Context.Courses.Remove(oldCourse);
-            await _repository.Context.SaveChangesAsync();
+            var oldCourse = _repository.GetCourse(id);
+
+            await _repository.RemoveCourse(oldCourse);
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _repository.Context.Update(course);
-                    await _repository.Context.SaveChangesAsync();
+                    await _repository.UpdateCourse(course);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -173,8 +154,8 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var course = await _repository.Context.Courses
-                .FirstOrDefaultAsync(m => m.CourseId == id);
+            var course = _repository.GetCourse(id);
+
             if (course == null)
             {
                 return NotFound();
@@ -188,9 +169,10 @@ namespace Projekt_StudieTips.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var course = await _repository.Context.Courses.FindAsync(id);
-            _repository.Context.Courses.Remove(course);
-            await _repository.Context.SaveChangesAsync();
+            var course = _repository.GetCourse(id);
+
+            await _repository.RemoveCourse(course);
+
             return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId });
         }
 
