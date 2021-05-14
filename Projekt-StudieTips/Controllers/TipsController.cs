@@ -36,17 +36,17 @@ namespace Projekt_StudieTips.Controllers
             //    return NotFound();
             //}
 
-            var context = _context.Tips
+            var context = await _context.Tips
                 .Include(t => t.Course)
                 .Include(t => t.User)
-                .Where(t => t.CourseId == id);
+                .Where(t => t.CourseId == id).ToListAsync();
 
-            var list = await context.ToListAsync();
+           // var list = await context.ToListAsync();
 
             try
             {
-                ViewBag.CourseName = list[0].Course.CourseName;
-                ViewBag.CourseId = list[0].CourseId;
+                ViewBag.CourseName = context[0].Course.CourseName;
+                ViewBag.CourseId = context[0].CourseId;
             }
             catch (ArgumentOutOfRangeException e)
             {
@@ -55,7 +55,7 @@ namespace Projekt_StudieTips.Controllers
                 ViewBag.CourseId = id;
             }
 
-            return View(list);
+            return View(context);
         }
 
         // GET: Tip/Details/5
