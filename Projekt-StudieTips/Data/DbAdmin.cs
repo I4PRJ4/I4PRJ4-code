@@ -23,7 +23,7 @@ namespace Projekt_StudieTips.Data
                     (user, adminPassword).Result;
                 if (result.Succeeded)
                 {
-                    var adminClaim = new Claim("Admin", "ADMINISTRATOR");
+                    var adminClaim = new Claim("Admin", adminName);
                     userManager.AddClaimAsync(user, adminClaim);
                 }
             }

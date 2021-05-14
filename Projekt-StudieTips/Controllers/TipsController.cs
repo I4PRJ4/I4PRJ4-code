@@ -89,7 +89,7 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Tip/Create
-        [Authorize]
+
         public IActionResult Create(int? value)
         {
             ViewBag.CourseId = value;
