@@ -24,9 +24,6 @@ namespace Projekt_StudieTips.Data
         {
             modelBuilder.Entity<Degree>().HasIndex(d => d.DegreeName).IsUnique();
 
-
-
-
             //modelBuilder.Entity<Course>().HasOne(c => c.Degrees)
             //    .WithMany(d => d.Courses)
             //    .HasForeignKey(c => c.DegreeId);

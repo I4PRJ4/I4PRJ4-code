@@ -24,10 +24,10 @@ namespace Projekt_StudieTips.Controllers
         public async Task<IActionResult> Index(int? id)
         {
             //Default page
-            //if (id == null)
-            //{
-            //    id = 1;
-            //}
+            if (id == null)
+            {
+                return RedirectToAction("Index", "Home"); // bliver sendt tilbage til forsiden
+            }
 
 
             var tip = await _context.Tips.FindAsync(id);
