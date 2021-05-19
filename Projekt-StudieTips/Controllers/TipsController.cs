@@ -49,7 +49,7 @@ namespace Projekt_StudieTips.Controllers
                 ViewBag.CourseName = context[0].Course.CourseName;
                 ViewBag.CourseId = context[0].CourseId;
             }
-            catch (ArgumentOutOfRangeException e)
+            catch (ArgumentOutOfRangeException)
             {
 
                 try
@@ -58,11 +58,56 @@ namespace Projekt_StudieTips.Controllers
                     ViewBag.CourseName = $"{course.CourseName} har ingen tips. Tryk Add Tip for at tilføje";
                     ViewBag.CourseId = id;
                 }
-                catch (InvalidOperationException a)
+                catch (InvalidOperationException)
                 {
                     return NotFound();
                 }
                 
+            }
+
+            return View(context);
+        }
+
+        public async Task<IActionResult> SearchTip([Bind("SearchTerm")]SearchDto search)
+        {
+            //Default page
+            if (search.SearchTerm == null)
+            {
+                return RedirectToAction("Index", "Home"); // bliver sendt tilbage til forsiden
+            }
+
+
+            //var tip = await _context.Tips.FindAsync(id);
+            //if (tip == null)
+            //{
+            //    return NotFound();
+            //}
+
+            var context = await _context.Tips
+                .Include(t => t.Course)
+                .Include(t => t.User)
+                .Where(t => t.Headline.Contains(search.SearchTerm) || t.Text.Contains(search.SearchTerm) || t.Course.CourseName.Contains(search.SearchTerm)).ToListAsync();
+
+            // var list = await context.ToListAsync();
+
+            try
+            {
+                ViewBag.CourseName = context[0].Course.CourseName;
+                ViewBag.CourseId = context[0].CourseId;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+
+                try
+                {
+                    ViewBag.CourseName = $"Vi kunne ikke finde nogle tips som indeholdte søgsordene.";
+                    ViewBag.CourseId = 0;
+                }
+                catch (InvalidOperationException)
+                {
+                    return NotFound();
+                }
+
             }
 
             return View(context);
