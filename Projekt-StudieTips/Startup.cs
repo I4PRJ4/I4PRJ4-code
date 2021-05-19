@@ -25,8 +25,9 @@ namespace Projekt_StudieTips
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer("server=[::1],1433; User Id=sa; Password=password_123; database=StudieProjectIdDb; trusted_connection=false;"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddScoped<DegreeRepository>();
@@ -61,7 +62,7 @@ namespace Projekt_StudieTips
             services.AddControllersWithViews();
 
             services.AddDbContext<DatabaseContext>(options =>
-                    options.UseSqlServer("server=[::1],1433; User Id=sa; Password=password_123; database=StudieProjectDataDb; trusted_connection=false;"));
+                    options.UseSqlServer(Configuration.GetConnectionString("AppContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
