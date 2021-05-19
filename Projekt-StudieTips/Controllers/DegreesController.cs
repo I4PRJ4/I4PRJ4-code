@@ -58,25 +58,9 @@ namespace Projekt_StudieTips.Controllers
 
         }
 
-        // GET: Degrees/Details/5
-        public IActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var degree = _repository.FindDegree(id);
-
-            if (degree == null)
-            {
-                return NotFound();
-            }
-
-            return View(degree);
-        }
 
         // GET: Degrees/Create
+    
         public IActionResult Create()
         {
             return View();
@@ -120,6 +104,7 @@ namespace Projekt_StudieTips.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize("IsAdmin")]
         public async Task<IActionResult> Edit(int id, [Bind("DegreeId,DegreeName")] Degree degree)
         {
             if (id != degree.DegreeId)
@@ -178,6 +163,7 @@ namespace Projekt_StudieTips.Controllers
         // POST: Degrees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize("IsAdmin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var degree = _repository.FindDegree(id);
@@ -189,7 +175,7 @@ namespace Projekt_StudieTips.Controllers
 
         private bool DegreeExists(int id)
         {
-            return _repository.Context.Degrees.Any(e => e.DegreeId == id);
+            return _repository.DegreeExist(id);
         }
     }
 }

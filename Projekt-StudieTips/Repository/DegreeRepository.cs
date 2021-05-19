@@ -44,5 +44,10 @@ namespace Projekt_StudieTips.Repository
             Context.Degrees.Remove(degree);
             await Context.SaveChangesAsync();
         }
+
+        public bool DegreeExist(int id)
+        {
+            return Context.Degrees.Any(e => e.DegreeId == id);
+        }
     }
 }
