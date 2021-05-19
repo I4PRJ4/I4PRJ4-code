@@ -40,7 +40,7 @@ namespace Projekt_StudieTips.Controllers
             var context = await _context.Tips
                 .Include(t => t.Course)
                 .Include(t => t.User)
-                .Where(t => t.CourseId == id).ToListAsync();
+                .Where(t => t.CourseId == id & t.IsVerified == true).ToListAsync();
 
            // var list = await context.ToListAsync();
 
@@ -86,7 +86,7 @@ namespace Projekt_StudieTips.Controllers
             var context = await _context.Tips
                 .Include(t => t.Course)
                 .Include(t => t.User)
-                .Where(t => t.Headline.Contains(search.SearchTerm) || t.Text.Contains(search.SearchTerm) || t.Course.CourseName.Contains(search.SearchTerm)).ToListAsync();
+                .Where(t => (t.Headline.Contains(search.SearchTerm) || t.Text.Contains(search.SearchTerm) || t.Course.CourseName.Contains(search.SearchTerm)) & t.IsVerified == true).ToListAsync();
 
             // var list = await context.ToListAsync();
 
