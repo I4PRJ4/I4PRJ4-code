@@ -5,6 +5,7 @@
 
 # User-specific files
 *.rsuser
+<<<<<<< HEAD
 *.suo
 *.user
 *.userosscache
@@ -12,10 +13,28 @@
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
+=======
+**/*.rsuser
+**/*.suo
+*.user
+**/*.user
+*.userosscache
+**/*.userosscache
+*.sln.docstates
+**/*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+**/*.userprefs
+>>>>>>> DegreePage
 
 # Mono auto generated files
 mono_crash.*
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> DegreePage
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -34,7 +53,12 @@ bld/
 [Ll]ogs/
 
 # Visual Studio 2015/2017 cache/options directory
+<<<<<<< HEAD
 .vs/
+=======
+.vs/*
+**/*.vs/*
+>>>>>>> DegreePage
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
@@ -54,6 +78,10 @@ nunit-*.xml
 [Dd]ebugPS/
 [Rr]eleasePS/
 dlldata.c
+<<<<<<< HEAD
+=======
+**/*.dlldata.c
+>>>>>>> DegreePage
 
 # Benchmark Results
 BenchmarkDotNet.Artifacts/
@@ -360,4 +388,8 @@ MigrationBackup/
 .ionide/
 
 # Fody - auto-generated XML schema
+<<<<<<< HEAD
 FodyWeavers.xsd
+=======
+FodyWeavers.xsd
+>>>>>>> DegreePage
