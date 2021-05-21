@@ -9,6 +9,7 @@ namespace Projekt_StudieTips.Data
         {
             const string adminEmail = "Admin@localhost";
             const string adminPassword = "Secret7/";
+            const string adminName = "Admin";
 
             if (userManager.FindByNameAsync(adminEmail).Result == null)
             {
@@ -22,7 +23,7 @@ namespace Projekt_StudieTips.Data
                     (user, adminPassword).Result;
                 if (result.Succeeded)
                 {
-                    var adminClaim = new Claim("Admin", "ADMINISTRATOR");
+                    var adminClaim = new Claim("Admin", adminName);
                     userManager.AddClaimAsync(user, adminClaim);
                 }
             }
