@@ -40,7 +40,7 @@ namespace Projekt_StudieTips.Controllers
             var context = await _context.Tips
                 .Include(t => t.Course)
                 .Include(t => t.User)
-                .Where(t => t.CourseId == id & t.IsVerified == true).ToListAsync();
+                .Where(t => t.CourseId == id & t.IsVerified == true).ToListAsync(); // HER
 
            // var list = await context.ToListAsync();
 
@@ -55,7 +55,7 @@ namespace Projekt_StudieTips.Controllers
                 try
                 {
                     var course = await _context.Courses.Where(c => c.CourseId == id).FirstAsync();
-                    ViewBag.CourseName = $"{course.CourseName} har ingen tips. Tryk Add Tip for at tilføje";
+                    ViewBag.CourseName = $"{course.CourseName} har ingen tips. Tryk 'Tilføj nyt tip' for at tilføje";
                     ViewBag.CourseId = id;
                 }
                 catch (InvalidOperationException)

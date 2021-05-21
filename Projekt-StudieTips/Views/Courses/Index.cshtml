@@ -9,7 +9,7 @@
 
 <br />
 <br />
-<div id="styletext"><p>Vælg det fag du ønsker at se tips for</p></div>
+<div id="styletext"><p>Vælg det kursus du ønsker at se tips for</p></div>
 <br />
 <br />
 
@@ -17,7 +17,7 @@
 {
     <div id="CenterEverything">
         <p>
-            <a asp-action="Create" asp-route-DegreeId="@ViewBag.DegreeId">Create New</a>
+            <a asp-action="Create" asp-route-DegreeId="@ViewBag.DegreeId">Opret nyt kursus</a>
         </p>
     </div>
 }
@@ -38,11 +38,11 @@
 
     @if (User.HasClaim(c => c.Type == "Admin"))
     {
-        <input class="gotobtn" type="submit" name="submit" value="Edit">
-        <input class="gotobtn" type="submit" name="submit" value="Delete">
+        <input class="gotobtn" type="submit" name="submit" value="Rediger">
+        <input class="gotobtn" type="submit" name="submit" value="Slet">
     }
     <br/>
     <br/>
-    <p><a asp-controller="Degrees" asp-route-id="@ViewBag.DegreeId" asp-action="Index">Tilbage</a></p>
+    <p><a asp-controller="Degrees" asp-route-id="@ViewBag.DegreeId" asp-action="Index">Tilbage til uddannelser</a></p>
 </div>
 }
