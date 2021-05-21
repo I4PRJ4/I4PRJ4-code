@@ -28,7 +28,7 @@ namespace Projekt_StudieTips.Models
         public string Text { get; set; }
 
         [Required]
-        public bool IsVerified { get; set; } = true;
+        public bool IsVerified { get; set; } = false;
 
     }
 }
