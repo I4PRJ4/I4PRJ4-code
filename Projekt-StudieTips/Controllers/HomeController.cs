@@ -24,7 +24,7 @@ namespace Projekt_StudieTips.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult UnauthorizedAccess()
         {
             return View();
         }
