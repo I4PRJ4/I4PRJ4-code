@@ -19,12 +19,12 @@ namespace Projekt_StudieTips.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? Course)
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult UnauthorizedAccess()
         {
             return View();
         }
