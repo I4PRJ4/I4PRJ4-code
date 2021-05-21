@@ -58,10 +58,12 @@ namespace Projekt_StudieTips
                      .RequireClaim("Admin"));
             });
 
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Home/UnauthorizedAccess");
+
             services.AddControllersWithViews();
 
             services.AddDbContext<DatabaseContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("AppContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("AppContext"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
