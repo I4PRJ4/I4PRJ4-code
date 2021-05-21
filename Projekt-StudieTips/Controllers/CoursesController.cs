@@ -82,7 +82,7 @@ namespace Projekt_StudieTips.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _repository.AddDegree(course);
+                await _repository.AddCourse(course);
               
 
                 return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId});

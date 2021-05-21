@@ -28,11 +28,6 @@ namespace Projekt_StudieTips.Controllers
         {
             return View();
         }
-        [Authorize(Policy = "IsAdmin")]
-        public IActionResult GamerView()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

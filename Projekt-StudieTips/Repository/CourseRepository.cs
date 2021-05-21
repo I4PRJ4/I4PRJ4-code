@@ -28,7 +28,7 @@ namespace Projekt_StudieTips.Repository
             return Context.Degrees.ToList();
         }
 
-        public async Task AddDegree(Course course)
+        public async Task AddCourse(Course course)
         {
             Context.Add(course);
             await Context.SaveChangesAsync();
