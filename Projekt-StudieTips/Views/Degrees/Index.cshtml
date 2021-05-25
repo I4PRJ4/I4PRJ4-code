@@ -1,47 +1,52 @@
 ﻿@model IEnumerable<Projekt_StudieTips.Models.Degree>
 
-    <link rel="stylesheet" href="~/css/course.css" />
+<link rel="stylesheet" href="~/css/course.css" />
+<link rel="stylesheet" href="~/css/site.css" />
 
 @{
-    ViewData["Title"] = "Studieretninger";
+    ViewData["Title"] = "Uddannelser";
 }
-
-<h1>Studieretninger</h1>
-
-@if (User.HasClaim(c => c.Type == "Admin"))
-{
-<p>
-        <a asp-action="Create">Create New</a>
-    </p>
-}
-
-
-@using (Html.BeginForm("Redirect", "Degrees", FormMethod.Post))
-{
-<div id="CenterEverything">
-    <select name="DegreeId">
-        @if (Model != null)
-        {
-
-            foreach (var item in Model.OrderBy(d => d.DegreeName))
-            {
-                <option value="@item.DegreeId">@item.DegreeName</option>
-            }
-        }
-
-    </select>
-    <br />
-    <br />
-
-    <input class="gotobtn" type="submit" name="submit" value="Gå til" />
+<div class="CenterEverything">
+    <h1>Uddannelser</h1>
 
     @if (User.HasClaim(c => c.Type == "Admin"))
     {
-        <input class="gotobtn" type="submit" name="submit" value="Edit">
-        <input class="gotobtn" type="submit" name="submit" value="Delete">
+        <p>
+            <a asp-action="Create">Opret ny uddannelse</a>
+        </p>
     }
-    <br/>
-    <br/> 
-    <p><a asp-controller="Home" asp-action="Index">Tilbage</a></p>
+
+
+    @using (Html.BeginForm("Redirect", "Degrees", FormMethod.Post))
+    {
+        <div id="CenterEverything">
+            <div class="select CenterEverything">
+                <select name="DegreeId">
+                    @if (Model != null)
+                    {
+
+                        foreach (var item in Model.OrderBy(d => d.DegreeName))
+                        {
+                            <option value="@item.DegreeId">@item.DegreeName</option>
+                        }
+                    }
+
+                </select>
+            </div>
+            <br />
+            <br />
+
+            <input class="gotobtn" type="submit" name="submit" value="Gå til" />
+
+            @if (User.HasClaim(c => c.Type == "Admin"))
+            {
+                <input class="gotobtn" type="submit" name="submit" value="Rediger">
+                <input class="gotobtn" type="submit" name="submit" value="Slet">
+            }
+            <br />
+            <br />
+            <p><a asp-controller="Home" asp-action="Index">Tilbage</a></p>
+        </div>
+
+    }
 </div>
-}

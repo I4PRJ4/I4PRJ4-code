@@ -75,7 +75,7 @@
 </head>
 
 <div class="text-center">
-    <h1>@courseName</h1>
+    <h1>@courseName </h1>
 </div>
 
 
@@ -83,7 +83,7 @@
 
 
     <p>
-        <a asp-action="Create" asp-route-value="@courseId">Add Tip</a>
+        <a asp-action="Create" asp-route-value="@courseId">Tilføj nyt tip</a>
     </p>
 
     @* Bruger class=mx-auto for at centrere indholdet *@
@@ -125,7 +125,7 @@
                     @if (textLength >= rmLength)
                     {
                         @(first)<span class="dots">...</span><span class="more">@(end)</span>
-                        <button class="read">read more</button>
+                        <button class="read">Vis mere...</button>
                     }
                     else
                     {
@@ -146,11 +146,11 @@
             $(".read").click(function () {
                 $(this).prev().toggle();
                 $(this).siblings('.dots').toggle();
-                if ($(this).text() === 'read more') {
-                    $(this).text('read less');
+                if ($(this).text() === 'Vis mere...') {
+                    $(this).text('Vis mindre...');
                 }
                 else {
-                    $(this).text('read more');
+                    $(this).text('Vis mere...');
                 }
             });
         });

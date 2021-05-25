@@ -19,7 +19,7 @@ a {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: #fff;
+    color: #0A8DFF;
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
@@ -78,12 +78,11 @@ body {
     font-size: 40px;
     text-shadow: 0px 0px 3px grey;
     color: #494949;
-
 }
 
 /* Gå til-knap styling*/
 
-#CenterEverything {
+.CenterEverything {
     text-align: center;
 }
 
@@ -105,8 +104,8 @@ body {
     font-weight: bold;
 }
 
-.row{
-    text-align:center;
-    margin-left:auto;
-    margin-right:auto;
+.row {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }

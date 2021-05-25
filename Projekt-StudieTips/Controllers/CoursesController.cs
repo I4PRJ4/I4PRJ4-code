@@ -45,12 +45,12 @@ namespace Projekt_StudieTips.Controllers
                 return RedirectToAction("Index", "Tips", new {id = CourseId});
             }
 
-            else if(submit == "Edit")
+            else if(submit == "Rediger")
             {
                 return RedirectToAction("Edit", "Courses", new { id = CourseId });
             }
 
-            else if(submit == "Delete")
+            else if(submit == "Slet")
             {
                 return RedirectToAction("Delete", "Courses", new { id = CourseId });
             }

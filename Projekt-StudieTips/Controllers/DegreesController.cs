@@ -42,12 +42,12 @@ namespace Projekt_StudieTips.Controllers
                 return RedirectToAction("Index", "Courses", new { DegreeId = DegreeId });
             }
 
-            else if (submit == "Edit")
+            else if (submit == "Rediger")
             {
                 return RedirectToAction("Edit", "Degrees", new { id = DegreeId });
             }
 
-            else if (submit == "Delete")
+            else if (submit == "Slet")
             {
                 return RedirectToAction("Delete", "Degrees", new { id = DegreeId });
             }

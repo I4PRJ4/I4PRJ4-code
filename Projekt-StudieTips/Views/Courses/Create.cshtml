@@ -5,37 +5,31 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Opret kursus</h1>
 
-<h4>Course</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Courses.CourseName" class="control-label"></label>
+                <label class="control-label">Kursus</label>
                 <input name="CourseName" id="CourseName" class="form-control" />
                 <span name="CourseName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <select name="DegreeId" id="DegreeId">
-                    @foreach (var item in Model.Degrees)
-                    {
-                        <option value="@item.DegreeId">@item.DegreeName</option>
-                    }
-                </select>
+                <input type="hidden" name="DegreeId" id="DegreeId" value="@ViewBag.DegreeId"/>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Opret" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" asp-route-DegreeId="@ViewBag.DegreeId">Back to List</a>
+    <a asp-action="Index" asp-route-DegreeId="@ViewBag.DegreeId">Tilbage til kursus</a>
 </div>
 
 @section Scripts {
