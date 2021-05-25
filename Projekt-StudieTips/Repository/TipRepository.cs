@@ -23,7 +23,7 @@ namespace Projekt_StudieTips.Repository
         {
             var context = Context.Tips
                 .Include(t => t.Course)
-                .Where(t => t.CourseId == id & t.IsVerified == true);
+                .Where(t => t.CourseId == id & t.IsVerified == false);
 
             switch (sortOrder)
             {
@@ -51,7 +51,7 @@ namespace Projekt_StudieTips.Repository
             return await Context.Tips
                 .Include(t => t.Course)
                 .Where(t => (t.Headline.Contains(search.SearchTerm) || t.Text.Contains(search.SearchTerm) ||
-                             t.Course.CourseName.Contains(search.SearchTerm)) & t.IsVerified == true).ToListAsync();
+                             t.Course.CourseName.Contains(search.SearchTerm)) & t.IsVerified == false).ToListAsync();
         }
 
         public async Task<Tip> GetTipDetails(int? id)
