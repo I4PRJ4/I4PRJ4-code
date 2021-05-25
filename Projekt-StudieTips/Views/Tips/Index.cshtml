@@ -102,16 +102,17 @@
 <p>
     <a asp-action="Create" asp-route-value="@courseId">Tilføj nyt tip</a>
 </p>
-    
-@*<form action="" name="sort" id="IdSort">
-    <select onchange="date"></select>
+
+
+<label for="sort">Sortér:</label>
+<form action="">
+    <select name="sortOrder" id="sortOrder" onchange="this.form.submit()">
+        <option value=""></option>
+        <option value="date_desc">Nyeste først</option>
+        <option value="date_asc">Ældste først</option>
+    </select>
 </form>
-<label for="sort">Sort by:</label>
-<select name="sort" id="sort">
-    <option value="date_desc">Date descending</option>
-    <option value="date_asc">Date ascending</option>
-    <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-id="@courseId" asp-route-sortOrder="value" asp-action="Edit">Redigér</a>
-</select>*@
+
 
 @* Bruger class=mx-auto for at centrere indholdet *@
     <div class="mx-auto" style="width: 50%; text-align: center;">
