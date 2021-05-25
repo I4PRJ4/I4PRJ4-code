@@ -111,3 +111,65 @@ body {
     background: rgb(220,249,255);
     background: linear-gradient(180deg, rgba(220,249,255,1) 0%, rgba(236,205,137,0.6085784655659139) 0%, rgba(255,255,255,1) 100%);
 }
+
+.CenterEverything {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Reset Select */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: rgba(255,255,255,0.40);
+    background-image: none;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+    display: none;
+}
+/* Custom Select */
+.select {
+    position: relative;
+    display: flex;
+    width: 20em;
+    height: 3em;
+    line-height: 3;
+    background: rgba(255,255,255,0.40);
+    overflow: hidden;
+    border-radius: .25em;
+    transform: scale(1.5);
+}
+
+select {
+    flex: 1;
+    padding: 0 .5em;
+    color: rgba(10,141,255,1.0);
+    cursor: pointer;
+
+}
+/* Arrow */
+.select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: rgba(10,141,255,1.0);
+    cursor: pointer;
+    pointer-events: none;
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
+}
+/* Transition */
+.select:hover::after {
+    color: #FFCB0A;
+}
