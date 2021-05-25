@@ -3,52 +3,60 @@
 <link rel="stylesheet" href="~/css/course.css" />
 <link rel="stylesheet" href="~/css/site.css" />
 
-@{
-    ViewData["Title"] = "Uddannelser";
-}
+@{ ViewData["Title"] = "Uddannelser"; }
 <div class="CenterEverything">
     <h1 class="h1Degree">Uddannelser</h1>
 
     @if (User.HasClaim(c => c.Type == "Admin"))
     {
-        <p>
-            <a asp-action="Create">Opret ny uddannelse</a>
-        </p>
-    }
-    
+<p>
+    <a asp-action="Create">Opret ny uddannelse</a>
+</p>}
+
+    @if (User.HasClaim(c => c.Type == "Moderator"))
+    {
+<p>
+    <a asp-action="Delete">Slet</a>
+</p>}
+
     <br />
     <br />
 
     @using (Html.BeginForm("Redirect", "Degrees", FormMethod.Post))
     {
-        <div>
-            <div class="select CenterEverything">
-                <select name="DegreeId">
-                    @if (Model != null)
-                    {
-
-                        foreach (var item in Model.OrderBy(d => d.DegreeName))
-                        {
-                            <option value="@item.DegreeId">@item.DegreeName</option>
-                        }
-                    }
-
-                </select>
-            </div>
-            <br />
-            <br />
-
-
-            <input class="gotobtn" type="submit" name="submit" value="Gå til" />
-
-            @if (User.HasClaim(c => c.Type == "Admin"))
+<div>
+    <div class="select CenterEverything">
+        <select name="DegreeId">
+            @if (Model != null)
             {
-                <input class="gotobtn" type="submit" name="submit" value="Rediger">
-                <input class="gotobtn" type="submit" name="submit" value="Slet">
-            }
-            <br />
-            <br />
-        </div>
 
-    }
+                foreach (var item in Model.OrderBy(d => d.DegreeName))
+                {
+<option value="@item.DegreeId">@item.DegreeName</option>
+}
+}
+
+        </select>
+    </div>
+    <br />
+    <br />
+
+
+    <input class="gotobtn" type="submit" name="submit" value="Gå til" />
+
+    @if (User.HasClaim(c => c.Type == "Admin"))
+    {
+<input class="gotobtn" type="submit" name="submit" value="Rediger">
+                    <input class="gotobtn" type="submit" name="submit" value="Slet">}
+    <br />
+    <br />
+</div>}
+
+    @if (User.HasClaim(c => c.Type == "Moderator"))
+    {
+<input class="gotobtn" type="submit" name="submit" value="Rediger">
+                <input class="gotobtn" type="submit" name="submit" value="Slet">}
+    <br />
+    <br />
+</div>}
 </div>

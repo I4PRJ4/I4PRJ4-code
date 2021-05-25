@@ -26,7 +26,7 @@ namespace Projekt_StudieTips
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer("server=localhost,1433; User Id = SA; Password=password_123; database =StudieTipsDB; trusted_connection = false;"));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddScoped<DegreeRepository>();
@@ -56,6 +56,10 @@ namespace Projekt_StudieTips
                     "IsAdmin",
                     policyBuilder => policyBuilder
                      .RequireClaim("Admin"));
+                options.AddPolicy(
+                   "IsModerator",
+                   policyBuilder => policyBuilder
+                    .RequireClaim("Moderator"));
             });
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Home/UnauthorizedAccess");
@@ -89,7 +93,8 @@ namespace Projekt_StudieTips
             app.UseAuthentication();
             app.UseAuthorization();
 
-            DbAdmin.SeedUsers(userManager, log);
+            DbAdmin.SeedAdmin(userManager, log);
+            DbAdmin.SeedModerator(userManager, log);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
