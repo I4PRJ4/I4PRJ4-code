@@ -1,45 +1,16 @@
-﻿@model MultipleModelsSearchAndTip
+﻿@model SearchDto
 @{
     ViewData["Title"] = "Home Page";
 }
 <link rel="stylesheet" href="~/css/site.css" />
 <link rel="stylesheet" href="~/css/searchbar.css"/>
-<!--Home is bugging on a stack-->
-<<<<<<< HEAD
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Tips" asp-action="SearchTip">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">Søg i tips:</label>
-                <input asp-for="SearchDto.SearchTerm" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Søg" class="btn btn-primary" />
-            </div>
-        </form>
-        @*@foreach(var item in Model.Tips)
-            {
-            <tr>
-               
-            </tr>
-            }*@
-    </div>
-</div>
-=======
+
 <form class="search-bar scale" asp-controller="Tips" asp-action="SearchTip">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
->>>>>>> origin/main
 
     <input pattern=".*\S.*" required  asp-for="SearchTerm">
     <button class="search-btn" type="submit" value="Søg" asp-for="SearchTerm">
         <span>Søg..</span>
     </button>
 
-<<<<<<< HEAD
-<style>
-    /*Scoping to this*/
-</style>
-=======
 </form>
->>>>>>> origin/main

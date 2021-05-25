@@ -2,15 +2,14 @@
 @model IEnumerable<Projekt_StudieTips.Models.Course>
 
 <link rel="stylesheet" href="~/css/site.css"/>
-<link rel="stylesheet" href="~/css/course.css"/>
 
 @{
     ViewData["Title"] = "Index";
 }
-
+<div class="CenterEverything">
 <br />
 <br />
-<div id="styletext"><p>Vælg det kursus du ønsker at se tips for</p></div>
+<div class="h1Degree" style="font-size: 6em">Vælg det kursus du ønsker at se tips for</div>
 <br />
 <br />
 
@@ -23,28 +22,17 @@
     </div>
 }
 
-
-
-@if (User.HasClaim(c => c.Type == "Moderator"))
-{
-    <div id="CenterEverything">
-        <p>
-            <a asp-action="Create" asp-route-DegreeId="@ViewBag.DegreeId">Create New</a>
-        </p>
-    </div>
-}
-
-
-
 @using (Html.BeginForm("Redirect", "Courses", FormMethod.Post))
 {
-<div id="CenterEverything">
-    <select name="CourseId">
-        @foreach (var item in Model.OrderBy(d => d.CourseName))
-        {
-            <option value="@item.CourseId">@item.CourseName</option>
-        }
-    </select>
+<div>
+    <div class="select CenterEverything">
+        <select name="CourseId">
+            @foreach (var item in Model.OrderBy(d => d.CourseName))
+            {
+                <option value="@item.CourseId">@item.CourseName</option>
+            }
+        </select>
+    </div>
     <br />
     <br />
 
@@ -55,22 +43,14 @@
         <input class="gotobtn" type="submit" name="submit" value="Rediger">
         <input class="gotobtn" type="submit" name="submit" value="Slet">
     }
-<<<<<<< HEAD
-
-    @if (User.HasClaim(c => c.Type == "Moderator"))
-    {
-        <input class="gotobtn" type="submit" name="submit" value="Edit">
-        <input class="gotobtn" type="submit" name="submit" value="Delete">
-    }
-
-
     <br />
     <br />
-    <p><a asp-controller="Degrees" asp-route-id="@ViewBag.DegreeId" asp-action="Index">Tilbage</a></p>
-=======
-    <br/>
-    <br/>
-    <p><a asp-controller="Degrees" asp-route-id="@ViewBag.DegreeId" asp-action="Index">Tilbage til uddannelser</a></p>
->>>>>>> origin/main
+    <a asp-controller="Degrees" asp-route-id="@ViewBag.DegreeId" asp-action="Index">
+    <div class="h1Degree" style="font-size: 2.5em; color: #fff">
+        Tilbage til uddannelser
+    </div>
+    </a>
 </div>
 }
+
+</div>
