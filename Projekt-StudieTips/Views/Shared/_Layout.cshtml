@@ -19,18 +19,12 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between navtext">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            
-                            <a class="nav-link text-primary" asp-area="" asp-controller="Home" asp-action="Index">Hjem</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-primary" asp-area="" asp-controller="Degrees" asp-action="Index">Uddannelser</a>
-                        </li>
-
-                    </ul>
-                    <partial name="_LoginPartial" />
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between navtext multi-button">
+                    <div class="navbar-nav flex-grow-1" style="transform: scale(0.8)">
+                        <button onclick="location.href='@Url.Action("Index", "Home")'">Hjem</button>
+                        <button onclick="location.href = '@Url.Action("Index", "Degrees")'">Uddannelser</button>
+                        <partial name="_LoginPartial" />
+                    </div>
                 </div>
             </div>
         </nav>
