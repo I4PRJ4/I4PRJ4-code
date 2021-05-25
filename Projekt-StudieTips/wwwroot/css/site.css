@@ -10,9 +10,14 @@ for details on configuring this project to bundle and minify static web assets. 
     font-size: 2.5em;
     font-weight: bold;
     color: #0A8DFF;
+
 }
 
-
+.h1Degree {
+    color: #FFCB0A;
+    font-size: 8em;
+    text-shadow: 0 0.125em 0.3125em #000;
+}
 
 body {
     background-image: url('/Images/study-bg.jpg');
@@ -61,12 +66,12 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+  font-size: 12px;
 
 }
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 12px;
   }
 }
 
@@ -172,4 +177,27 @@ select {
 /* Transition */
 .select:hover::after {
     color: #FFCB0A;
+}
+
+.gotobtn {
+    background-color: #FFCB0A;
+    border: 2px;
+    border-color: #0F5DC5;
+    border-radius: 4px;
+    text-align: center;
+    display: inline-block;
+    font-size: 2em;
+    padding: 3px;
+    min-height: 1em;
+    min-width: 4em;
+    box-shadow: 0 2px 5px #494949;
+    outline: none;
+    color: white;
+    text-shadow: 0 2px 4px #000;
+    font-weight: bold;
+
+}
+
+.backBtn {
+    font-size: 1em;
 }

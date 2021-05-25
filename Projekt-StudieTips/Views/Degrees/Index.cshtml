@@ -7,7 +7,7 @@
     ViewData["Title"] = "Uddannelser";
 }
 <div class="CenterEverything">
-    <h1>Uddannelser</h1>
+    <h1 class="h1Degree">Uddannelser</h1>
 
     @if (User.HasClaim(c => c.Type == "Admin"))
     {
@@ -15,7 +15,9 @@
             <a asp-action="Create">Opret ny uddannelse</a>
         </p>
     }
-
+    
+    <br />
+    <br />
 
     @using (Html.BeginForm("Redirect", "Degrees", FormMethod.Post))
     {
@@ -36,6 +38,7 @@
             <br />
             <br />
 
+
             <input class="gotobtn" type="submit" name="submit" value="Gå til" />
 
             @if (User.HasClaim(c => c.Type == "Admin"))
@@ -45,7 +48,6 @@
             }
             <br />
             <br />
-            <p><a asp-controller="Home" asp-action="Index">Tilbage</a></p>
         </div>
 
     }

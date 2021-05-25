@@ -86,23 +86,7 @@ body {
     text-align: center;
 }
 
-.gotobtn {
-    background-color: #4D93F1;
-    border: 2px;
-    border-color: #0F5DC5;
-    border-radius: 4px;
-    text-align: center;
-    display: inline-block;
-    font-size: 16px;
-    padding: 3px;
-    min-height: 30px;
-    min-width: 100px;
-    box-shadow: 0 2px 5px #494949;
-    outline: none;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-}
+
 
 .row {
     text-align: center;
