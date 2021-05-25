@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Projekt_StudieTips.Data;
 using Projekt_StudieTips.Models;
 using Projekt_StudieTips.Repository;
+using PagedList;
 
 namespace Projekt_StudieTips.Controllers
 {
@@ -33,7 +35,7 @@ namespace Projekt_StudieTips.Controllers
 
 
         // GET: Tip
-        public async Task<IActionResult> Index(int? id, string sortOrder)
+        public async Task<IActionResult> Index(int? id, string sortOrder, int? page)
         {
             //Default page
             if (id == null)
@@ -87,7 +89,14 @@ namespace Projekt_StudieTips.Controllers
                 
             }
 
-            return View(context);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            if (pageNumber < 1)
+            {
+                pageNumber = 1;
+            }
+
+            return View(context.ToPagedList(pageNumber, pageSize));
         }
 
         public async Task<IActionResult> SearchTip([Bind("SearchTerm")]SearchDto search)

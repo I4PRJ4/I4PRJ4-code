@@ -1,5 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@model IEnumerable<Projekt_StudieTips.Models.Tip>
+@using PagedList
+@*@model IEnumerable<Projekt_StudieTips.Models.Tip>*@
+@model PagedList.IPagedList<Projekt_StudieTips.Models.Tip>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 @inject UserManager<IdentityUser> UserManager
 
 @{
@@ -61,7 +66,7 @@
                 margin-bottom: 30px;
             }
 
-         .read{
+        .read {
             margin-top: 15px;
             display: block;
             background-color: rgba(255,0,0,0);
@@ -80,14 +85,14 @@
             background-color: transparent;
         }
 
-        .topnav a {
-            float: left;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
     </style>
 </head>
 
@@ -99,22 +104,22 @@
 <body class="text-center">
 
 
-<p>
-    <a asp-action="Create" asp-route-value="@courseId">Tilføj nyt tip</a>
-</p>
+    <p>
+        <a asp-action="Create" asp-route-value="@courseId">Tilføj nyt tip</a>
+    </p>
 
 
-<label for="sort">Sortér:</label>
-<form action="">
-    <select name="sortOrder" id="sortOrder" onchange="this.form.submit()">
-        <option value=""></option>
-        <option value="date_desc">Nyeste først</option>
-        <option value="date_asc">Ældste først</option>
-    </select>
-</form>
+    <label for="sort">Sortér:</label>
+    <form action="">
+        <select name="sortOrder" id="sortOrder" onchange="this.form.submit()">
+            <option value=""></option>
+            <option value="date_desc">Nyeste først</option>
+            <option value="date_asc">Ældste først</option>
+        </select>
+    </form>
 
 
-@* Bruger class=mx-auto for at centrere indholdet *@
+    @* Bruger class=mx-auto for at centrere indholdet *@
     <div class="mx-auto" style="width: 50%; text-align: center;">
         @foreach (var item in Model)
         {
@@ -138,7 +143,7 @@
 
             <div class="post" name="postdiv" style="overflow-wrap: break-word">
                 <div>
-                    <div class ="topnav">
+                    <div class="topnav">
                         <a style="font-size: 12px;">
                             @item.Username.Substring(0, item.Username.IndexOf('@'))
                         </a>
@@ -185,11 +190,33 @@
                 </div>
             </div>
         }
+        <div>
+            <a asp-controller="Home" asp-action="Index">Hjem</a>
+        </div>
+
+        Side @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) ud af @Model.PageCount
+        
+
+        @if (Model.PageNumber > 1)
+        {
+            <p class="nav-item" style="float:left">
+                @{ var previousPage = Model.PageNumber - 1;}
+                <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-sortOrder="ViewBag.DateSortParm" asp-route-page="@previousPage" asp-route-id="@courseId" asp-action="Index">Forrige</a>
+            </p>
+        }
+        @if (Model.PageNumber < Model.PageCount )
+        { 
+            <p class="nav-item" style="float:right">
+                @{ var nextPage = Model.PageNumber + 1;}
+                <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-sortOrder="ViewBag.DateSortParm" asp-route-page="@nextPage" asp-route-id="@courseId" asp-action="Index">Næste</a>
+            </p>
+        }
+
+
+        @*@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index",
+        new { courseId, page, sortOrder = ViewBag.CurrentSort, }))*@
     </div>
 
-    <div>
-        <a asp-controller="Home" asp-action="Index">Hjem</a>
-    </div>
 
     @*Javascript der håndterer read more / read less collapse-funktionen på tips*@
     <script>
