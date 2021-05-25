@@ -1,5 +1,16 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+@import url('http://fonts.cdnfonts.com/css/tw-cen-mt-condensed');
+
+* {
+    font-family: 'Tw Cen MT Condensed', sans-serif;
+}
+
+.navtext {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #0A8DFF;
+}
 
 body {
     background-image: url('/Images/study-bg.jpg');
@@ -8,6 +19,12 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+}
+
+.menusetting {
+    background: rgb(220,249,255);
+    background: linear-gradient(0deg, rgba(220,249,255,1) 0%, rgba(236,205,137,0.31416316526610644) 0%, rgba(255,255,255,1) 100%);
 }
 
 .searchbox {
@@ -17,9 +34,9 @@ body {
 }
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
@@ -34,7 +51,7 @@ a {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
+  color: #0A8DFF;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
@@ -79,9 +96,14 @@ body {
   margin-bottom: 60px;
 }
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+    background: rgb(220,249,255);
+    background: linear-gradient(180deg, rgba(220,249,255,1) 0%, rgba(236,205,137,0.31416316526610644) 0%, rgba(255,255,255,1) 100%);
 }

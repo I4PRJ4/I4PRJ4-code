@@ -7,32 +7,34 @@
     <title>@ViewData["Title"] - Projekt_StudieTips</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/test.css" />
+    <link rel="stylesheet" href="~/css/navbuttons.css" />
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-white border-bottom navbar-light box-shadow mb-3">
+    <header >
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom navbar-light box-shadow mb-3 menusetting">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/logo1.png" width="100em" height="100em" /></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between navtext">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Hjem</a>
+                            
+                            <a class="nav-link text-primary" asp-area="" asp-controller="Home" asp-action="Index">Hjem</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Degrees" asp-action="Index">Uddannelser</a>
+                            <a class="nav-link text-primary" asp-area="" asp-controller="Degrees" asp-action="Index">Uddannelser</a>
                         </li>
 
                     </ul>
-
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
+        
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -40,9 +42,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer border-top">
         <div class="container">
-            &copy; 2021 - StudieTips
+            <label class="footclass">Semesterprojekt 4 - Gruppe 4 - StudieTips 2022 test</label>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
