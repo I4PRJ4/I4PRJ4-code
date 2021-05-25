@@ -9,19 +9,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Projekt_StudieTips.Data;
 using Projekt_StudieTips.Models;
+using Projekt_StudieTips.Repository;
 
 namespace Projekt_StudieTips.Controllers
 {
     public class TipsController : Controller
     {
-        private readonly DatabaseContext _context;
+        //private readonly DatabaseContext _context;
+        private readonly TipRepository _repository;
         private readonly UserManager<IdentityUser> _user;
 
-        public TipsController(DatabaseContext context, UserManager<IdentityUser> user)
+        //public TipsController(DatabaseContext context, UserManager<IdentityUser> user)
+        //{
+        //    _context = context;
+        //    _user = user;
+        //}
+
+        public TipsController(TipRepository repository, UserManager<IdentityUser> user)
         {
-            _context = context;
+            _repository = repository;
             _user = user;
         }
+
 
         // GET: Tip
         public async Task<IActionResult> Index(int? id, string sortOrder)
@@ -32,40 +41,42 @@ namespace Projekt_StudieTips.Controllers
                 return RedirectToAction("Index", "Home"); // bliver sendt tilbage til forsiden
             }
 
+            ViewBag.DateSortParm = sortOrder == "date_desc" ? "date_desc" : "date_asc";
+            var context = _repository.GetTips(id,sortOrder).Result;
+
+            //var context = _context.Tips
+            //    .Include(t => t.Course)
+            //    .Where(t => t.CourseId == id & t.IsVerified == false);
+
             
 
-            var context = _context.Tips
-                .Include(t => t.Course)
-                .Where(t => t.CourseId == id & t.IsVerified == false);
+            //switch (sortOrder)
+            //{
+            //    case "date_asc":
+            //        context = context.OrderBy(t => t.Date);
+            //        break;
+            //    case "date_desc":
+            //        context = context.OrderByDescending(t => t.Date);
+            //        break;
+            //    default:
+            //        context = context.OrderByDescending(t => t.Date);
+            //        break;
+            //}
 
-            ViewBag.DateSortParm = sortOrder == "date_desc" ? "date_desc" : "date_asc";
-
-            switch (sortOrder)
-            {
-                case "date_asc":
-                    context = context.OrderBy(t => t.Date);
-                    break;
-                case "date_desc":
-                    context = context.OrderByDescending(t => t.Date);
-                    break;
-                default:
-                    context = context.OrderByDescending(t => t.Date);
-                    break;
-            }
-
-            var list = await context.ToListAsync();
+            //var list = await context.ToListAsync();
 
             try
             {
-                ViewBag.CourseName = list[0].Course.CourseName;
-                ViewBag.CourseId = list[0].CourseId;
+                ViewBag.CourseName = context[0].Course.CourseName;
+                ViewBag.CourseId = context[0].CourseId;
             }
             catch (ArgumentOutOfRangeException)
             {
 
                 try
                 {
-                    var course = await _context.Courses.Where(c => c.CourseId == id).FirstAsync();
+                    //var course = await _context.Courses.Where(c => c.CourseId == id).FirstAsync();
+                    var course = await _repository.GetCourse(id);
                     ViewBag.CourseName = $"{course.CourseName} har ingen tips. Tryk 'Tilføj nyt tip' for at tilføje";
                     ViewBag.CourseId = id;
                 }
@@ -76,7 +87,7 @@ namespace Projekt_StudieTips.Controllers
                 
             }
 
-            return View(list);
+            return View(context);
         }
 
         public async Task<IActionResult> SearchTip([Bind("SearchTerm")]SearchDto search)
@@ -87,10 +98,11 @@ namespace Projekt_StudieTips.Controllers
                 return RedirectToAction("Index", "Home"); // bliver sendt tilbage til forsiden
             }
 
-            var context = await _context.Tips
-                .Include(t => t.Course)
-                .Where(t => (t.Headline.Contains(search.SearchTerm) || t.Text.Contains(search.SearchTerm) || t.Course.CourseName.Contains(search.SearchTerm)) & t.IsVerified == false).ToListAsync();
+            //var context = await _context.Tips
+            //    .Include(t => t.Course)
+            //    .Where(t => (t.Headline.Contains(search.SearchTerm) || t.Text.Contains(search.SearchTerm) || t.Course.CourseName.Contains(search.SearchTerm)) & t.IsVerified == false).ToListAsync();
 
+            var context = _repository.GetTipsWithinSearchTerm(search).Result;
 
             try
             {
@@ -123,9 +135,12 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var tip = await _context.Tips
-                .Include(t => t.Course)
-                .FirstOrDefaultAsync(m => m.TipId == id);
+            //var tip = await _context.Tips
+            //    .Include(t => t.Course)
+            //    .FirstOrDefaultAsync(m => m.TipId == id);
+
+            var tip = _repository.GetTipDetails(id);
+
             if (tip == null)
             {
                 return NotFound();
@@ -155,8 +170,8 @@ namespace Projekt_StudieTips.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Add(tip);
-                await _context.SaveChangesAsync();
+                _repository.Context.Add(tip);
+                await _repository.Context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new { id = tip.CourseId });
             }
 
@@ -172,7 +187,7 @@ namespace Projekt_StudieTips.Controllers
             }
 
 
-            var tip = await _context.Tips.FindAsync(id);
+            var tip = await _repository.Context.Tips.FindAsync(id);
             if (tip == null)
             {
                 return NotFound();
@@ -202,8 +217,8 @@ namespace Projekt_StudieTips.Controllers
             {
                 try
                 {
-                    _context.Update(tip);
-                    await _context.SaveChangesAsync();
+                    _repository.Context.Update(tip);
+                    await _repository.Context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -231,9 +246,11 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var tip = await _context.Tips
-                .Include(t => t.Course)
-                .FirstOrDefaultAsync(m => m.TipId == id);
+            //var tip = await _context.Tips
+            //    .Include(t => t.Course)
+            //    .FirstOrDefaultAsync(m => m.TipId == id);
+
+            var tip = _repository.GetTipDetails(id).Result;
 
 
             if (tip.Username != _user.GetUserName(User))
@@ -255,15 +272,15 @@ namespace Projekt_StudieTips.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tip = await _context.Tips.FindAsync(id);
-            _context.Tips.Remove(tip);
-            await _context.SaveChangesAsync();
+            var tip = await _repository.Context.Tips.FindAsync(id);
+            _repository.Context.Tips.Remove(tip);
+            await _repository.Context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TipExists(int id)
         {
-            return _context.Tips.Any(e => e.TipId == id);
+            return _repository.TipExists(id);
         }
     }
 }
