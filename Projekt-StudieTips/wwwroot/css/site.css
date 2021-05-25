@@ -25,8 +25,8 @@ body {
 }
 
 .menusetting {
-    background: rgb(220,249,255);
-    background: linear-gradient(0deg, rgba(220,249,255,1) 0%, rgba(236,205,137,0.31416316526610644) 0%, rgba(255,255,255,1) 100%);
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(236,205,137,0.6085784655659139) 100%);
 }
 
 .searchbox {
@@ -104,8 +104,10 @@ body {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    font-size: 1em;
+    font-style: italic;
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
     background: rgb(220,249,255);
-    background: linear-gradient(180deg, rgba(220,249,255,1) 0%, rgba(236,205,137,0.31416316526610644) 0%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(180deg, rgba(220,249,255,1) 0%, rgba(236,205,137,0.6085784655659139) 0%, rgba(255,255,255,1) 100%);
 }
