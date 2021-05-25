@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Projekt_StudieTips.Models.Tip>
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Projekt_StudieTips.Models.Tip>
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -52,6 +54,7 @@
             border: 1px solid black;
             margin: 10px;
             padding: 20px;
+            float: left;
         }
 
             .post:not(:last-child) {
@@ -71,6 +74,20 @@
             font-size: 14px;
             font-style: italic;
         }
+
+        .topnav {
+            overflow: hidden;
+            background-color: transparent;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
     </style>
 </head>
 
@@ -82,14 +99,25 @@
 <body class="text-center">
 
 
-    <p>
-        <a asp-action="Create" asp-route-value="@courseId">Tilføj nyt tip</a>
-    </p>
+<p>
+    <a asp-action="Create" asp-route-value="@courseId">Tilføj nyt tip</a>
+</p>
+    
+@*<form action="" name="sort" id="IdSort">
+    <select onchange="date"></select>
+</form>
+<label for="sort">Sort by:</label>
+<select name="sort" id="sort">
+    <option value="date_desc">Date descending</option>
+    <option value="date_asc">Date ascending</option>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-id="@courseId" asp-route-sortOrder="value" asp-action="Edit">Redigér</a>
+</select>*@
 
-    @* Bruger class=mx-auto for at centrere indholdet *@
+@* Bruger class=mx-auto for at centrere indholdet *@
     <div class="mx-auto" style="width: 50%; text-align: center;">
         @foreach (var item in Model)
         {
+
             var text = item.Text;
             var textLength = text.Length;
             var first = "";
@@ -108,11 +136,33 @@
             }
 
             <div class="post" name="postdiv" style="overflow-wrap: break-word">
-                <div class="topright">
-                    <p>
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </p>
+                <div>
+                    <div class ="topnav">
+                        <a style="font-size: 12px;">
+                            @item.Username.Substring(0, item.Username.IndexOf('@'))
+                        </a>
+                    </div>
+                    <div>
+                        <a style="float:right">
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </a>
+                    </div>
                 </div>
+
+                @if (item.Username == UserManager.GetUserName(User))
+                {
+                    <div class="topright">
+                        <p class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-id="@item.TipId" asp-action="Delete">Slet</a>
+                        </p>
+                    </div>
+                    <div class="topright">
+                        <p class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-id="@item.TipId" asp-action="Edit">Redigér</a>
+                        </p>
+                    </div>
+                }
+
                 @* INDSÆT OVERTSKRIFT *@
                 <div class="tiptext2">
                     <h5>

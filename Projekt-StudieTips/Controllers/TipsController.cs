@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Projekt_StudieTips.Data;
 using Projekt_StudieTips.Models;
 
@@ -13,15 +15,16 @@ namespace Projekt_StudieTips.Controllers
     public class TipsController : Controller
     {
         private readonly DatabaseContext _context;
-       
+        private readonly UserManager<IdentityUser> _user;
 
-        public TipsController(DatabaseContext context)
+        public TipsController(DatabaseContext context, UserManager<IdentityUser> user)
         {
             _context = context;
+            _user = user;
         }
 
         // GET: Tip
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index(int? id, string sortOrder)
         {
             //Default page
             if (id == null)
@@ -29,24 +32,33 @@ namespace Projekt_StudieTips.Controllers
                 return RedirectToAction("Index", "Home"); // bliver sendt tilbage til forsiden
             }
 
+            
 
-            //var tip = await _context.Tips.FindAsync(id);
-            //if (tip == null)
-            //{
-            //    return NotFound();
-            //}
-
-            var context = await _context.Tips
+            var context = _context.Tips
                 .Include(t => t.Course)
-                .Include(t => t.User)
-                .Where(t => t.CourseId == id & t.IsVerified == true).ToListAsync(); // HER
+                .Where(t => t.CourseId == id & t.IsVerified == false);
 
-           // var list = await context.ToListAsync();
+            ViewBag.DateSortParm = sortOrder == "date_desc" ? "date_desc" : "date_asc";
+
+            switch (sortOrder)
+            {
+                case "date_asc":
+                    context = context.OrderBy(t => t.Date);
+                    break;
+                case "date_desc":
+                    context = context.OrderByDescending(t => t.Date);
+                    break;
+                default:
+                    context = context.OrderByDescending(t => t.Date);
+                    break;
+            }
+
+            var list = await context.ToListAsync();
 
             try
             {
-                ViewBag.CourseName = context[0].Course.CourseName;
-                ViewBag.CourseId = context[0].CourseId;
+                ViewBag.CourseName = list[0].Course.CourseName;
+                ViewBag.CourseId = list[0].CourseId;
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -64,7 +76,7 @@ namespace Projekt_StudieTips.Controllers
                 
             }
 
-            return View(context);
+            return View(list);
         }
 
         public async Task<IActionResult> SearchTip([Bind("SearchTerm")]SearchDto search)
@@ -75,19 +87,10 @@ namespace Projekt_StudieTips.Controllers
                 return RedirectToAction("Index", "Home"); // bliver sendt tilbage til forsiden
             }
 
-
-            //var tip = await _context.Tips.FindAsync(id);
-            //if (tip == null)
-            //{
-            //    return NotFound();
-            //}
-
             var context = await _context.Tips
                 .Include(t => t.Course)
-                .Include(t => t.User)
-                .Where(t => (t.Headline.Contains(search.SearchTerm) || t.Text.Contains(search.SearchTerm) || t.Course.CourseName.Contains(search.SearchTerm)) & t.IsVerified == true).ToListAsync();
+                .Where(t => (t.Headline.Contains(search.SearchTerm) || t.Text.Contains(search.SearchTerm) || t.Course.CourseName.Contains(search.SearchTerm)) & t.IsVerified == false).ToListAsync();
 
-            // var list = await context.ToListAsync();
 
             try
             {
@@ -122,7 +125,6 @@ namespace Projekt_StudieTips.Controllers
 
             var tip = await _context.Tips
                 .Include(t => t.Course)
-                .Include(t => t.User)
                 .FirstOrDefaultAsync(m => m.TipId == id);
             if (tip == null)
             {
@@ -137,8 +139,6 @@ namespace Projekt_StudieTips.Controllers
         public IActionResult Create(int? value)
         {
             ViewBag.CourseId = value;
-            //ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId");
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId");
             return View();
         }
 
@@ -148,8 +148,9 @@ namespace Projekt_StudieTips.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("TipId,UserId,CourseId,Date,Headline,Text")] Tip tip)
+        public async Task<IActionResult> Create([Bind("TipId,Username,CourseId,Date,Headline,Text")] Tip tip)
         {
+            tip.Username = _user.GetUserName(User);
             tip.Date = DateTime.Now;
 
             if (ModelState.IsValid)
@@ -159,8 +160,6 @@ namespace Projekt_StudieTips.Controllers
                 return RedirectToAction(nameof(Index), new { id = tip.CourseId });
             }
 
-            //ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", tip.CourseId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", tip.UserId);
             return View(tip);
         }
 
@@ -172,13 +171,18 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
+
             var tip = await _context.Tips.FindAsync(id);
             if (tip == null)
             {
                 return NotFound();
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", tip.CourseId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", tip.UserId);
+
+            if (tip.Username != _user.GetUserName(User))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(tip);
         }
 
@@ -187,7 +191,7 @@ namespace Projekt_StudieTips.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TipId,UserId,CourseId,Date,Headline,Text")] Tip tip)
+        public async Task<IActionResult> Edit(int id, [Bind("TipId,Username,CourseId,Date,Headline,Text")] Tip tip)
         {
             if (id != tip.TipId)
             {
@@ -212,10 +216,10 @@ namespace Projekt_StudieTips.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", tip.CourseId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", tip.UserId);
+
             return View(tip);
         }
 
@@ -229,8 +233,14 @@ namespace Projekt_StudieTips.Controllers
 
             var tip = await _context.Tips
                 .Include(t => t.Course)
-                .Include(t => t.User)
                 .FirstOrDefaultAsync(m => m.TipId == id);
+
+
+            if (tip.Username != _user.GetUserName(User))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             if (tip == null)
             {
                 return NotFound();
@@ -238,6 +248,7 @@ namespace Projekt_StudieTips.Controllers
 
             return View(tip);
         }
+
 
         // POST: Tip/Delete/5
         [HttpPost, ActionName("Delete")]
