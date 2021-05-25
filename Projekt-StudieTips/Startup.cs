@@ -56,6 +56,11 @@ namespace Projekt_StudieTips
                     "IsAdmin",
                     policyBuilder => policyBuilder
                      .RequireClaim("Admin"));
+
+                options.AddPolicy(
+                  "IsModerator",
+                  policyBuilder => policyBuilder
+                   .RequireClaim("Moderator"));
             });
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Home/UnauthorizedAccess");
@@ -63,7 +68,7 @@ namespace Projekt_StudieTips
             services.AddControllersWithViews();
 
             services.AddDbContext<DatabaseContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("AppContext")));
+                    options.UseSqlServer("server=localhost,1433; User Id=SA; Password=password_123; database=StudieTipsDB; trusted_connection = false"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -89,7 +94,8 @@ namespace Projekt_StudieTips
             app.UseAuthentication();
             app.UseAuthorization();
 
-            DbAdmin.SeedUsers(userManager, log);
+            DbAdmin.SeedAdmin(userManager, log);
+            DbAdmin.SeedModerator(userManager, log);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -22,6 +22,19 @@
     </div>
 }
 
+
+
+@if (User.HasClaim(c => c.Type == "Moderator"))
+{
+    <div id="CenterEverything">
+        <p>
+            <a asp-action="Create" asp-route-DegreeId="@ViewBag.DegreeId">Create New</a>
+        </p>
+    </div>
+}
+
+
+
 @using (Html.BeginForm("Redirect", "Courses", FormMethod.Post))
 {
 <div id="CenterEverything">
@@ -41,8 +54,16 @@
         <input class="gotobtn" type="submit" name="submit" value="Edit">
         <input class="gotobtn" type="submit" name="submit" value="Delete">
     }
-    <br/>
-    <br/>
+
+    @if (User.HasClaim(c => c.Type == "Moderator"))
+    {
+        <input class="gotobtn" type="submit" name="submit" value="Edit">
+        <input class="gotobtn" type="submit" name="submit" value="Delete">
+    }
+
+
+    <br />
+    <br />
     <p><a asp-controller="Degrees" asp-route-id="@ViewBag.DegreeId" asp-action="Index">Tilbage</a></p>
 </div>
 }
