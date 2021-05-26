@@ -25,6 +25,7 @@ namespace Projekt_StudieTips.Data
                 {
                     var adminClaim = new Claim("Admin", adminName);
                     userManager.AddClaimAsync(user, adminClaim);
+                   
                 }
             }
         }
