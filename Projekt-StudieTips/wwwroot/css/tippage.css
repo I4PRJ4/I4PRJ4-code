@@ -14,7 +14,8 @@
 }
 
 .tiptext2 {
-    border-bottom: 1px solid darkblue;
+    border-bottom: 2px solid;
+    border-color: rgba(10, 141, 255, 1.0);
 }
 
 .tiptext3 {
@@ -78,8 +79,6 @@
 .topnav a {
     float: left;
     color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
 }
