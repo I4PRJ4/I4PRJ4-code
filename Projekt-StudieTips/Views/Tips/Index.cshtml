@@ -61,6 +61,7 @@
             margin: 10px;
             padding: 20px;
             float: left;
+            background-color: rgba(255,255,255,0.8);
         }
 
             .post:not(:last-child) {
@@ -98,7 +99,7 @@
 </head>
 
 <div class="text-center">
-    <h1 class="h1Degree">@courseName </h1>
+    <h1 class="h1Degree" style="font-size: 6em">@courseName </h1>
 </div>
 
 
@@ -117,13 +118,12 @@
             <option selected disabled>Sortér...</option>
             <option value="date_desc">Nyeste først</option>
             <option value="date_asc">Ældste først</option>
-
         </select>
     </form>
 
 
     @* Bruger class=mx-auto for at centrere indholdet *@
-    <div class="mx-auto" style="width: 50%; text-align: center;">
+    <div class="mx-auto" style="width: 75%; text-align: center;">
         @foreach (var item in Model)
         {
 
@@ -147,15 +147,15 @@
             <div class="post" name="postdiv" style="overflow-wrap: break-word">
                 <div>
                     <div class="topnav">
-                        <a style="font-size: 12px;">
-                            @item.Username.Substring(0, item.Username.IndexOf('@'))
+                        <a style="font-size: 2em; color:#000" >
+                            Bruger: @item.Username.Substring(0, item.Username.IndexOf('@'))
                         </a>
                     </div>
                     <div>
-                        <a style="float:right">
+                        <a style="float: right; font-size: 1.5em;">
                             @Html.DisplayFor(modelItem => item.Date)
                         </a>
-                        <a style="float:top">
+                        <a style="float: top; font-size: 1.5em; color: #000;">
                             @Html.DisplayFor(modelItem => item.Course.CourseName)
                         </a>
                     </div>
