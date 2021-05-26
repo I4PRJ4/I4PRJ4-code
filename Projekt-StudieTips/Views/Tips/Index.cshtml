@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="~/css/site.css" />
 <link rel="stylesheet" href="~/css/tippage.css" />
 
+
 @inject UserManager<IdentityUser> UserManager
 
 @{
@@ -83,8 +84,8 @@
             <div class="post" name="postdiv" style="overflow-wrap: break-word">
                 <div>
                     <div class="topnav">
-                        <a style="font-size: 2em; color:#000" >
-                            Bruger: @item.Username.Substring(0, item.Username.IndexOf('@'))
+                        <a style="font-size: 2em; color:#000">
+                            Bruger: @User.Claims.FirstOrDefault(c => c.Type == "User" || c.Type == "Admin").Value
                         </a>
                     </div>
                     <div>
