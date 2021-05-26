@@ -10,12 +10,12 @@
 @{
     var courseId = ViewBag.CourseId;
 }
-
-<h1>Tilføj nyt tip</h1>
+<div class="CenterEverything">
+<h1 class="h1Degree" style="font-size: 7em">Tilføj nyt tip</h1>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row CenterEverything">
+    <div class="col-md-4 CenterEverything">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -27,26 +27,28 @@
                 <span asp-validation-for="CourseId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Overskrift</label>
+                <label class="control-label h1Degree" style="font-size: 2.5em">Overskrift</label>
                 <input asp-for="Headline" class="form-control" />
                 <span asp-validation-for="Headline" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Tekst</label>
+                <label class="control-label h1Degree" style="font-size: 2.5em">Tekst</label>
                 <textarea asp-for="Text" class="form-control" style="height:200px"></textarea>
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Opret" class="btn btn-primary" />
+                <input type="submit" value="Opret" class="gotobtn" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Tilbage til tips</a>
+    <a asp-action="Index" asp-route-id="@ViewBag.CourseId">
+        <p class="h1Degree" style="font-size: 2em; color: #fff">Tilbage til tips</p>
+    </a>
 </div>
-
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
