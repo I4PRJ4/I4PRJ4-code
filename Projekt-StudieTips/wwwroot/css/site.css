@@ -10,9 +10,14 @@ for details on configuring this project to bundle and minify static web assets. 
     font-size: 2.5em;
     font-weight: bold;
     color: #0A8DFF;
+
 }
 
-
+.h1Degree {
+    color: #FFCB0A;
+    font-size: 10em;
+    text-shadow: 0 0.03em 0.1em #000;
+}
 
 body {
     background-image: url('/Images/study-bg.jpg');
@@ -61,12 +66,12 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+  font-size: 12px;
 
 }
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 12px;
   }
 }
 
@@ -130,7 +135,15 @@ select {
     border: 0 !important;
     background: rgba(255,255,255,0.40);
     background-image: none;
+
+
 }
+
+option {
+    font-size: 0.8em;
+    background: rgba(255, 255, 255, 0.40);
+}
+
 /* Remove IE arrow */
 select::-ms-expand {
     display: none;
@@ -139,13 +152,15 @@ select::-ms-expand {
 .select {
     position: relative;
     display: flex;
-    width: 20em;
-    height: 3em;
-    line-height: 3;
+    width: 15em;
+    height: 2em;
+    line-height: 2;
     background: rgba(255,255,255,0.40);
     overflow: hidden;
     border-radius: .25em;
-    transform: scale(1.5);
+    transform: scale(0.8);
+    font-size: 3em;
+    
 }
 
 select {
@@ -153,7 +168,7 @@ select {
     padding: 0 .5em;
     color: rgba(10,141,255,1.0);
     cursor: pointer;
-
+   
 }
 /* Arrow */
 .select::after {
@@ -172,4 +187,27 @@ select {
 /* Transition */
 .select:hover::after {
     color: #FFCB0A;
+}
+
+.gotobtn {
+    background-color: #FFCB0A;
+    border: 2px;
+    border-color: #0F5DC5;
+    border-radius: 4px;
+    text-align: center;
+    display: inline-block;
+    font-size: 2em;
+    padding: 3px;
+    min-height: 1em;
+    min-width: 4em;
+    box-shadow: 0 2px 5px #494949;
+    outline: none;
+    color: white;
+    text-shadow: 0 2px 4px #000;
+    font-weight: bold;
+
+}
+
+.backBtn {
+    font-size: 1em;
 }

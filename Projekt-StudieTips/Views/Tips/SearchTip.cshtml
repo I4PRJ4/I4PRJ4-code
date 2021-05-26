@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<Projekt_StudieTips.Models.Tip>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -71,6 +73,20 @@
             font-size: 14px;
             font-style: italic;
         }
+
+        .topnav {
+            overflow: hidden;
+            background-color: transparent;
+        }
+
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
     </style>
 </head>
 
@@ -103,24 +119,47 @@
             }
 
             <div class="post" name="postdiv" style="overflow-wrap: break-word">
-                <div class="topright">
-                    <p>
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </p>
+                <div>
+                    <div class="topnav">
+                        <a style="font-size: 12px;">
+                            @item.Username.Substring(0, item.Username.IndexOf('@'))
+                        </a>
+                    </div>
+                    <div>
+                        <a style="float:right">
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </a>
+                        <a style="float:top">
+                            @Html.DisplayFor(modelItem => item.Course.CourseName)
+                        </a>
+                    </div>
                 </div>
-                @* INDSÆT OVERTSKRIFT *@
+
+                @if (item.Username == UserManager.GetUserName(User))
+                {
+                    <div class="topright">
+                        <p class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-id="@item.TipId" asp-action="Delete">Slet</a>
+                        </p>
+                    </div>
+                    <div class="topright">
+                        <p class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-id="@item.TipId" asp-action="Edit">Redigér</a>
+                        </p>
+                    </div>
+                }
+
                 <div class="tiptext2">
                     <h5>
                         @Html.DisplayFor(modelItem => item.Headline)
                     </h5>
                 </div>
 
-                @* INDSÆT tip text *@
                 <div class="tiptext3">
                     @if (textLength >= rmLength)
                     {
                         @(first)<span class="dots">...</span><span class="more">@(end)</span>
-                        <button class="read">read more</button>
+                        <button class="read">Vis mere...</button>
                     }
                     else
                     {
