@@ -85,7 +85,7 @@
                 <div>
                     <div class="topnav">
                         <a style="font-size: 2em; color:#000">
-                            Bruger: @User.Claims.FirstOrDefault(c => c.Type == "User" || c.Type == "Admin").Value
+                            Bruger: @item.Username.Substring(0, item.Username.IndexOf('@'))
                         </a>
                     </div>
                     <div>
