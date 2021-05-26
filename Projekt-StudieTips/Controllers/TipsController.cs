@@ -190,6 +190,7 @@ namespace Projekt_StudieTips.Controllers
             {
                 try
                 {
+                    tip.Date = DateTime.Now;
                     _repository.Context.Update(tip);
                     await _repository.Context.SaveChangesAsync();
                 }
