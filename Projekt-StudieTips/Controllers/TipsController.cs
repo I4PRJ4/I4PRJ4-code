@@ -15,6 +15,7 @@ using PagedList;
 
 namespace Projekt_StudieTips.Controllers
 {
+    
     public class TipsController : Controller
     {
         private readonly TipRepository _repository;
@@ -106,6 +107,7 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Tip/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -124,7 +126,7 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Tip/Create
-
+        [Authorize]
         public IActionResult Create(int? value)
         {
             ViewBag.CourseId = value;
@@ -153,6 +155,7 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Tip/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -180,6 +183,7 @@ namespace Projekt_StudieTips.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("TipId,Username,CourseId,Date,Headline,Text")] Tip tip)
         {
             if (id != tip.TipId)
@@ -213,6 +217,7 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Tip/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

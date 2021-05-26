@@ -51,7 +51,7 @@ namespace Projekt_StudieTips.Repository
             return await Context.Tips
                 .Include(t => t.Course)
                 .Where(t => (t.Headline.Contains(search.SearchTerm) || t.Text.Contains(search.SearchTerm) ||
-                             t.Course.CourseName.Contains(search.SearchTerm)) & t.IsVerified == false).ToListAsync();
+                             t.Course.CourseName.Contains(search.SearchTerm)) & t.IsVerified == true).ToListAsync();
         }
 
         public async Task<Tip> GetTipDetails(int? id)
