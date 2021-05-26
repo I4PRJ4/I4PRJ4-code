@@ -31,6 +31,7 @@ namespace Projekt_StudieTips
 
             services.AddScoped<DegreeRepository>();
             services.AddScoped<CourseRepository>();
+            services.AddScoped<TipRepository>();
 
             services.AddDefaultIdentity<IdentityUser>(options => {
                 options.SignIn.RequireConfirmedAccount = false;

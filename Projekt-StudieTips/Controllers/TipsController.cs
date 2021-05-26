@@ -2,27 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Projekt_StudieTips.Data;
 using Projekt_StudieTips.Models;
+using Projekt_StudieTips.Repository;
+using PagedList;
 
 namespace Projekt_StudieTips.Controllers
 {
     public class TipsController : Controller
     {
-        private readonly DatabaseContext _context;
-       
+        private readonly TipRepository _repository;
+        private readonly UserManager<IdentityUser> _user;
 
-        public TipsController(DatabaseContext context)
+
+        public TipsController(TipRepository repository, UserManager<IdentityUser> user)
         {
-            _context = context;
+            _repository = repository;
+            _user = user;
         }
 
+
         // GET: Tip
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index(int? id, string sortOrder, int? page)
         {
             //Default page
             if (id == null)
@@ -30,19 +37,8 @@ namespace Projekt_StudieTips.Controllers
                 return RedirectToAction("Index", "Home"); // bliver sendt tilbage til forsiden
             }
 
-
-            //var tip = await _context.Tips.FindAsync(id);
-            //if (tip == null)
-            //{
-            //    return NotFound();
-            //}
-
-            var context = await _context.Tips
-                .Include(t => t.Course)
-                .Include(t => t.User)
-                .Where(t => t.CourseId == id & t.IsVerified == true).ToListAsync(); // HER
-
-           // var list = await context.ToListAsync();
+            ViewBag.DateSortParm = sortOrder == "date_desc" ? "date_desc" : "date_asc";
+            var context = _repository.GetTips(id,sortOrder).Result;
 
             try
             {
@@ -54,7 +50,7 @@ namespace Projekt_StudieTips.Controllers
 
                 try
                 {
-                    var course = await _context.Courses.Where(c => c.CourseId == id).FirstAsync();
+                    var course = await _repository.GetCourse(id);
                     ViewBag.CourseName = $"{course.CourseName} har ingen tips. Tryk 'Tilføj nyt tip' for at tilføje";
                     ViewBag.CourseId = id;
                 }
@@ -65,7 +61,14 @@ namespace Projekt_StudieTips.Controllers
                 
             }
 
-            return View(context);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            if (pageNumber < 1)
+            {
+                pageNumber = 1;
+            }
+
+            return View(context.ToPagedList(pageNumber, pageSize));
         }
 
         public async Task<IActionResult> SearchTip([Bind("SearchTerm")]SearchDto search)
@@ -76,19 +79,7 @@ namespace Projekt_StudieTips.Controllers
                 return RedirectToAction("Index", "Home"); // bliver sendt tilbage til forsiden
             }
 
-
-            //var tip = await _context.Tips.FindAsync(id);
-            //if (tip == null)
-            //{
-            //    return NotFound();
-            //}
-
-            var context = await _context.Tips
-                .Include(t => t.Course)
-                .Include(t => t.User)
-                .Where(t => (t.Headline.Contains(search.SearchTerm) || t.Text.Contains(search.SearchTerm) || t.Course.CourseName.Contains(search.SearchTerm)) & t.IsVerified == true).ToListAsync();
-
-            // var list = await context.ToListAsync();
+            var context = _repository.GetTipsWithinSearchTerm(search).Result;
 
             try
             {
@@ -121,10 +112,8 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var tip = await _context.Tips
-                .Include(t => t.Course)
-                .Include(t => t.User)
-                .FirstOrDefaultAsync(m => m.TipId == id);
+            var tip = _repository.GetTipDetails(id);
+
             if (tip == null)
             {
                 return NotFound();
@@ -138,8 +127,6 @@ namespace Projekt_StudieTips.Controllers
         public IActionResult Create(int? value)
         {
             ViewBag.CourseId = value;
-            //ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId");
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId");
             return View();
         }
 
@@ -149,19 +136,18 @@ namespace Projekt_StudieTips.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("TipId,UserId,CourseId,Date,Headline,Text")] Tip tip)
+        public async Task<IActionResult> Create([Bind("TipId,Username,CourseId,Date,Headline,Text")] Tip tip)
         {
+            tip.Username = _user.GetUserName(User);
             tip.Date = DateTime.Now;
 
             if (ModelState.IsValid)
             {
-                _context.Add(tip);
-                await _context.SaveChangesAsync();
+                _repository.Context.Add(tip);
+                await _repository.Context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new { id = tip.CourseId });
             }
 
-            //ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", tip.CourseId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", tip.UserId);
             return View(tip);
         }
 
@@ -173,13 +159,18 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var tip = await _context.Tips.FindAsync(id);
+
+            var tip = await _repository.Context.Tips.FindAsync(id);
             if (tip == null)
             {
                 return NotFound();
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", tip.CourseId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", tip.UserId);
+
+            if (tip.Username != _user.GetUserName(User))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(tip);
         }
 
@@ -188,7 +179,7 @@ namespace Projekt_StudieTips.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TipId,UserId,CourseId,Date,Headline,Text")] Tip tip)
+        public async Task<IActionResult> Edit(int id, [Bind("TipId,Username,CourseId,Date,Headline,Text")] Tip tip)
         {
             if (id != tip.TipId)
             {
@@ -199,8 +190,8 @@ namespace Projekt_StudieTips.Controllers
             {
                 try
                 {
-                    _context.Update(tip);
-                    await _context.SaveChangesAsync();
+                    _repository.Context.Update(tip);
+                    await _repository.Context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -213,10 +204,10 @@ namespace Projekt_StudieTips.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", tip.CourseId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", tip.UserId);
+
             return View(tip);
         }
 
@@ -228,10 +219,15 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var tip = await _context.Tips
-                .Include(t => t.Course)
-                .Include(t => t.User)
-                .FirstOrDefaultAsync(m => m.TipId == id);
+
+            var tip = _repository.GetTipDetails(id).Result;
+
+
+            if (tip.Username != _user.GetUserName(User))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             if (tip == null)
             {
                 return NotFound();
@@ -240,20 +236,21 @@ namespace Projekt_StudieTips.Controllers
             return View(tip);
         }
 
+
         // POST: Tip/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tip = await _context.Tips.FindAsync(id);
-            _context.Tips.Remove(tip);
-            await _context.SaveChangesAsync();
+            var tip = await _repository.Context.Tips.FindAsync(id);
+            _repository.Context.Tips.Remove(tip);
+            await _repository.Context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TipExists(int id)
         {
-            return _context.Tips.Any(e => e.TipId == id);
+            return _repository.TipExists(id);
         }
     }
 }
