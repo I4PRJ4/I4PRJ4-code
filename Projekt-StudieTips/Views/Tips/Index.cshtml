@@ -152,7 +152,11 @@
                         <a style="float:right">
                             @Html.DisplayFor(modelItem => item.Date)
                         </a>
+                        <a style="float:top">
+                            @Html.DisplayFor(modelItem => item.Course.CourseName)
+                        </a>
                     </div>
+
                 </div>
 
                 @if (item.Username == UserManager.GetUserName(User))
