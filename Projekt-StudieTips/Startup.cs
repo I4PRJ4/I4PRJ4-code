@@ -68,7 +68,7 @@ namespace Projekt_StudieTips
             services.AddControllersWithViews();
 
             services.AddDbContext<DatabaseContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("AppContext")));
+                    options.UseSqlServer(("server=localhost,1433; User Id = SA; Password=password_123; database =StudieTipsDB; trusted_connection = false;")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

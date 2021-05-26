@@ -3,7 +3,7 @@
 @*@model IEnumerable<Projekt_StudieTips.Models.Tip>*@
 @model PagedList.IPagedList<Projekt_StudieTips.Models.Tip>
 @using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 
 @inject UserManager<IdentityUser> UserManager
 
@@ -96,13 +96,13 @@
     </style>
 </head>
 
-<div class="text-center">
-    <h1>@courseName </h1>
-</div>
+
 
 
 <body class="text-center">
-
+    <div class="text-center">
+        <h1>@courseName </h1>
+    </div>
 
     <p>
         <a asp-action="Create" asp-route-value="@courseId">Tilføj nyt tip</a>
@@ -235,3 +235,4 @@
 
 
 </body>
+</html>
