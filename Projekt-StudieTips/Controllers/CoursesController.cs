@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -62,6 +63,7 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Courses/Create
+        [Authorize("IsAdmin")]
         public async Task<IActionResult> Create(int? DegreeId)
         {
             DegreeCourse ViewModeDegreeCourse = new DegreeCourse();
@@ -91,6 +93,7 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Courses/Edit/5
+        [Authorize("IsAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -147,6 +150,7 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Courses/Delete/5
+        [Authorize("IsAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
