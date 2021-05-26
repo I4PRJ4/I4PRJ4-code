@@ -169,7 +169,7 @@ namespace Projekt_StudieTips.Controllers
             {
                 return NotFound();
             }
-
+            User.Claims.FirstOrDefault()
             if (tip.Username != _user.GetUserName(User))
             {
                 return RedirectToAction(nameof(Index));
