@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
-
+using Projekt_StudieTips.Models;
+using Projekt_StudieTips.Controllers;
+using Projekt_StudieTips.Repository;
 
 namespace Projekt_StudieTips.Test.Unit
 {
