@@ -139,7 +139,7 @@ namespace Projekt_StudieTips.Controllers
         [Authorize]
         public async Task<IActionResult> Create([Bind("TipId,Username,CourseId,Date,Headline,Text")] Tip tip)
         {
-            tip.Username = _user.GetUserName(User);
+
             tip.Date = DateTime.Now;
 
             if (ModelState.IsValid)
