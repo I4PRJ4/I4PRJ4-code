@@ -1,15 +1,49 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-body {
-    background-color: #0093E9;
-    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+@import url('http://fonts.cdnfonts.com/css/tw-cen-mt-condensed');
+
+* {
+    font-family: 'Tw Cen MT Condensed', sans-serif;
 }
 
+.navtext {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #0A8DFF;
+
+}
+
+.h1Degree {
+    color: #FFCB0A;
+    font-size: 10em;
+    text-shadow: 0 0.03em 0.1em #000;
+}
+
+body {
+    background-image: url('/Images/study-bg.jpg');
+    height: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.menusetting {
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(236,205,137,0.6085784655659139) 100%);
+}
+
+.searchbox {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
@@ -24,7 +58,7 @@ a {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
+  color: #0A8DFF;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
@@ -32,12 +66,12 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+  font-size: 12px;
 
 }
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 12px;
   }
 }
 
@@ -69,9 +103,111 @@ body {
   margin-bottom: 60px;
 }
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 1em;
+    font-style: italic;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+    background: rgb(220,249,255);
+    background: linear-gradient(180deg, rgba(220,249,255,1) 0%, rgba(236,205,137,0.6085784655659139) 0%, rgba(255,255,255,1) 100%);
+}
+
+.CenterEverything {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Reset Select */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: rgba(255,255,255,0.40);
+    background-image: none;
+
+
+}
+
+option {
+    font-size: 0.8em;
+    background: rgba(255, 255, 255, 0.40);
+}
+
+/* Remove IE arrow */
+select::-ms-expand {
+    display: none;
+}
+/* Custom Select */
+.select {
+    position: relative;
+    display: flex;
+    width: 15em;
+    height: 2em;
+    line-height: 2;
+    background: rgba(255,255,255,0.40);
+    overflow: hidden;
+    border-radius: .25em;
+    transform: scale(0.8);
+    font-size: 3em;
+    
+}
+
+select {
+    flex: 1;
+    padding: 0 .5em;
+    color: rgba(10,141,255,1.0);
+    cursor: pointer;
+   
+}
+/* Arrow */
+.select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: rgba(10,141,255,1.0);
+    cursor: pointer;
+    pointer-events: none;
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
+}
+/* Transition */
+.select:hover::after {
+    color: #FFCB0A;
+}
+
+.gotobtn {
+    background-color: #FFCB0A;
+    border: 2px;
+    border-color: #0F5DC5;
+    border-radius: 4px;
+    text-align: center;
+    display: inline-block;
+    font-size: 2em;
+    padding: 3px;
+    min-height: 1em;
+    min-width: 4em;
+    box-shadow: 0 2px 5px #494949;
+    outline: none;
+    color: white;
+    text-shadow: 0 2px 4px #000;
+    font-weight: bold;
+
+}
+
+.backBtn {
+    font-size: 1em;
 }
