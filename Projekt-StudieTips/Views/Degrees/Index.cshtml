@@ -50,12 +50,7 @@
             <br />
             <p><a asp-controller="Home" asp-action="Index">Tilbage</a></p>
         </div>
+    }
+    </div>
 
-        @if (User.HasClaim(c => c.Type == "Moderator"))
-        {
-            <input class="gotobtn" type="submit" name="submit" value="Rediger">
-            <input class="gotobtn" type="submit" name="submit" value="Slet">}
-        <br />
-        <br />
-    }</div>
 

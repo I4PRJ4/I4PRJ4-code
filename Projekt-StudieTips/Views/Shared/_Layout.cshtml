@@ -11,7 +11,7 @@
 
 </head>
 <body>
-    <header >
+    <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom navbar-light box-shadow mb-3 menusetting">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/logo1.png" width="100em" height="100em" /></a>
@@ -23,12 +23,16 @@
                     <div class="navbar-nav flex-grow-1" style="transform: scale(0.8)">
                         <button onclick="location.href='@Url.Action("Index", "Home")'">Hjem</button>
                         <button onclick="location.href = '@Url.Action("Index", "Degrees")'">Uddannelser</button>
+                        @if (User.HasClaim(c => c.Type == "Moderator"))
+                        {
+                            <button onclick="location.href = '@Url.Action("Index", "Moderator")'">Moderator-side</button>
+                        }
                         <partial name="_LoginPartial" />
                     </div>
                 </div>
             </div>
         </nav>
-        
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
