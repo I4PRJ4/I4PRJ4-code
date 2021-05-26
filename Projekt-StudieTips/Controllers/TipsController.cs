@@ -51,7 +51,8 @@ namespace Projekt_StudieTips.Controllers
                 try
                 {
                     var course = await _repository.GetCourse(id);
-                    ViewBag.CourseName = $"{course.CourseName} har ingen tips. Tryk 'Tilføj nyt tip' for at tilføje";
+                    ViewBag.CourseName = $"{course.CourseName}";
+                    ViewBag.NoTip = "har desværre ingen tips..";
                     ViewBag.CourseId = id;
                 }
                 catch (InvalidOperationException)

@@ -16,12 +16,14 @@
 @{
     var courseName = ViewBag.CourseName;
     var courseId = ViewBag.CourseId;
+    var noTip = ViewBag.NoTip;
 }
 
 <html>
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
+
         .h1 {
             text-align: center;
         }
@@ -48,6 +50,8 @@
         }
 
 
+
+
         .more {
             display: none;
         }
@@ -63,9 +67,9 @@
             float: left;
         }
 
-            .post:not(:last-child) {
-                margin-bottom: 30px;
-            }
+        .post:not(:last-child) {
+            margin-bottom: 30px;
+        }
 
         .read {
             margin-top: 15px;
@@ -86,19 +90,27 @@
             background-color: transparent;
         }
 
-            .topnav a {
-                float: left;
-                color: #f2f2f2;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-                font-size: 17px;
-            }
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
     </style>
 </head>
 
 <div class="text-center">
-    <h1 class="h1Degree">@courseName </h1>
+    @if (noTip != null)
+    {
+        <h1 class="h1Degree" style="font-size: 8em">@courseName @noTip</h1>
+    }
+    else
+    {
+        <h1 class="h1Degree">@courseName</h1>
+    }
+
 </div>
 
 
