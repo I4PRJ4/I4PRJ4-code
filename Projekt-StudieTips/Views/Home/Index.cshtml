@@ -2,26 +2,15 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/css/searchbar.css"/>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Tips" asp-action="SearchTip">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">Søg i tips:</label>
-                <input asp-for="SearchTerm" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Søg" class="btn btn-primary" />
-            </div>
-        </form>
-       
-    </div>
-</div>
+<form class="search-bar scale" asp-controller="Tips" asp-action="SearchTip">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+    <input pattern=".*\S.*" required  asp-for="SearchTerm">
+    <button class="search-btn" type="submit" value="Søg" asp-for="SearchTerm">
+        <span>Søg..</span>
+    </button>
 
-<style>
-   /*Scoping to this*/
-
-
-</style>
+</form>

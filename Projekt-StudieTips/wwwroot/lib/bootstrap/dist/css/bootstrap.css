@@ -4061,8 +4061,9 @@ input[type="button"].btn-block {
 }
 
 .nav-link {
-  display: block;
-  padding: 0.5rem 1rem;
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #0A8DFF;
 }
 
 .nav-link:hover, .nav-link:focus {
@@ -9849,7 +9850,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #007bff !important;
+    color: #0A8DFF !important;
 }
 
 a.text-primary:hover, a.text-primary:focus {
