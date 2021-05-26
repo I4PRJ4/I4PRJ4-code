@@ -205,7 +205,7 @@ namespace Projekt_StudieTips.Controllers
                     }
                 }
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index),new { id = tip.CourseId });
             }
 
             return View(tip);
