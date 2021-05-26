@@ -4,6 +4,7 @@
 @model PagedList.IPagedList<Projekt_StudieTips.Models.Tip>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="~/css/site.css" />
 
 @inject UserManager<IdentityUser> UserManager
 
@@ -97,24 +98,26 @@
 </head>
 
 <div class="text-center">
-    <h1>@courseName </h1>
+    <h1 class="h1Degree">@courseName </h1>
 </div>
 
 
 <body class="text-center">
 
 
-    <p>
-        <a asp-action="Create" asp-route-value="@courseId">Tilføj nyt tip</a>
-    </p>
+
+    <a asp-action="Create" asp-route-value="@courseId">
+        <p class="h1Degree" style="font-size: 2.5em; color: #fff">Tilføj nyt tip </p>
+    </a>
 
 
-    <label for="sort">Sortér:</label>
-    <form action="">
+<label for="sort" class="h1Degree" style="font-size: 2em"></label>
+    <form action="" class="select CenterEverything" style="transform: scale(0.5)">
         <select name="sortOrder" id="sortOrder" onchange="this.form.submit()">
-            <option value=""></option>
+            <option selected disabled>Sortér...</option>
             <option value="date_desc">Nyeste først</option>
             <option value="date_asc">Ældste først</option>
+
         </select>
     </form>
 
@@ -197,7 +200,7 @@
         </div>
 
         Side @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) ud af @Model.PageCount
-        
+
 
         @if (Model.PageNumber > 1)
         {
@@ -206,8 +209,8 @@
                 <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-sortOrder="ViewBag.DateSortParm" asp-route-page="@previousPage" asp-route-id="@courseId" asp-action="Index">Forrige</a>
             </p>
         }
-        @if (Model.PageNumber < Model.PageCount )
-        { 
+        @if (Model.PageNumber < Model.PageCount)
+        {
             <p class="nav-item" style="float:right">
                 @{ var nextPage = Model.PageNumber + 1;}
                 <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-sortOrder="ViewBag.DateSortParm" asp-route-page="@nextPage" asp-route-id="@courseId" asp-action="Index">Næste</a>
