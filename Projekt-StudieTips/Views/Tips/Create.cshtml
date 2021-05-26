@@ -1,4 +1,7 @@
-﻿@model Projekt_StudieTips.Models.Tip
+﻿@using Microsoft.AspNetCore.Identity
+@model Projekt_StudieTips.Models.Tip
+
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Create";
@@ -16,7 +19,7 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <input asp-for="Username" class="form-control" type="hidden" value="ViewBag.Username" />
+                <input asp-for="Username" class="form-control" type="hidden" value="@User.Claims.FirstOrDefault(c => c.Type == "User" || c.Type == "Admin").Value" />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">

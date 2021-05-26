@@ -5,6 +5,8 @@
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/css/tippage.css" />
+
 
 @inject UserManager<IdentityUser> UserManager
 
@@ -16,89 +18,25 @@
 @{
     var courseName = ViewBag.CourseName;
     var courseId = ViewBag.CourseId;
+    var noTip = ViewBag.NoTip;
 }
 
 <html>
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <style>
-        .h1 {
-            text-align: center;
-        }
-
-        .container {
-            position: relative;
-        }
-
-        .topright {
-            float: right;
-            top: 8px;
-            right: 16px;
-            font-size: 12px;
-        }
-
-        .tiptext2 {
-            border-bottom: 1px solid darkblue;
-        }
-
-        .tiptext3 {
-            font-style: italic;
-            position: relative;
-            font-size: 16px;
-        }
-
-
-        .more {
-            display: none;
-        }
-
-        .post {
-            width: 100%;
-            font-size: 18px;
-            text-align: justify;
-            line-height: 25px;
-            border: 1px solid black;
-            margin: 10px;
-            padding: 20px;
-            float: left;
-        }
-
-            .post:not(:last-child) {
-                margin-bottom: 30px;
-            }
-
-        .read {
-            margin-top: 15px;
-            display: block;
-            background-color: rgba(255,0,0,0);
-            color: black;
-            border: none;
-            outline: none;
-            padding: 8px 20px;
-            text-transform: capitalize;
-            cursor: pointer;
-            font-size: 14px;
-            font-style: italic;
-        }
-
-        .topnav {
-            overflow: hidden;
-            background-color: transparent;
-        }
-
-            .topnav a {
-                float: left;
-                color: #f2f2f2;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-                font-size: 17px;
-            }
-    </style>
+   
 </head>
 
 <div class="text-center">
-    <h1 class="h1Degree">@courseName </h1>
+    @if (noTip != null)
+    {
+        <h1 class="h1Degree" style="font-size: 8em">@courseName @noTip</h1>
+    }
+    else
+    {
+        <h1 class="h1Degree">@courseName</h1>
+    }
+
 </div>
 
 
@@ -117,105 +55,103 @@
             <option selected disabled>Sortér...</option>
             <option value="date_desc">Nyeste først</option>
             <option value="date_asc">Ældste først</option>
-
         </select>
     </form>
 
 
     @* Bruger class=mx-auto for at centrere indholdet *@
-    <div class="mx-auto" style="width: 50%; text-align: center;">
-        @foreach (var item in Model)
+<div class="mx-auto widthclass" style="text-align: center;">
+    @foreach (var item in Model)
+    {
+
+        var text = item.Text;
+        var textLength = text.Length;
+        var first = "";
+        var end = "";
+        var rmLength = 40;
+
+        if (textLength >= rmLength)
         {
-
-            var text = item.Text;
-            var textLength = text.Length;
-            var first = "";
-            var end = "";
-            var rmLength = 40;
-
-            if (textLength >= rmLength)
-            {
-                first = text.Substring(0, rmLength);
-                end = text.Substring(rmLength);
-            }
-            else
-            {
-                first = text.Substring(0, textLength);
-
-            }
-
-            <div class="post" name="postdiv" style="overflow-wrap: break-word">
-                <div>
-                    <div class="topnav">
-                        <a style="font-size: 12px;">
-                            @item.Username.Substring(0, item.Username.IndexOf('@'))
-                        </a>
-                    </div>
-                    <div>
-                        <a style="float:right">
-                            @Html.DisplayFor(modelItem => item.Date)
-                        </a>
-                        <a style="float:top">
-                            @Html.DisplayFor(modelItem => item.Course.CourseName)
-                        </a>
-                    </div>
-
-                </div>
-
-                @if (item.Username == UserManager.GetUserName(User))
-                {
-                    <div class="topright">
-                        <p class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-id="@item.TipId" asp-action="Delete">Slet</a>
-                        </p>
-                    </div>
-                    <div class="topright">
-                        <p class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-id="@item.TipId" asp-action="Edit">Redigér</a>
-                        </p>
-                    </div>
-                }
-
-                <div class="tiptext2">
-                    <h5>
-                        @Html.DisplayFor(modelItem => item.Headline)
-                    </h5>
-                </div>
-
-                <div class="tiptext3">
-                    @if (textLength >= rmLength)
-                    {
-                        @(first)<span class="dots">...</span><span class="more">@(end)</span>
-                        <button class="read">Vis mere...</button>
-                    }
-                    else
-                    {
-                        @(first)
-                    }
-                </div>
-            </div>
+            first = text.Substring(0, rmLength);
+            end = text.Substring(rmLength);
         }
-        <div>
-            <a asp-controller="Home" asp-action="Index">Hjem</a>
-        </div>
+        else
+        {
+            first = text.Substring(0, textLength);
 
+        }
+
+        <div class="post" name="postdiv" style="overflow-wrap: break-word">
+            <div>
+
+                <p style="font-size: 1.2em; color:rgba(10,141,255,1.0)">
+                    Bruger: @item.Username
+                </p>
+
+
+                <p style="float: top; font-size: 1em;">
+                    @Html.DisplayFor(modelItem => item.Date)
+                </p>
+            </div>
+
+            @if (item.Username == UserManager.GetUserName(User))
+            {
+                <div class="topright">
+                    <p class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-id="@item.TipId" asp-action="Delete">Slet</a>
+                    </p>
+                </div>
+                <div class="topright">
+                    <p class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-id="@item.TipId" asp-action="Edit">Redigér</a>
+                    </p>
+                </div>
+            }
+
+            <div class="tiptext2">
+                <p style="float: top; font-size: 1.8em; color: #000;">
+                    @Html.DisplayFor(modelItem => item.Headline)
+                </p>
+            </div>
+
+            <div class="tiptext3">
+                @if (textLength >= rmLength)
+                {
+                    @(first)<span class="dots">...</span><span class="more">@(end)</span>
+                    <button class="read">Vis mere...</button>
+                }
+                else
+                {
+                    @(first)
+                }
+            </div>
+        </div>
+    }
+    <div class="h1Degree" style="font-size: 2em;">
         Side @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) ud af @Model.PageCount
 
 
         @if (Model.PageNumber > 1)
         {
-            <p class="nav-item" style="float:left">
-                @{ var previousPage = Model.PageNumber - 1;}
-                <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-sortOrder="ViewBag.DateSortParm" asp-route-page="@previousPage" asp-route-id="@courseId" asp-action="Index">Forrige</a>
-            </p>
+        <p class="nav-item" style="float:left">
+            @{ var previousPage = Model.PageNumber - 1;}
+            <a class=" text-white" asp-area="" asp-controller="Tips" asp-route-sortOrder="ViewBag.DateSortParm" asp-route-page="@previousPage" asp-route-id="@courseId" asp-action="Index">Forrige</a>
+        </p>
         }
         @if (Model.PageNumber < Model.PageCount)
         {
             <p class="nav-item" style="float:right">
                 @{ var nextPage = Model.PageNumber + 1;}
-                <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-sortOrder="ViewBag.DateSortParm" asp-route-page="@nextPage" asp-route-id="@courseId" asp-action="Index">Næste</a>
+                <a class=" text-white" asp-area="" asp-controller="Tips" asp-route-sortOrder="ViewBag.DateSortParm" asp-route-page="@nextPage" asp-route-id="@courseId" asp-action="Index">Næste</a>
             </p>
         }
+    </div>
+
+        <div>
+            <a asp-controller="Home" asp-action="Index">
+                <p class="h1Degree" style="font-size: 2.5em; color: #fff">Hjem</p>
+            </a>
+        </div>
 
     </div>
 

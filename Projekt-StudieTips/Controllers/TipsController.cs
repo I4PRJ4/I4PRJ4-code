@@ -51,7 +51,8 @@ namespace Projekt_StudieTips.Controllers
                 try
                 {
                     var course = await _repository.GetCourse(id);
-                    ViewBag.CourseName = $"{course.CourseName} har ingen tips. Tryk 'Tilføj nyt tip' for at tilføje";
+                    ViewBag.CourseName = $"{course.CourseName}";
+                    ViewBag.NoTip = "har desværre ingen tips..";
                     ViewBag.CourseId = id;
                 }
                 catch (InvalidOperationException)
@@ -138,7 +139,7 @@ namespace Projekt_StudieTips.Controllers
         [Authorize]
         public async Task<IActionResult> Create([Bind("TipId,Username,CourseId,Date,Headline,Text")] Tip tip)
         {
-            tip.Username = _user.GetUserName(User);
+
             tip.Date = DateTime.Now;
 
             if (ModelState.IsValid)
