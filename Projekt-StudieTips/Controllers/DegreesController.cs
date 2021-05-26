@@ -28,7 +28,7 @@ namespace Projekt_StudieTips.Controllers
         {
             ViewBag.DegreeId = 0;
 
-            return View(await _repository.Context.Degrees.ToListAsync());
+            return View(_repository.GetDegrees());
         }
 
         [HttpPost]
@@ -58,25 +58,8 @@ namespace Projekt_StudieTips.Controllers
 
         }
 
-        // GET: Degrees/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var degree = await _repository.Context.Degrees
-                .FirstOrDefaultAsync(m => m.DegreeId == id);
-            if (degree == null)
-            {
-                return NotFound();
-            }
-
-            return View(degree);
-        }
-
         // GET: Degrees/Create
+        [Authorize("IsAdmin")]
         public IActionResult Create()
         {
             return View();
@@ -87,19 +70,18 @@ namespace Projekt_StudieTips.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize("IsAdmin")]
         public async Task<IActionResult> Create([Bind("DegreeId,DegreeName")] Degree degree)
         {
             if (ModelState.IsValid)
             {
-                _repository.Context.Add(degree);
-                await _repository.Context.SaveChangesAsync();
+                await _repository.AddDegree(degree);
                 return RedirectToAction(nameof(Index));
             }
             return View(degree);
         }
 
-        // GET: Degrees/Edit/5
+        // GET: Degrees/Edit/5'
+        [Authorize("IsAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -107,7 +89,7 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var degree = await _repository.Context.Degrees.FindAsync(id);
+            var degree = _repository.FindDegree(id);
             if (degree == null)
             {
                 return NotFound();
@@ -140,8 +122,7 @@ namespace Projekt_StudieTips.Controllers
                 }
                 try
                 {
-                    _repository.Context.Update(degree);
-                    await _repository.Context.SaveChangesAsync();
+                    await _repository.UpdateDegree(degree);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -160,6 +141,7 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Degrees/Delete/5
+        [Authorize("IsAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -167,8 +149,7 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var degree = await _repository.Context.Degrees
-                .FirstOrDefaultAsync(m => m.DegreeId == id);
+            var degree = _repository.FindDegree(id);
             if (degree == null)
             {
                 return NotFound();
@@ -182,9 +163,8 @@ namespace Projekt_StudieTips.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var degree = await _repository.Context.Degrees.FindAsync(id);
-            _repository.Context.Degrees.Remove(degree);
-            await _repository.Context.SaveChangesAsync();
+            var degree = _repository.FindDegree(id);
+            await _repository.RemoveDegree(degree);
             return RedirectToAction(nameof(Index));
         }
 

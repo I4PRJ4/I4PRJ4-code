@@ -20,9 +20,15 @@
     var first = "";
     var end = "";
     var rmLength = 40;
+    var username = "";
+    var check = @User.Claims.FirstOrDefault(); /* Tjekker om der er brugere logget ind */
+    if (check != null) /* Hvis der er bruger med claim, sæt brugernavn */
+    {
+        username = @User.Claims.FirstOrDefault(c => c.Type == "User" || c.Type == "Admin" || c.Type == "Moderator").Value;
+    }
 }
 
-<html>
+    <html>
     <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    
@@ -86,21 +92,21 @@
                         </p>
 
 
-                        <p style="float: top; font-size: 1em;">
+                        <p style="float: top; font-size: 1em; color:#000">
                             @Html.DisplayFor(modelItem => item.Date)
                         </p>
                     </div>
 
-                    @if (item.Username == UserManager.GetUserName(User))
+                    @if (item.Username == username || username == "Admin" || username == "Moderator") 
                     {
                         <div class="topright">
                             <p class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-id="@item.TipId" asp-action="Delete">Slet</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-id="@item.TipId" asp-action="Delete" style="font-size: 1.5em">Slet</a>
                             </p>
                         </div>
                         <div class="topright">
                             <p class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-id="@item.TipId" asp-action="Edit">Redigér</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Tips" asp-route-id="@item.TipId" asp-action="Edit" style="font-size: 1.5em">Redigér</a>
                             </p>
                         </div>
                     }
@@ -111,7 +117,7 @@
                         </p>
                     </div>
 
-                    <div class="tiptext3">
+                    <div class="tiptext3" style="font-size: 1.3em">
                         @if (textLength >= rmLength)
                         {
                             @(first)<span class="dots">...</span><span class="more">@(end)</span>

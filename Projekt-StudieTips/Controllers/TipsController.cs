@@ -162,7 +162,7 @@ namespace Projekt_StudieTips.Controllers
             {
                 return NotFound();
             }
-
+            
 
             var tip = await _repository.Context.Tips.FindAsync(id);
             if (tip == null)
@@ -170,9 +170,16 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            if (tip.Username != _user.GetUserName(User))
+            var check = User.Claims.FirstOrDefault();
+
+            if (check != null)
             {
-                return RedirectToAction(nameof(Index));
+                var bruger = User.Claims.FirstOrDefault(c => c.Type == "User" || c.Type == "Admin" || c.Type == "Moderator").Value;
+                
+                if (tip.Username != bruger && bruger != "Admin" && bruger != "Moderator")
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
 
             return View(tip);
@@ -229,9 +236,16 @@ namespace Projekt_StudieTips.Controllers
             var tip = _repository.GetTipDetails(id).Result;
 
 
-            if (tip.Username != _user.GetUserName(User))
+            var check = User.Claims.FirstOrDefault();
+
+            if (check != null)
             {
-                return RedirectToAction(nameof(Index));
+                var bruger = User.Claims.FirstOrDefault(c => c.Type == "User" || c.Type == "Admin" || c.Type == "Moderator").Value;
+
+                if (tip.Username != bruger && bruger != "Admin" && bruger != "Moderator")
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
 
             if (tip == null)

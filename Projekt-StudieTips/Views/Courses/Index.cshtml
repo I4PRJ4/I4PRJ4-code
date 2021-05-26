@@ -45,6 +45,11 @@
     }
     <br/>
     <br/>
-    <p><a asp-controller="Degrees" asp-route-id="@ViewBag.DegreeId" asp-action="Index">Tilbage til uddannelser</a></p>
+    <div>
+        <a asp-controller="Degrees" asp-route-id="@ViewBag.DegreeId" asp-action="Index">
+            <p class="h1Degree" style="font-size: 2.5em; color: #fff">Tilbage til uddannelser</p>
+        </a>
+    </div>
+    
 </div>
 }
