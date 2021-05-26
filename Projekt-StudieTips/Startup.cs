@@ -57,6 +57,10 @@ namespace Projekt_StudieTips
                     "IsAdmin",
                     policyBuilder => policyBuilder
                      .RequireClaim("Admin"));
+                options.AddPolicy(
+                   "IsModerator",
+                   policyBuilder => policyBuilder
+                    .RequireClaim("Moderator"));
             });
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Home/UnauthorizedAccess");
@@ -90,7 +94,8 @@ namespace Projekt_StudieTips
             app.UseAuthentication();
             app.UseAuthorization();
 
-            DbAdmin.SeedUsers(userManager, log);
+            DbAdmin.SeedAdmin(userManager, log);
+            DbAdmin.SeedModerator(userManager, log);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

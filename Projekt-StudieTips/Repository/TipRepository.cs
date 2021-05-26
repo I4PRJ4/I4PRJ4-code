@@ -23,7 +23,7 @@ namespace Projekt_StudieTips.Repository
         {
             var context = Context.Tips
                 .Include(t => t.Course)
-                .Where(t => t.CourseId == id & t.IsVerified == false);
+                .Where(t => t.CourseId == id & t.IsVerified == true);
 
             switch (sortOrder)
             {
@@ -51,7 +51,7 @@ namespace Projekt_StudieTips.Repository
             return await Context.Tips
                 .Include(t => t.Course)
                 .Where(t => (t.Headline.Contains(search.SearchTerm) || t.Text.Contains(search.SearchTerm) ||
-                             t.Course.CourseName.Contains(search.SearchTerm)) & t.IsVerified == false).ToListAsync();
+                             t.Course.CourseName.Contains(search.SearchTerm)) & t.IsVerified == true).ToListAsync();
         }
 
         public async Task<Tip> GetTipDetails(int? id)
@@ -65,6 +65,11 @@ namespace Projekt_StudieTips.Repository
         public bool TipExists(int id)
         {
             return Context.Tips.Any(e => e.TipId == id);
+        }
+
+        public async Task<List<Tip>> GetUnmoderatedTips()
+        {
+            return await Context.Tips.Where(t => (t.IsVerified == false)).ToListAsync();
         }
     }
 }

@@ -15,6 +15,7 @@ using PagedList;
 
 namespace Projekt_StudieTips.Controllers
 {
+    
     public class TipsController : Controller
     {
         private readonly TipRepository _repository;
@@ -51,7 +52,8 @@ namespace Projekt_StudieTips.Controllers
                 try
                 {
                     var course = await _repository.GetCourse(id);
-                    ViewBag.CourseName = $"{course.CourseName} har ingen tips. Tryk 'Tilføj nyt tip' for at tilføje";
+                    ViewBag.CourseName = $"{course.CourseName}";
+                    ViewBag.NoTip = "har desværre ingen tips..";
                     ViewBag.CourseId = id;
                 }
                 catch (InvalidOperationException)
@@ -105,6 +107,7 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Tip/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -123,7 +126,7 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Tip/Create
-
+        [Authorize]
         public IActionResult Create(int? value)
         {
             ViewBag.CourseId = value;
@@ -138,7 +141,7 @@ namespace Projekt_StudieTips.Controllers
         [Authorize]
         public async Task<IActionResult> Create([Bind("TipId,Username,CourseId,Date,Headline,Text")] Tip tip)
         {
-            tip.Username = _user.GetUserName(User);
+
             tip.Date = DateTime.Now;
 
             if (ModelState.IsValid)
@@ -152,6 +155,7 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Tip/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -179,6 +183,7 @@ namespace Projekt_StudieTips.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("TipId,Username,CourseId,Date,Headline,Text")] Tip tip)
         {
             if (id != tip.TipId)
@@ -212,6 +217,7 @@ namespace Projekt_StudieTips.Controllers
         }
 
         // GET: Tip/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
