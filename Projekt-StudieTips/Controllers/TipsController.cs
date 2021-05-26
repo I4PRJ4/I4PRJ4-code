@@ -17,15 +17,9 @@ namespace Projekt_StudieTips.Controllers
 {
     public class TipsController : Controller
     {
-        //private readonly DatabaseContext _context;
         private readonly TipRepository _repository;
         private readonly UserManager<IdentityUser> _user;
 
-        //public TipsController(DatabaseContext context, UserManager<IdentityUser> user)
-        //{
-        //    _context = context;
-        //    _user = user;
-        //}
 
         public TipsController(TipRepository repository, UserManager<IdentityUser> user)
         {
@@ -46,27 +40,6 @@ namespace Projekt_StudieTips.Controllers
             ViewBag.DateSortParm = sortOrder == "date_desc" ? "date_desc" : "date_asc";
             var context = _repository.GetTips(id,sortOrder).Result;
 
-            //var context = _context.Tips
-            //    .Include(t => t.Course)
-            //    .Where(t => t.CourseId == id & t.IsVerified == false);
-
-            
-
-            //switch (sortOrder)
-            //{
-            //    case "date_asc":
-            //        context = context.OrderBy(t => t.Date);
-            //        break;
-            //    case "date_desc":
-            //        context = context.OrderByDescending(t => t.Date);
-            //        break;
-            //    default:
-            //        context = context.OrderByDescending(t => t.Date);
-            //        break;
-            //}
-
-            //var list = await context.ToListAsync();
-
             try
             {
                 ViewBag.CourseName = context[0].Course.CourseName;
@@ -77,7 +50,6 @@ namespace Projekt_StudieTips.Controllers
 
                 try
                 {
-                    //var course = await _context.Courses.Where(c => c.CourseId == id).FirstAsync();
                     var course = await _repository.GetCourse(id);
                     ViewBag.CourseName = $"{course.CourseName} har ingen tips. Tryk 'Tilføj nyt tip' for at tilføje";
                     ViewBag.CourseId = id;
@@ -106,10 +78,6 @@ namespace Projekt_StudieTips.Controllers
             {
                 return RedirectToAction("Index", "Home"); // bliver sendt tilbage til forsiden
             }
-
-            //var context = await _context.Tips
-            //    .Include(t => t.Course)
-            //    .Where(t => (t.Headline.Contains(search.SearchTerm) || t.Text.Contains(search.SearchTerm) || t.Course.CourseName.Contains(search.SearchTerm)) & t.IsVerified == false).ToListAsync();
 
             var context = _repository.GetTipsWithinSearchTerm(search).Result;
 
@@ -143,10 +111,6 @@ namespace Projekt_StudieTips.Controllers
             {
                 return NotFound();
             }
-
-            //var tip = await _context.Tips
-            //    .Include(t => t.Course)
-            //    .FirstOrDefaultAsync(m => m.TipId == id);
 
             var tip = _repository.GetTipDetails(id);
 
@@ -255,9 +219,6 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            //var tip = await _context.Tips
-            //    .Include(t => t.Course)
-            //    .FirstOrDefaultAsync(m => m.TipId == id);
 
             var tip = _repository.GetTipDetails(id).Result;
 

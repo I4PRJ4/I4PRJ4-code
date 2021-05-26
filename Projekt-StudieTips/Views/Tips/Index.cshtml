@@ -169,14 +169,12 @@
                     </div>
                 }
 
-                @* INDSÆT OVERTSKRIFT *@
                 <div class="tiptext2">
                     <h5>
                         @Html.DisplayFor(modelItem => item.Headline)
                     </h5>
                 </div>
 
-                @* INDSÆT tip text *@
                 <div class="tiptext3">
                     @if (textLength >= rmLength)
                     {
@@ -212,9 +210,6 @@
             </p>
         }
 
-
-        @*@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index",
-        new { courseId, page, sortOrder = ViewBag.CurrentSort, }))*@
     </div>
 
 
