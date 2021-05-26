@@ -1,13 +1,11 @@
 ﻿@model IEnumerable<Projekt_StudieTips.Models.Degree>
 
-<link rel="stylesheet" href="~/css/course.css" />
+
 <link rel="stylesheet" href="~/css/site.css" />
 
-@{
-    ViewData["Title"] = "Uddannelser";
-}
+@{ ViewData["Title"] = "Uddannelser"; }
 <div class="CenterEverything">
-    <h1>Uddannelser</h1>
+    <h1 class="h1Degree">Uddannelser</h1>
 
     @if (User.HasClaim(c => c.Type == "Admin"))
     {
@@ -16,6 +14,11 @@
         </p>
     }
 
+    <br />
+    <br />
+
+    <br />
+    <br />
 
     @using (Html.BeginForm("Redirect", "Degrees", FormMethod.Post))
     {
@@ -47,6 +50,7 @@
             <br />
             <p><a asp-controller="Home" asp-action="Index">Tilbage</a></p>
         </div>
-
     }
-</div>
+    </div>
+
+

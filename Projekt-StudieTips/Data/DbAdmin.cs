@@ -5,7 +5,7 @@ namespace Projekt_StudieTips.Data
 {
     public class DbAdmin
     {
-        public static void SeedUsers(UserManager<IdentityUser> userManager, ILogger log)
+        public static void SeedAdmin(UserManager<IdentityUser> userManager, ILogger log)
         {
             const string adminEmail = "Admin@localhost";
             const string adminPassword = "Secret7/";
@@ -24,6 +24,30 @@ namespace Projekt_StudieTips.Data
                 if (result.Succeeded)
                 {
                     var adminClaim = new Claim("Admin", adminName);
+                    userManager.AddClaimAsync(user, adminClaim);
+                }
+            }
+        }
+
+        public static void SeedModerator(UserManager<IdentityUser> userManager, ILogger log)
+        {
+            const string moderatorEmail = "Mod@localhost";
+            const string moderatorPassword = "Secret7/";
+            const string moderatorName = "Moderator";
+
+            if (userManager.FindByNameAsync(moderatorEmail).Result == null)
+            {
+                log.LogWarning("Seeding the admin user");
+                var user = new IdentityUser
+                {
+                    UserName = moderatorEmail,
+                    Email = moderatorEmail
+                };
+                IdentityResult result = userManager.CreateAsync
+                    (user, moderatorPassword).Result;
+                if (result.Succeeded)
+                {
+                    var adminClaim = new Claim("Moderator", moderatorName);
                     userManager.AddClaimAsync(user, adminClaim);
                 }
             }
