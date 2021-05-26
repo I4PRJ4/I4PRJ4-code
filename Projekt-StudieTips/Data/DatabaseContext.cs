@@ -17,8 +17,6 @@ namespace Projekt_StudieTips.Data
 
         public DbSet<Tip> Tips { get; set; }
 
-        public DbSet<User> Users { get; set; } //SKAL FJERNES SENERE
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,12 +36,6 @@ namespace Projekt_StudieTips.Data
             //    .HasForeignKey(t => t.UserId);
 
 
-            modelBuilder.Entity<User>().HasData(
-                new User { UserId = 1, Username = "TronaldDump" },
-                new User { UserId = 2, Username = "SwedishNoob" },
-                new User { UserId = 3, Username = "TheLegend" },
-                new User { UserId = 4, Username = "IntrovertedSnail" }
-            );
 
             //modelBuilder.Entity<Degree>().HasData(
             //    new Degree { DegreeId = 1, DegreeName = "Softwareteknologi" }

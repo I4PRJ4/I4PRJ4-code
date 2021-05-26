@@ -29,7 +29,8 @@
         <select name="CourseId">
             @foreach (var item in Model.OrderBy(d => d.CourseName))
             {
-<option value="@item.CourseId">@item.CourseName</option>}
+                <option value="@item.CourseId">@item.CourseName</option>
+            }
         </select>
     </div>
     <br />
@@ -39,21 +40,11 @@
 
     @if (User.HasClaim(c => c.Type == "Admin"))
     {
-<input class="gotobtn" type="submit" name="submit" value="Rediger">
-                    <input class="gotobtn" type="submit" name="submit" value="Slet">}
-
-    @if (User.HasClaim(c => c.Type == "Moderator"))
-    {
-<input class="gotobtn" type="submit" name="submit" value="Rediger">
-                    <input class="gotobtn" type="submit" name="submit" value="Slet">}
-    <br />
-    <br />
-    <a asp-controller="Degrees" asp-route-id="@ViewBag.DegreeId" asp-action="Index">
-        <div class="h1Degree" style="font-size: 2.5em; color: #fff">
-            Tilbage til uddannelser
-        </div>
-    </a>
+        <input class="gotobtn" type="submit" name="submit" value="Rediger">
+        <input class="gotobtn" type="submit" name="submit" value="Slet">
+    }
+    <br/>
+    <br/>
+    <p><a asp-controller="Degrees" asp-route-id="@ViewBag.DegreeId" asp-action="Index">Tilbage til uddannelser</a></p>
 </div>
 }
-
-</div>

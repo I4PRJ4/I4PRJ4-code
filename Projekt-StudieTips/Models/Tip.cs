@@ -9,9 +9,7 @@ namespace Projekt_StudieTips.Models
         public int TipId { get; set; }
 
         [Required]
-        [ForeignKey("User")]
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public string Username { get; set; }
 
         [Required]
         [ForeignKey("Course")]
