@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projekt-StudieTips", "Projekt-StudieTips\Projekt-StudieTips.csproj", "{5D6939B9-D6F2-48CA-8DC1-4AF4A2EB4895}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projekt-StudieTips.Test.Unit", "Projekt-StudieTips.Test.Unit\Projekt-StudieTips.Test.Unit.csproj", "{CCEF6290-85E5-417C-85B0-105BBFC8D6DC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5D6939B9-D6F2-48CA-8DC1-4AF4A2EB4895} = {5D6939B9-D6F2-48CA-8DC1-4AF4A2EB4895}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
