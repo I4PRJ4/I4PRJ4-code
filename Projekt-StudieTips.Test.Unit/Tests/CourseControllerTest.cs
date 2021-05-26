@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace Projekt_StudieTips.Test.Unit
 {
-    public class Tests
+    public class CourseControllerTest
     {
         [SetUp]
         public void Setup()
