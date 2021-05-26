@@ -13,7 +13,7 @@
             <a asp-action="Create">Opret ny uddannelse</a>
         </p>
     }
-    
+
     <br />
     <br />
 
@@ -28,16 +28,16 @@
                     @if (Model != null)
                     {
 
-                foreach (var item in Model.OrderBy(d => d.DegreeName))
-                {
-<option value="@item.DegreeId">@item.DegreeName</option>
-}
-}
+                        foreach (var item in Model.OrderBy(d => d.DegreeName))
+                        {
+                            <option value="@item.DegreeId">@item.DegreeName</option>
+                        }
+                    }
 
-        </select>
-    </div>
-    <br />
-    <br />
+                </select>
+            </div>
+            <br />
+            <br />
 
             <input class="gotobtn" type="submit" name="submit" value="Gå til" />
 
@@ -51,11 +51,11 @@
             <p><a asp-controller="Home" asp-action="Index">Tilbage</a></p>
         </div>
 
-    @if (User.HasClaim(c => c.Type == "Moderator"))
-    {
-<input class="gotobtn" type="submit" name="submit" value="Rediger">
-                <input class="gotobtn" type="submit" name="submit" value="Slet">}
-    <br />
-    <br />
-</div>}
-</div>
+        @if (User.HasClaim(c => c.Type == "Moderator"))
+        {
+            <input class="gotobtn" type="submit" name="submit" value="Rediger">
+            <input class="gotobtn" type="submit" name="submit" value="Slet">}
+        <br />
+        <br />
+    }</div>
+
