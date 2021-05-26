@@ -11,7 +11,7 @@
         <a class="nav-link text-primary"  asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Log ud</a>
     </button>
     
-    <a class="nav-link text-primary" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hej @User.Claims.FirstOrDefault(c => c.Type == "User" || c.Type == "Admin").Value!</a>
+    <a class="nav-link text-primary" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hej @User.Claims.FirstOrDefault(c => c.Type == "User" || c.Type == "Admin" || c.Type == "Moderator").Value!</a>
        
 }
 else

@@ -3,10 +3,8 @@
 @*@model IEnumerable<Projekt_StudieTips.Models.Tip>*@
 @model PagedList.IPagedList<Projekt_StudieTips.Models.Tip>
 @using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="~/css/site.css" />
 <link rel="stylesheet" href="~/css/tippage.css" />
-
 
 @inject UserManager<IdentityUser> UserManager
 
@@ -19,6 +17,9 @@
     var courseName = ViewBag.CourseName;
     var courseId = ViewBag.CourseId;
     var noTip = ViewBag.NoTip;
+    var first = "";
+    var end = "";
+    var rmLength = 40;
 }
 
 <html>
@@ -37,12 +38,28 @@
         <h1 class="h1Degree">@courseName</h1>
     }
 
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+    </style>
+</head>
+
+<div class="text-center">
+    <h1>@courseName </h1>
 </div>
 
 
 <body class="text-center">
 
 
+    <p>
+        <a asp-action="Create" asp-route-value="@courseId">Tilføj nyt tip</a>
+    </p>
 
     <a asp-action="Create" asp-route-value="@courseId">
         <p class="h1Degree" style="font-size: 2.5em; color: #fff">Tilføj nyt tip </p>
@@ -66,9 +83,7 @@
 
         var text = item.Text;
         var textLength = text.Length;
-        var first = "";
-        var end = "";
-        var rmLength = 40;
+        
 
         if (textLength >= rmLength)
         {
@@ -174,3 +189,4 @@
 
 
 </body>
+</html>
