@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Projekt_StudieTips.Data;
 using System.Linq;
+using System.Threading;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 using Projekt_StudieTips.Repository;
 
@@ -26,8 +27,8 @@ namespace Projekt_StudieTips
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            options.UseSqlServer("server=[::1],1433; User Id = SA; Password=password_123; database =StudieTipsDB; trusted_connection = false;"));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //options.UseSqlServer("server=[::1],1433; User Id = SA; Password=password_123; database =StudieTipsDB; trusted_connection = false;"));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddScoped<IDegreeRepository, DegreeRepository>();
@@ -69,8 +70,8 @@ namespace Projekt_StudieTips
             services.AddControllersWithViews();
 
             services.AddDbContext<DatabaseContext>(options =>
-                    //options.UseSqlServer(Configuration.GetConnectionString("AppContext")));
-                    options.UseSqlServer("server=[::1],1433; User Id = SA; Password=password_123; database =StudieTipsDB; trusted_connection = false;"));
+                    options.UseSqlServer(Configuration.GetConnectionString("AppContext")));
+                    //.UseSqlServer("server=[::1],1433; User Id = SA; Password=password_123; database =StudieTipsDB; trusted_connection = false;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -97,6 +98,7 @@ namespace Projekt_StudieTips
             app.UseAuthorization();
 
             DbAdmin.SeedAdmin(userManager, log);
+            Thread.Sleep(2000);
             DbAdmin.SeedModerator(userManager, log);
             app.UseEndpoints(endpoints =>
             {

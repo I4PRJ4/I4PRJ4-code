@@ -68,13 +68,14 @@ namespace Projekt_StudieTips.Controllers
         [Authorize("IsAdmin")]
         public async Task<IActionResult> Create(int? DegreeId)
         {
-            DegreeCourse ViewModeDegreeCourse = new();
+            if (DegreeId == null)
+            {
+                return NotFound();
+            }
 
             ViewBag.DegreeId = DegreeId;
 
-            ViewModeDegreeCourse.Degrees = _degreeRepository.GetDegrees();
-
-            return View(ViewModeDegreeCourse);
+            return View();
         }
 
         // POST: Courses/Create
