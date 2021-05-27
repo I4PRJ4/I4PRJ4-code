@@ -5,21 +5,21 @@
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
 
-<h4>@ViewData["Title"]</h4>
+<h4 class="h1Degree" style="font-size: 3em">@ViewData["Title"]</h4>
 
 
 <div>
     <form id="delete-user" method="post" class="form-group">
-        <div asp-validation-summary="All" class="text-danger"></div>
+       
         @if (Model.RequirePassword)
         {
             <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                <label class="h1Degree" style="font-size: 2em" asp-for="Input.Password"></label>
+                <input style="font-size: 2em; width: 50%" asp-for="Input.Password" class="form-control" />
+                <span style="font-size: 1.5em" asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
         }
-        <button class="btn btn-danger" type="submit">Slet brugeren</button>
+        <button class="gotobtn" style="background-color: red" type="submit">Slet brugeren</button>
     </form>
 </div>
 

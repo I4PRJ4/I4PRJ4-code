@@ -13,26 +13,26 @@
         <div class="col-md-4">
             <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
                 <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
+                
                 <div class="form-group">
                     <label asp-for="Input.Email" class="h1Degree" style="font-size: 2.5em; color: #fff"></label>
                     <input asp-for="Input.Email" class="form-control" style="font-size: 2em"/>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    <span style="font-size: 1.5em" asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.Password" class="h1Degree" style="font-size: 2.5em; color: #fff"></label>
                     <input asp-for="Input.Password" class="form-control" style="font-size: 2em"/>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    <span style="font-size: 1.5em" asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.ConfirmPassword" class="h1Degree" style="font-size: 2.5em; color: #fff"></label>
                     <input asp-for="Input.ConfirmPassword" class="form-control" style="font-size: 2em" />
-                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    <span style="font-size: 1.5em" asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.Brugernavn" class="h1Degree" style="font-size: 2.5em; color: #fff"></label>
                     <input asp-for="Input.Brugernavn" class="form-control"style="font-size: 2em" />
-                    <span asp-validation-for="Input.Brugernavn" class="text-danger"></span>
+                    <span style="font-size: 1.5em" asp-validation-for="Input.Brugernavn" class="text-danger"></span>
                 </div>
                 <button type="submit" class="gotobtn">Opret</button>
             </form>

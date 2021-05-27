@@ -10,23 +10,23 @@
 <div class="row CenterEverything">
     <div class="col-md-4 CenterEverything">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div style="font-size: 1.5em" asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="TipId" />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div style="font-size: 1.5em" asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Username" />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div style="font-size: 1.5em" asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="CourseId" />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div style="font-size: 1.5em" asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Date"/>
             <div class="form-group">
                 <p class="h1Degree" style="font-size: 2.5em">Overskrift</p>
                 <input style="font-size: 2em" asp-for="Headline" class="form-control" />
-                <span asp-validation-for="Headline" class="text-danger"></span>
+                <span style="font-size: 1.5em" asp-validation-for="Headline" class="text-danger"></span>
             </div>
                 <div class="form-group">
                     <p class="h1Degree" style="font-size: 2.5em">Tekst</p>
                     <textarea style="font-size: 2em" asp-for="Text" class="form-control" style="height:200px"></textarea>
-                    <span asp-validation-for="Text" class="text-danger"></span>
+                    <span style="font-size: 1.5em" asp-validation-for="Text" class="text-danger"></span>
                 </div>
                 <br/>
                 <div class="form-group">
