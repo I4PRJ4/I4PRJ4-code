@@ -22,11 +22,6 @@ namespace Projekt_StudieTips.Repository
             return Context.Courses.Where(i => i.DegreeId == id).ToList();
         }
 
-        public List<Degree> GetDegrees()
-        {
-            return Context.Degrees.ToList();
-        }
-
         public async Task AddCourse(Course course)
         {
             Context.Add(course);

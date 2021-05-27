@@ -13,7 +13,6 @@ namespace Projekt_StudieTips.Repository
 
         List<Course> FindCourses(int? id);
 
-        List<Degree> GetDegrees();
 
         Course GetCourse(int? id);
 
