@@ -63,7 +63,7 @@ namespace Projekt_StudieTips.Controllers
                 
             }
 
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
             if (pageNumber < 1)
             {
@@ -73,7 +73,7 @@ namespace Projekt_StudieTips.Controllers
             return View(context.ToPagedList(pageNumber, pageSize));
         }
 
-        public async Task<IActionResult> SearchTip([Bind("SearchTerm")]SearchDto search)
+        public async Task<IActionResult> SearchTip(int? id, string sortOrder, int? page, [Bind("SearchTerm")]SearchDto search)
         {
             //Default page
             if (search.SearchTerm == null)
@@ -81,10 +81,12 @@ namespace Projekt_StudieTips.Controllers
                 return RedirectToAction("Index", "Home"); // bliver sendt tilbage til forsiden
             }
 
+            ViewBag.DateSortParm = sortOrder == "date_desc" ? "date_desc" : "date_asc";
             var context = _repository.GetTipsWithinSearchTerm(search).Result;
 
             try
             {
+                ViewBag.SearchTerm = search.SearchTerm;
                 ViewBag.CourseName = context[0].Course.CourseName;
                 ViewBag.CourseId = context[0].CourseId;
             }
@@ -103,7 +105,14 @@ namespace Projekt_StudieTips.Controllers
 
             }
 
-            return View(context);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            if (pageNumber < 1)
+            {
+                pageNumber = 1;
+            }
+
+            return View(context.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Tip/Details/5
