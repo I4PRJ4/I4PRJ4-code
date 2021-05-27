@@ -63,7 +63,7 @@ namespace Projekt_StudieTips.Controllers
                 
             }
 
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
             if (pageNumber < 1)
             {

@@ -20,9 +20,11 @@ namespace Projekt_StudieTips.Models
         public DateTime Date { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public string Headline { get; set; }
 
         [Required]
+        [MaxLength(500)]
         public string Text { get; set; }
 
         [Required]
