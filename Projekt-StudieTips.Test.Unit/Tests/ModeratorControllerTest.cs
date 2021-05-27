@@ -9,6 +9,7 @@ using Projekt_StudieTips.Repository;
 using NUnit.Framework;
 using NSubstitute;
 using Microsoft.AspNetCore.Mvc;
+using PagedList;
 
 namespace Projekt_StudieTips.Test.Unit
 {
@@ -39,12 +40,12 @@ namespace Projekt_StudieTips.Test.Unit
             _TipRepo.GetUnmoderatedTips().Returns(tips);
 
             // Act
-            var result = await _uut.Index();
+            var result = await _uut.Index("date_desc", 1);
 
             // Assert
             
             Assert.IsInstanceOf(typeof(ViewResult), result);
-            Assert.IsAssignableFrom<List<Tip>>(((ViewResult)result).ViewData.Model);
+            Assert.IsAssignableFrom<PagedList<Tip>>(((ViewResult)result).ViewData.Model);
         }
 
         [Test]
@@ -56,12 +57,12 @@ namespace Projekt_StudieTips.Test.Unit
             _TipRepo.GetUnmoderatedTips().Returns(tips);
 
             // Act
-            var result = await _uut.Index();
+            var result = await _uut.Index("date_desc", 1);
 
             // Assert
 
             Assert.IsInstanceOf(typeof(ViewResult), result);
-            Assert.IsAssignableFrom<List<Tip>>(((ViewResult)result).ViewData.Model);
+            Assert.IsAssignableFrom<PagedList<Tip>>(((ViewResult)result).ViewData.Model);
             string ViewBagData = "Der er ingen tips at verificere.";
             Assert.That(((ViewResult)result).ViewData["CourseName"] == ViewBagData);
         }

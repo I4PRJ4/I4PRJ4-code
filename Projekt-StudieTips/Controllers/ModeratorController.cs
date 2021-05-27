@@ -29,11 +29,13 @@ namespace Projekt_StudieTips.Controllers
 
 
         // GET: ModeratorController
-        public async Task<IActionResult> Index(int? id, string sortOrder, int? page)
+        public async Task<IActionResult> Index(string sortOrder, int? page)
         {
             var context = await _repository.GetUnmoderatedTips();
+            
+            ViewBag.DateSortParm = sortOrder == "date_desc" ? "date_desc" : "date_asc";
 
-                try
+            try
                 {
                     if (context.Count == 0)
                     {

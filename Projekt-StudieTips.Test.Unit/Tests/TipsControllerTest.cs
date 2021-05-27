@@ -95,7 +95,7 @@ namespace Projekt_StudieTips.Test.Unit
             search.SearchTerm = null;
 
             //Act
-            var result = await _uut.SearchTip(search);
+            var result = _uut.SearchTip("date_desc",1, search);
             //Assert
             Assert.IsInstanceOf(typeof(RedirectToActionResult), result);
             Assert.AreEqual("Index", ((RedirectToActionResult)result).ActionName);
@@ -117,7 +117,7 @@ namespace Projekt_StudieTips.Test.Unit
             _TipRepo.GetCourse(1).Returns(c);
 
             //Act
-            var result = await _uut.SearchTip(search);
+            var result = _uut.SearchTip("date_desc", 1, search);
             //Assert
             Assert.IsInstanceOf(typeof(ViewResult), result);
             _TipRepo.Received().GetTipsWithinSearchTerm(search);
@@ -144,13 +144,13 @@ namespace Projekt_StudieTips.Test.Unit
             _TipRepo.GetTipsWithinSearchTerm(search).Returns(tips);
 
             //Act
-            var result = await _uut.SearchTip(search);
+            var result = _uut.SearchTip("date_desc", 1, search);
             //Assert
             Assert.IsInstanceOf(typeof(ViewResult), result);
             _TipRepo.Received().GetTipsWithinSearchTerm(search);
             Assert.That((int)((ViewResult)result).ViewData["CourseId"] == TipMock.CourseId);
             Assert.That((string)((ViewResult)result).ViewData["CourseName"] == TipMock.Course.CourseName);
-            Assert.IsAssignableFrom<List<Tip>>(((ViewResult)result).ViewData.Model);
+            Assert.IsAssignableFrom<PagedList<Tip>>(((ViewResult)result).ViewData.Model);
         }
 
         [Test]

@@ -73,7 +73,7 @@ namespace Projekt_StudieTips.Controllers
             return View(context.ToPagedList(pageNumber, pageSize));
         }
 
-        public async Task<IActionResult> SearchTip(int? id, string sortOrder, int? page, [Bind("SearchTerm")]SearchDto search)
+        public IActionResult SearchTip(string sortOrder, int? page, [Bind("SearchTerm")] SearchDto search)
         {
             //Default page
             if (search.SearchTerm == null)
@@ -276,7 +276,7 @@ namespace Projekt_StudieTips.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _repository.DeleteTip(id);
-            return RedirectToAction("Index", "Tips", new { id = tip.CourseId });
+            return RedirectToAction("Index", "Tips",  id );
         }
     }
 }
