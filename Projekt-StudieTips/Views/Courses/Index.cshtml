@@ -7,49 +7,54 @@
     ViewData["Title"] = "Index";
 }
 <div class="CenterEverything">
-<br />
-<br />
-<div class="h1Degree" style="font-size: 6em">Vælg det kursus du ønsker at se tips for</div>
-<br />
-<br />
-
-@if (User.HasClaim(c => c.Type == "Admin"))
-{
-    <div id="CenterEverything">
-        <p>
-            <a asp-action="Create" asp-route-DegreeId="@ViewBag.DegreeId">Opret nyt kursus</a>
-        </p>
-    </div>
-}
-
-@using (Html.BeginForm("Redirect", "Courses", FormMethod.Post))
-{
-<div>
-    <div class="select CenterEverything">
-        <select name="CourseId">
-            @foreach (var item in Model.OrderBy(d => d.CourseName))
-            {
-                <option value="@item.CourseId">@item.CourseName</option>
-            }
-        </select>
-    </div>
     <br />
     <br />
-
-    <input class="gotobtn" type="submit" name="submit" value="Gå til">
+    <div class="h1Degree" style="font-size: 6em">Vælg det kursus du ønsker at se tips for</div>
+    <br />
+    <br />
 
     @if (User.HasClaim(c => c.Type == "Admin"))
     {
-        <input class="gotobtn" type="submit" name="submit" value="Rediger">
-        <input class="gotobtn" type="submit" name="submit" value="Slet">
+        <div id="CenterEverything">
+
+            <a asp-action="Create" asp-route-DegreeId="@ViewBag.DegreeId">
+
+                <p class="h1Degree" style="font-size: 2.5em; color: #fff">Opret nyt kursus</p>
+            </a>
+
+        </div>
     }
-    <br/>
-    <br/>
-    <div>
-        <a asp-controller="Degrees" asp-route-id="@ViewBag.DegreeId" asp-action="Index">
-            <p class="h1Degree" style="font-size: 2.5em; color: #fff">Tilbage til uddannelser</p>
-        </a>
-    </div>
-    
+
+    @using (Html.BeginForm("Redirect", "Courses", FormMethod.Post))
+    {
+        <div>
+            <div class="select CenterEverything">
+                <select name="CourseId">
+                    @foreach (var item in Model.OrderBy(d => d.CourseName))
+                    {
+                        <option value="@item.CourseId">@item.CourseName</option>
+                    }
+                </select>
+            </div>
+            <br />
+            <br />
+
+            <input class="gotobtn" type="submit" name="submit" value="Gå til">
+
+            @if (User.HasClaim(c => c.Type == "Admin"))
+            {
+                <input class="gotobtn" type="submit" name="submit" value="Rediger">
+                <input class="gotobtn" type="submit" name="submit" value="Slet">
+            }
+            <br />
+            <br />
+            <div>
+                <a asp-controller="Degrees" asp-route-id="@ViewBag.DegreeId" asp-action="Index">
+                    <p class="h1Degree" style="font-size: 2.5em; color: #fff">Tilbage til uddannelser</p>
+                </a>
+            </div>
+
+        </div>
+
+    }
 </div>
-}
