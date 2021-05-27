@@ -218,7 +218,7 @@ namespace Projekt_StudieTips.Controllers
                     }
                 }
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Tips", new { id = tip.CourseId });
             }
 
             return View(tip);
@@ -266,7 +266,7 @@ namespace Projekt_StudieTips.Controllers
             var tip = await _repository.Context.Tips.FindAsync(id);
             _repository.Context.Tips.Remove(tip);
             await _repository.Context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Tips", new { id = tip.CourseId });
         }
 
         private bool TipExists(int id)
