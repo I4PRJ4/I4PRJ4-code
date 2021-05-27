@@ -9,7 +9,7 @@ using Projekt_StudieTips.Models;
 
 namespace Projekt_StudieTips.Repository
 {
-    public class TipRepository
+    public class TipRepository : ITipRepository
     {
         public DatabaseContext Context { get; set; }
 
@@ -18,6 +18,11 @@ namespace Projekt_StudieTips.Repository
             Context = context;
         }
 
+
+        public async Task<Tip> GetTip(int? id)
+        {
+            return await Context.Tips.FindAsync(id);
+        }
 
         public async Task<List<Tip>> GetTips(int? id, string sortOrder)
         {
@@ -70,6 +75,37 @@ namespace Projekt_StudieTips.Repository
         public async Task<List<Tip>> GetUnmoderatedTips()
         {
             return await Context.Tips.Where(t => (t.IsVerified == false)).ToListAsync();
+        }
+
+        public void SaveChanges()
+        {
+
+            Context.SaveChanges();
+        }
+
+        public async Task AddTip(Tip tip)
+        {
+
+            Context.Add(tip);
+            await Context.SaveChangesAsync();
+
+        }
+        public async Task UpdateTip(Tip tip)
+        {
+
+            Context.Update(tip);
+            await Context.SaveChangesAsync();
+
+        }
+
+        public async Task DeleteTip(int id)
+        {
+
+            Tip tipToDelete = new() { TipId = (int)id };
+            Context.Attach(tipToDelete);
+            Context.Remove(tipToDelete);
+            await Context.SaveChangesAsync();
+
         }
     }
 }
