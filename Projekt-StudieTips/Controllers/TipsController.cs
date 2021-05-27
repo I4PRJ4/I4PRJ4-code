@@ -18,11 +18,11 @@ namespace Projekt_StudieTips.Controllers
     
     public class TipsController : Controller
     {
-        private readonly TipRepository _repository;
+        private readonly ITipRepository _repository;
         private readonly UserManager<IdentityUser> _user;
 
 
-        public TipsController(TipRepository repository, UserManager<IdentityUser> user)
+        public TipsController(ITipRepository repository, UserManager<IdentityUser> user)
         {
             _repository = repository;
             _user = user;
@@ -146,8 +146,7 @@ namespace Projekt_StudieTips.Controllers
 
             if (ModelState.IsValid)
             {
-                _repository.Context.Add(tip);
-                await _repository.Context.SaveChangesAsync();
+                await _repository.AddTip(tip);
                 return RedirectToAction(nameof(Index), new { id = tip.CourseId });
             }
 
@@ -162,9 +161,9 @@ namespace Projekt_StudieTips.Controllers
             {
                 return NotFound();
             }
-            
 
-            var tip = await _repository.Context.Tips.FindAsync(id);
+
+            var tip = await _repository.GetTip(id);
             if (tip == null)
             {
                 return NotFound();
@@ -202,8 +201,7 @@ namespace Projekt_StudieTips.Controllers
             {
                 try
                 {
-                    _repository.Context.Update(tip);
-                    await _repository.Context.SaveChangesAsync();
+                    await _repository.UpdateTip(tip);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -262,9 +260,7 @@ namespace Projekt_StudieTips.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tip = await _repository.Context.Tips.FindAsync(id);
-            _repository.Context.Tips.Remove(tip);
-            await _repository.Context.SaveChangesAsync();
+            await _repository.DeleteTip(id);
             return RedirectToAction(nameof(Index));
         }
 
