@@ -15,19 +15,21 @@ namespace Projekt_StudieTips.Controllers
 {
     public class CoursesController : Controller
     {
-        
-        private readonly CourseRepository _repository;
 
-        public CoursesController(CourseRepository courseRepository)
+        private readonly ICourseRepository _courseRepository;
+        private readonly IDegreeRepository _degreeRepository;
+
+        public CoursesController(ICourseRepository courseRepository, IDegreeRepository degreeRepository)
         {
-            
-            _repository = courseRepository;
+
+            _courseRepository = courseRepository;
+            _degreeRepository = degreeRepository;
         }
 
         // GET: Courses
         public IActionResult Index(int? DegreeId)
         {
-            List<Course> courses = _repository.FindCourses(DegreeId);
+            Course courses = _courseRepository.FindCourses(DegreeId);
 
             ViewBag.DegreeId = DegreeId;
 
@@ -41,17 +43,17 @@ namespace Projekt_StudieTips.Controllers
         {
             ViewBag.CourseId = CourseId;
 
-            if(submit == "Gå til")
+            if (submit == "Gå til")
             {
-                return RedirectToAction("Index", "Tips", new {id = CourseId});
+                return RedirectToAction("Index", "Tips", new { id = CourseId });
             }
 
-            else if(submit == "Rediger")
+            else if (submit == "Rediger")
             {
                 return RedirectToAction("Edit", "Courses", new { id = CourseId });
             }
 
-            else if(submit == "Slet")
+            else if (submit == "Slet")
             {
                 return RedirectToAction("Delete", "Courses", new { id = CourseId });
             }
@@ -70,7 +72,7 @@ namespace Projekt_StudieTips.Controllers
 
             ViewBag.DegreeId = DegreeId;
 
-            ViewModeDegreeCourse.Degrees = _repository.GetDegrees();
+            ViewModeDegreeCourse.Degrees = _degreeRepository.GetDegrees();
 
             return View(ViewModeDegreeCourse);
         }
@@ -84,10 +86,10 @@ namespace Projekt_StudieTips.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _repository.AddDegree(course);
-              
+                await _courseRepository.AddCourse(course);
 
-                return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId});
+
+                return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId });
             }
             return View();
         }
@@ -103,10 +105,10 @@ namespace Projekt_StudieTips.Controllers
 
             DegreeCourse ViewModelDegreeCourse = new DegreeCourse();
 
-            ViewModelDegreeCourse.Degrees = _repository.GetDegrees();
-            ViewModelDegreeCourse.Courses = _repository.GetCourse(id);
+            ViewModelDegreeCourse.Degrees = _degreeRepository.GetDegrees();
+            ViewModelDegreeCourse.Courses = _courseRepository.FindCourses(id);
 
-            ViewBag.Course = _repository.GetCourse(id);
+            ViewBag.Course = _courseRepository.GetCourse(id);
 
             if (ViewModelDegreeCourse.Courses == null)
             {
@@ -123,19 +125,19 @@ namespace Projekt_StudieTips.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("CourseId,CourseName,DegreeId")] Course course)
         {
 
-            var oldCourse = _repository.GetCourse(id);
+            Course oldCourse = _courseRepository.FindCourses(id);
 
-            await _repository.RemoveCourse(oldCourse);
+            await _courseRepository.RemoveCourse(oldCourse);
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _repository.UpdateCourse(course);
+                    await _courseRepository.UpdateCourse(course);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CourseExists(course.CourseId))
+                    if (!_courseRepository.CourseExists(course.CourseId))
                     {
                         return NotFound();
                     }
@@ -144,7 +146,7 @@ namespace Projekt_StudieTips.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId });    
+                return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId });
             }
             return View();
         }
@@ -158,7 +160,7 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var course = _repository.GetCourse(id);
+            Course course = _courseRepository.FindCourses(id);
 
             if (course == null)
             {
@@ -173,16 +175,10 @@ namespace Projekt_StudieTips.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var course = _repository.GetCourse(id);
-
-            await _repository.RemoveCourse(course);
-
+            Course course = _courseRepository.FindCourses(id);
+            await _courseRepository.RemoveCourse(course);
             return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId });
         }
 
-        private bool CourseExists(int id)
-        {
-            return _repository.Context.Courses.Any(e => e.CourseId == id);
-        }
     }
 }

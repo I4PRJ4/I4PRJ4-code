@@ -12,7 +12,6 @@ namespace Projekt_StudieTips.Repository
     {
 
         public DatabaseContext Context { get; set; }
-
         public CourseRepository(DatabaseContext context)
         {
             Context = context;
@@ -28,7 +27,7 @@ namespace Projekt_StudieTips.Repository
             return Context.Degrees.ToList();
         }
 
-        public async Task AddDegree(Course course)
+        public async Task AddCourse(Course course)
         {
             Context.Add(course);
             await Context.SaveChangesAsync();
@@ -49,6 +48,10 @@ namespace Projekt_StudieTips.Repository
         {
             Context.Update(course);
             await Context.SaveChangesAsync();
+        }
+        private bool CourseExists(int id)
+        {
+            return Context.Courses.Any(e => e.CourseId == id);
         }
 
     }
