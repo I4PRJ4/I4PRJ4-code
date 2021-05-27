@@ -30,19 +30,12 @@ namespace Projekt_StudieTips.Repository
                 .Include(t => t.Course)
                 .Where(t => t.CourseId == id & t.IsVerified == true);
 
-            switch (sortOrder)
+            context = sortOrder switch
             {
-                case "date_asc":
-                    context = context.OrderBy(t => t.Date);
-                    break;
-                case "date_desc":
-                    context = context.OrderByDescending(t => t.Date);
-                    break;
-                default:
-                    context = context.OrderByDescending(t => t.Date);
-                    break;
-            }
-
+                "date_asc" => context.OrderBy(t => t.Date),
+                "date_desc" => context.OrderByDescending(t => t.Date),
+                _ => context.OrderByDescending(t => t.Date),
+            };
             return await context.ToListAsync();
         }
 

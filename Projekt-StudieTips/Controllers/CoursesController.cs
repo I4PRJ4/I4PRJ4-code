@@ -29,7 +29,7 @@ namespace Projekt_StudieTips.Controllers
         // GET: Courses
         public IActionResult Index(int? DegreeId)
         {
-            Course courses = _courseRepository.FindCourses(DegreeId);
+            var courses = _courseRepository.FindCourses(DegreeId);
 
             ViewBag.DegreeId = DegreeId;
 
@@ -68,7 +68,7 @@ namespace Projekt_StudieTips.Controllers
         [Authorize("IsAdmin")]
         public async Task<IActionResult> Create(int? DegreeId)
         {
-            DegreeCourse ViewModeDegreeCourse = new DegreeCourse();
+            DegreeCourse ViewModeDegreeCourse = new();
 
             ViewBag.DegreeId = DegreeId;
 
@@ -89,7 +89,7 @@ namespace Projekt_StudieTips.Controllers
                 await _courseRepository.AddCourse(course);
 
 
-                return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId });
+                return RedirectToAction("Index", "Courses", new { course.DegreeId });
             }
             return View();
         }
@@ -103,10 +103,10 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            DegreeCourse ViewModelDegreeCourse = new DegreeCourse();
+            DegreeCourse ViewModelDegreeCourse = new();
 
             ViewModelDegreeCourse.Degrees = _degreeRepository.GetDegrees();
-            ViewModelDegreeCourse.Courses = _courseRepository.FindCourses(id);
+            ViewModelDegreeCourse.Courses = _courseRepository.GetCourse(id);
 
             ViewBag.Course = _courseRepository.GetCourse(id);
 
@@ -125,7 +125,7 @@ namespace Projekt_StudieTips.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("CourseId,CourseName,DegreeId")] Course course)
         {
 
-            Course oldCourse = _courseRepository.FindCourses(id);
+            Course oldCourse = _courseRepository.GetCourse(id);
 
             await _courseRepository.RemoveCourse(oldCourse);
 
@@ -146,7 +146,7 @@ namespace Projekt_StudieTips.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId });
+                return RedirectToAction("Index", "Courses", new { course.DegreeId });
             }
             return View();
         }
@@ -160,7 +160,7 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            Course course = _courseRepository.FindCourses(id);
+            Course course = _courseRepository.GetCourse(id);
 
             if (course == null)
             {
@@ -175,9 +175,9 @@ namespace Projekt_StudieTips.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            Course course = _courseRepository.FindCourses(id);
+            Course course = _courseRepository.GetCourse(id);
             await _courseRepository.RemoveCourse(course);
-            return RedirectToAction("Index", "Courses", new { DegreeId = course.DegreeId });
+            return RedirectToAction("Index", "Courses", new { course.DegreeId });
         }
 
     }

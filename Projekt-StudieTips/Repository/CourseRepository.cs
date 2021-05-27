@@ -8,7 +8,7 @@ using Projekt_StudieTips.Models;
 
 namespace Projekt_StudieTips.Repository
 {
-    public class CourseRepository
+    public class CourseRepository : ICourseRepository
     {
 
         public DatabaseContext Context { get; set; }
@@ -49,7 +49,7 @@ namespace Projekt_StudieTips.Repository
             Context.Update(course);
             await Context.SaveChangesAsync();
         }
-        private bool CourseExists(int id)
+        public bool CourseExists(int id)
         {
             return Context.Courses.Any(e => e.CourseId == id);
         }

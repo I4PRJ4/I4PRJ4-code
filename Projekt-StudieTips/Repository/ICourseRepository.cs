@@ -11,11 +11,11 @@ namespace Projekt_StudieTips.Repository
     public interface ICourseRepository 
     {
 
-        Course FindCourses(int? id);
+        List<Course> FindCourses(int? id);
 
-        //List<Degree> GetDegrees(int id);
+        List<Degree> GetDegrees();
 
-        List<Course> GetCourse(int? id);
+        Course GetCourse(int? id);
 
         Task AddCourse(Course course);
 
