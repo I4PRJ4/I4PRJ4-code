@@ -4,27 +4,30 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Opret uddannelse</h1>
+<div class="CenterEverything">
+    <h1 class="h1Degree">Opret uddannelse</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">Uddannelse</label>
-                <input asp-for="DegreeName" class="form-control" />
-                <span asp-validation-for="DegreeName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Opret" class="btn btn-primary" />
-            </div>
-        </form>
+    <hr />
+    <div class="row CenterEverything">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label h1Degree" style="font-size: 3em; color:#fff">Uddannelse</label>
+                    <input style="font-size: 2em" asp-for="DegreeName" class="form-control" />
+                    <span asp-validation-for="DegreeName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Opret" class="gotobtn" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Tilbage til uddannelse</a>
+    <div>
+        <a asp-action="Index"><p class="h1Degree" style="font-size: 2.5em; color: #fff">Tilbage til uddannelser</p></a>
+    </div>
+
 </div>
 
 @section Scripts {

@@ -9,13 +9,14 @@
 
     @if (User.HasClaim(c => c.Type == "Admin"))
     {
-        <p>
-            <a asp-action="Create">Opret ny uddannelse</a>
-        </p>
+        <div>
+            <a asp-action="Create">
+                <p class="h1Degree" style="font-size: 2.5em; color: #fff">Opret ny uddannelse</p>
+            </a>
+        </div>
     }
 
-    <br />
-    <br />
+    
 
     <br />
     <br />

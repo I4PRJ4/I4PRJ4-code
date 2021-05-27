@@ -3,11 +3,11 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
-<h1>Rediger uddannelse</h1>
+<div class="CenterEverything">
+<h1 class="h1Degree">Redigér uddannelse</h1>
 
 <hr />
-<div class="row">
+<div class="row CenterEverything">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -27,7 +27,7 @@
 <div>
     <a asp-action="Index" asp-route-DegreeId="@ViewBag.DegreeId">Tilbage til uddannelser</a>
 </div>
-
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
