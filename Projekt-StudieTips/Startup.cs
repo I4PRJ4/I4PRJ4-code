@@ -30,8 +30,8 @@ namespace Projekt_StudieTips
             options.UseSqlServer("server=[::1],1433; User Id = SA; Password=password_123; database =StudieTipsDB; trusted_connection = false;"));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddScoped<DegreeRepository>();
-            services.AddScoped<CourseRepository>();
+            services.AddScoped<IDegreeRepository, DegreeRepository>();
+            services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<ITipRepository,TipRepository>();
 
             services.AddDefaultIdentity<IdentityUser>(options => {

@@ -15,7 +15,7 @@ using PagedList;
 
 namespace Projekt_StudieTips.Controllers
 {
-    
+
     public class TipsController : Controller
     {
         private readonly ITipRepository _repository;
@@ -39,7 +39,7 @@ namespace Projekt_StudieTips.Controllers
             }
 
             ViewBag.DateSortParm = sortOrder == "date_desc" ? "date_desc" : "date_asc";
-            var context = _repository.GetTips(id,sortOrder).Result;
+            var context = _repository.GetTips(id, sortOrder).Result;
 
             try
             {
@@ -60,7 +60,7 @@ namespace Projekt_StudieTips.Controllers
                 {
                     return NotFound();
                 }
-                
+
             }
 
             int pageSize = 3;
@@ -73,7 +73,7 @@ namespace Projekt_StudieTips.Controllers
             return View(context.ToPagedList(pageNumber, pageSize));
         }
 
-        public async Task<IActionResult> SearchTip([Bind("SearchTerm")]SearchDto search)
+        public async Task<IActionResult> SearchTip([Bind("SearchTerm")] SearchDto search)
         {
             //Default page
             if (search.SearchTerm == null)
@@ -129,6 +129,11 @@ namespace Projekt_StudieTips.Controllers
         [Authorize]
         public IActionResult Create(int? value)
         {
+            if (value == null)
+            {
+                return NotFound();
+            }
+
             ViewBag.CourseId = value;
             return View();
         }
@@ -174,7 +179,7 @@ namespace Projekt_StudieTips.Controllers
             if (check != null)
             {
                 var bruger = User.Claims.FirstOrDefault(c => c.Type == "User" || c.Type == "Admin" || c.Type == "Moderator").Value;
-                
+
                 if (tip.Username != bruger && bruger != "Admin" && bruger != "Moderator")
                 {
                     return RedirectToAction(nameof(Index));
@@ -205,7 +210,7 @@ namespace Projekt_StudieTips.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TipExists(tip.TipId))
+                    if (!_repository.TipExists(tip.TipId))
                     {
                         return NotFound();
                     }
@@ -262,11 +267,6 @@ namespace Projekt_StudieTips.Controllers
         {
             await _repository.DeleteTip(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool TipExists(int id)
-        {
-            return _repository.TipExists(id);
         }
     }
 }
