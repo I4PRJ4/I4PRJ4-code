@@ -30,12 +30,12 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label h1Degree" style="font-size: 2.5em">Overskrift</label>
-                    <input asp-for="Headline" id="tipheadline" class="form-control" maxlength=@MaxLengthHeadline />
+                    <input style="font-size: 2em" asp-for="Headline" id="tipheadline" class="form-control" maxlength=@MaxLengthHeadline />
                     <span asp-validation-for="Headline" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label class="control-label h1Degree" style="font-size: 2.5em">Tekst</label>
-                    <textarea asp-for="Text" id="tiptext" class="form-control" style="height:200px" maxlength=@MaxLengthText></textarea>
+                    <textarea style="font-size: 2em" asp-for="Text" id="tiptext" class="form-control" style="height:200px" maxlength=@MaxLengthText></textarea>
                     <span asp-validation-for="Text" class="text-danger"></span>
                 </div>
                 <div class="form-group">

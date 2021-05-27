@@ -29,7 +29,7 @@ namespace Projekt_StudieTips.Controllers
 
 
         // GET: ModeratorController
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id, string sortOrder, int? page)
         {
 
 
@@ -49,8 +49,15 @@ namespace Projekt_StudieTips.Controllers
                 {
                     return NotFound();
                 }
+                int pageSize = 3;
+                int pageNumber = (page ?? 1);
+                if (pageNumber < 1)
+                {
+                    pageNumber = 1;
+                }
 
-            return View(context);
+
+            return View(context.ToPagedList(pageNumber, pageSize));
         }
 
 
