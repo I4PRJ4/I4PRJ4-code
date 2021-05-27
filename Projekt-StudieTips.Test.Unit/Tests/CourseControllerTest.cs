@@ -7,6 +7,8 @@ using Projekt_StudieTips.Models;
 using Projekt_StudieTips.Controllers;
 using Projekt_StudieTips.Repository;
 using NUnit.Framework;
+using NSubstitute;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Projekt_StudieTips.Test.Unit
 {
@@ -20,13 +22,22 @@ namespace Projekt_StudieTips.Test.Unit
         [SetUp]
         public void Setup()
         {
-            //_uut = new CoursesController();
+            _uut = new CoursesController(Substitute.For<ICourseRepository>(), Substitute.For<IDegreeRepository>());
         }
 
         [Test]
-        public void TestCourseCreate()
+        public void Index_ReturnsView(int id)
         {
+            var result = _uut.Index(id);
+
+            Assert.IsInstanceOf(typeof(ViewResult), result);
            
+        }
+
+        [Test]
+        public void _IfCourseExists()
+        {
+            return; 
         }
     }
 }
