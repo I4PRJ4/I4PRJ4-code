@@ -10,10 +10,7 @@
 
 @{
     ViewData["Title"] = "Index";
-}
 
-
-@{
     var courseName = ViewBag.CourseName;
     var courseId = ViewBag.CourseId;
     var searchTerm = ViewBag.SearchTerm;
@@ -25,15 +22,16 @@
 
 </head>
 
-<div class="text-center">
-    <h2 class="h1Degree" style="font-size: 5em">Søgt: @searchTerm</h2>
-</div>
-
 
 <body class="text-center">
-
+    @if (Model.Count() > 0)
+    {
+    <h2 class="h1Degree" style="font-size: 5em">Søgt: @searchTerm</h2>
+    }
     @* Bruger class=mx-auto for at centrere indholdet *@
-    <div class="mx-auto" style="width: 50%; text-align: center;">
+<div class="mx-auto" style="width: 50%; text-align: center;">
+    @if (Model.Count() > 0)
+    {
         @foreach (var item in Model)
         {
             var text = item.Text;
@@ -71,7 +69,7 @@
                     </p>
                 </div>
 
-                @if (item.Username == username || username == "Admin" || username == "Moderator") 
+                @if (item.Username == username || username == "Admin" || username == "Moderator")
                 {
                     <div class="topright">
                         <p class="nav-item">
@@ -122,32 +120,38 @@
                     <a class=" text-white" asp-area="" asp-controller="Tips" asp-route-sortOrder="ViewBag.DateSortParm" asp-route-SearchTerm="@searchTerm" asp-route-page="@nextPage" asp-route-id="@courseId" asp-action="SearchTip">Næste</a>
                 </p>
             }
-        </div>
 
-        <div>
-            <a asp-controller="Home" asp-action="Index">
-                <p class="h1Degree" style="font-size: 2.5em; color: #fff">Hjem</p>
-            </a>
-        </div>
 
+        </div>
+    }
+    else
+    {
+
+        <h2 class="h1Degree" style="font-size: 5em">Der findes ingen tips med søgeordet: @searchTerm</h2>
+    }
+    <div>
+        <a asp-controller="Home" asp-action="Index">
+            <p class="h1Degree" style="font-size: 2.5em; color: #fff">Hjem</p>
+        </a>
     </div>
 
-
-    @*Javascript der håndterer read more / read less collapse-funktionen på tips*@
-    <script>
-        $(document).ready(function () {
-            $(".read").click(function () {
-                $(this).prev().toggle();
-                $(this).siblings('.dots').toggle();
-                if ($(this).text() === 'read more') {
-                    $(this).text('read less');
-                }
-                else {
-                    $(this).text('read more');
-                }
-            });
-        });
-    </script>
-
+</div>
 
 </body>
+</html>
+
+@*Javascript der håndterer read more / read less collapse-funktionen på tips*@
+<script>
+    $(document).ready(function () {
+        $(".read").click(function () {
+            $(this).prev().toggle();
+            $(this).siblings('.dots').toggle();
+            if ($(this).text() === 'read more') {
+                $(this).text('read less');
+            }
+            else {
+                $(this).text('read more');
+            }
+        });
+    });
+</script>
