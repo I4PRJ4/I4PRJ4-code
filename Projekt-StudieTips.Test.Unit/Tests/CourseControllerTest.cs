@@ -20,7 +20,7 @@ namespace Projekt_StudieTips.Test.Unit
         [SetUp]
         public void Setup()
         {
-            _uut = new CoursesController();
+            //_uut = new CoursesController();
         }
 
         [Test]
