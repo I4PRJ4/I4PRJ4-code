@@ -15,14 +15,14 @@ using PagedList;
 
 namespace Projekt_StudieTips.Controllers
 {
-    
+
     public class TipsController : Controller
     {
-        private readonly TipRepository _repository;
+        private readonly ITipRepository _repository;
         private readonly UserManager<IdentityUser> _user;
 
 
-        public TipsController(TipRepository repository, UserManager<IdentityUser> user)
+        public TipsController(ITipRepository repository, UserManager<IdentityUser> user)
         {
             _repository = repository;
             _user = user;
@@ -39,7 +39,7 @@ namespace Projekt_StudieTips.Controllers
             }
 
             ViewBag.DateSortParm = sortOrder == "date_desc" ? "date_desc" : "date_asc";
-            var context = _repository.GetTips(id,sortOrder).Result;
+            var context = _repository.GetTips(id, sortOrder).Result;
 
             try
             {
@@ -60,7 +60,7 @@ namespace Projekt_StudieTips.Controllers
                 {
                     return NotFound();
                 }
-                
+
             }
 
             int pageSize = 5;
@@ -138,6 +138,11 @@ namespace Projekt_StudieTips.Controllers
         [Authorize]
         public IActionResult Create(int? value)
         {
+            if (value == null)
+            {
+                return NotFound();
+            }
+
             ViewBag.CourseId = value;
             return View();
         }
@@ -155,8 +160,7 @@ namespace Projekt_StudieTips.Controllers
 
             if (ModelState.IsValid)
             {
-                _repository.Context.Add(tip);
-                await _repository.Context.SaveChangesAsync();
+                await _repository.AddTip(tip);
                 return RedirectToAction(nameof(Index), new { id = tip.CourseId });
             }
 
@@ -171,9 +175,9 @@ namespace Projekt_StudieTips.Controllers
             {
                 return NotFound();
             }
-            
 
-            var tip = await _repository.Context.Tips.FindAsync(id);
+
+            var tip = await _repository.GetTip(id);
             if (tip == null)
             {
                 return NotFound();
@@ -184,7 +188,7 @@ namespace Projekt_StudieTips.Controllers
             if (check != null)
             {
                 var bruger = User.Claims.FirstOrDefault(c => c.Type == "User" || c.Type == "Admin" || c.Type == "Moderator").Value;
-                
+
                 if (tip.Username != bruger && bruger != "Admin" && bruger != "Moderator")
                 {
                     return RedirectToAction(nameof(Index));
@@ -212,12 +216,11 @@ namespace Projekt_StudieTips.Controllers
             {
                 try
                 {
-                    _repository.Context.Update(tip);
-                    await _repository.Context.SaveChangesAsync();
+                    await _repository.UpdateTip(tip);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TipExists(tip.TipId))
+                    if (!_repository.TipExists(tip.TipId))
                     {
                         return NotFound();
                     }
@@ -272,15 +275,8 @@ namespace Projekt_StudieTips.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tip = await _repository.Context.Tips.FindAsync(id);
-            _repository.Context.Tips.Remove(tip);
-            await _repository.Context.SaveChangesAsync();
+            await _repository.DeleteTip(id);
             return RedirectToAction("Index", "Tips", new { id = tip.CourseId });
-        }
-
-        private bool TipExists(int id)
-        {
-            return _repository.TipExists(id);
         }
     }
 }

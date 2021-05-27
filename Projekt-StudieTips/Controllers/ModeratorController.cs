@@ -19,10 +19,10 @@ namespace Projekt_StudieTips.Controllers
     public class ModeratorController : Controller
     {
 
-        private readonly TipRepository _repository;
+        private readonly ITipRepository _repository;
 
 
-        public ModeratorController(TipRepository repository)
+        public ModeratorController(ITipRepository repository)
         {
             _repository = repository;
         }
@@ -31,13 +31,8 @@ namespace Projekt_StudieTips.Controllers
         // GET: ModeratorController
         public async Task<IActionResult> Index(int? id, string sortOrder, int? page)
         {
-
-
-
             var context = await _repository.GetUnmoderatedTips();
 
-           
-            
                 try
                 {
                     if (context.Count == 0)
@@ -70,7 +65,7 @@ namespace Projekt_StudieTips.Controllers
             }
 
 
-            var tip = await _repository.Context.Tips.FindAsync(id);
+            var tip = await _repository.GetTip(id);
             if (tip == null)
             {
                 return NotFound();
@@ -78,23 +73,15 @@ namespace Projekt_StudieTips.Controllers
 
             tip.IsVerified = true;
 
-            _repository.Context.SaveChanges();
+            _repository.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }
        
-        public async Task<IActionResult> DenyTip(int? id)
+        public async Task<IActionResult> DenyTip(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            Tip tipToDelete = new() { TipId = (int)id };
-            _repository.Context.Attach(tipToDelete);
-            _repository.Context.Remove(tipToDelete);
-
-            _repository.Context.SaveChanges();
+            await _repository.DeleteTip(id);
 
             return RedirectToAction(nameof(Index));
         }

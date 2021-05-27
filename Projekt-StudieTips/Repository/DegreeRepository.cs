@@ -8,9 +8,9 @@ using Projekt_StudieTips.Data;
 
 namespace Projekt_StudieTips.Repository
 {
-    public class DegreeRepository
+    public class DegreeRepository : IDegreeRepository
     {
-        public DatabaseContext Context { get; set; }
+        private DatabaseContext Context { get; set; }
         public DegreeRepository(DatabaseContext context)
         {
             Context = context;
@@ -43,6 +43,11 @@ namespace Projekt_StudieTips.Repository
         {
             Context.Degrees.Remove(degree);
             await Context.SaveChangesAsync();
+        }
+
+        public bool DegreeExists(int id)
+        {
+            return Context.Degrees.Any(e => e.DegreeId == id);
         }
     }
 }

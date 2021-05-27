@@ -15,9 +15,9 @@ namespace Projekt_StudieTips.Controllers
     public class DegreesController : Controller
     {
        
-        private readonly DegreeRepository _repository;
+        private readonly IDegreeRepository _repository;
 
-        public DegreesController(DegreeRepository degreeRepository)
+        public DegreesController(IDegreeRepository degreeRepository)
         {
             
             _repository = degreeRepository;
@@ -126,7 +126,7 @@ namespace Projekt_StudieTips.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DegreeExists(degree.DegreeId))
+                    if (!_repository.DegreeExists(degree.DegreeId))
                     {
                         return NotFound();
                     }
@@ -168,9 +168,6 @@ namespace Projekt_StudieTips.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DegreeExists(int id)
-        {
-            return _repository.Context.Degrees.Any(e => e.DegreeId == id);
-        }
+
     }
 }
