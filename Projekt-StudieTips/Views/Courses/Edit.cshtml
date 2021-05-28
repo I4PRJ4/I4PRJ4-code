@@ -12,10 +12,10 @@
         <div >
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Courses.CourseId" />
+                <input type="hidden" asp-for="Course.CourseId" />
                 <div class="form-group CenterEverything">
                     <label class="control-label h1Degree" style="font-size: 3em">Navn på kursus</label>
-                    <input  style="font-size: 2em; width: 50%; text-align: left; background-color: rgba(255,255,255,0.8);" asp-for="Courses.CourseName" name="CourseName" id="CourseName" class="form-control CenterEverything" />
+                    <input  style="font-size: 2em; width: 50%; text-align: left; background-color: rgba(255,255,255,0.8);" asp-for="Course.CourseName" name="CourseName" id="CourseName" class="form-control CenterEverything" />
                     <span asp-for="Courses.CourseName" name="CourseName" class="text-danger"></span>
                 </div>
                 <label class="control-label h1Degree" style="font-size: 3em">Vælg uddannelse</label>
@@ -35,7 +35,7 @@
     </div>
 
     <div>
-        <a asp-action="Index" asp-route-DegreeId="@Model.Courses.DegreeId"><p class="h1Degree" style="font-size: 2.5em; color: #fff">Tilbage til kursus</p></a>
+        <a asp-action="Index" asp-route-DegreeId="@Model.Course.DegreeId"><p class="h1Degree" style="font-size: 2.5em; color: #fff">Tilbage til kursus</p></a>
     </div>
 
     </div>

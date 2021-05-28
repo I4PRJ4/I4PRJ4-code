@@ -107,11 +107,11 @@ namespace Projekt_StudieTips.Controllers
             DegreeCourse ViewModelDegreeCourse = new();
 
             ViewModelDegreeCourse.Degrees = _degreeRepository.GetDegrees();
-            ViewModelDegreeCourse.Courses = _courseRepository.GetCourse(id);
+            ViewModelDegreeCourse.Course = _courseRepository.GetCourse(id);
 
-            ViewBag.Course = _courseRepository.GetCourse(id);
+            ViewBag.Course = ViewModelDegreeCourse.Course;
 
-            if (ViewModelDegreeCourse.Courses == null)
+            if (ViewModelDegreeCourse.Course == null)
             {
                 return NotFound();
             }

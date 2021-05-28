@@ -7,7 +7,7 @@ namespace Projekt_StudieTips.Models.ViewModels
 {
     public class DegreeCourse
     {
-        public Course Courses { get; set; }
+        public Course Course { get; set; }
 
         public List<Degree> Degrees { get; set; }
     }
