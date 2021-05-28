@@ -16,6 +16,7 @@ using PagedList;
 namespace Projekt_StudieTips.Controllers
 {
     [Authorize(Policy = "IsModerator")]
+
     public class ModeratorController : Controller
     {
 

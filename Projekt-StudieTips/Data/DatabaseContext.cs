@@ -20,7 +20,7 @@ namespace Projekt_StudieTips.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Degree>().HasIndex(d => d.DegreeName).IsUnique();
+            //modelBuilder.Entity<Degree>().HasIndex(d => d.DegreeName).IsUnique();
 
             //modelBuilder.Entity<Course>().HasOne(c => c.Degrees)
             //    .WithMany(d => d.Courses)
