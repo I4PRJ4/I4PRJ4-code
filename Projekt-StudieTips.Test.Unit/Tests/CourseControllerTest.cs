@@ -84,23 +84,15 @@ namespace Projekt_StudieTips.Test.Unit
 
 
         [Test]
-        public async Task Create_WithoutParameters_ReturnsAViewResult_WithNoViewData_AndCallsCreateOnRepository()
+        public async Task Create_WithNullParameter_CallOnRepository_ReturnsANotFoundResult()
         {
             //Arrange
-            Degree d = new();
-            List<Degree> degrees = new();
-            degrees.Add(d);
-            _degreeRepo.GetDegrees().Returns(degrees);
 
             //Act
-            var result = await _uut.Create(DegreeId:1);
-
+            var result = await _uut.Create(DegreeId: null);
 
             //Assert
-            Assert.IsInstanceOf(typeof(ViewResult), result);
-            Assert.That((int)((ViewResult)result).ViewData["DegreeId"] == 1);
-            _degreeRepo.Received().GetDegrees();
-            Assert.IsAssignableFrom<DegreeCourse>(((ViewResult)result).ViewData.Model);
+            Assert.IsInstanceOf<NotFoundResult>(result);
         }
 
         [Test]
