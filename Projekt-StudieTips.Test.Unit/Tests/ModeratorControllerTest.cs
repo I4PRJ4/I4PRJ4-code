@@ -64,7 +64,8 @@ namespace Projekt_StudieTips.Test.Unit
             Assert.IsInstanceOf(typeof(ViewResult), result);
             Assert.IsAssignableFrom<PagedList<Tip>>(((ViewResult)result).ViewData.Model);
             string ViewBagData = "Der er ingen tips at verificere.";
-            Assert.That(((ViewResult)result).ViewData["CourseName"] == ViewBagData);
+            Assert.That((string)((ViewResult)result).ViewData["CourseName"] == ViewBagData);
+            await _TipRepo.Received().GetUnmoderatedTips();
         }
 
         [Test]

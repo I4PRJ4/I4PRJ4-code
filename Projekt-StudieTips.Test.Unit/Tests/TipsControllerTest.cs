@@ -20,7 +20,6 @@ namespace Projekt_StudieTips.Test.Unit
         [SetUp]
         public void Setup()
         {
-
             _TipRepo = Substitute.For<ITipRepository>();
             _uut = new(_TipRepo, _user);
         }
@@ -53,8 +52,8 @@ namespace Projekt_StudieTips.Test.Unit
             var result = await _uut.Index(1, "date_desc", 1);
             //Assert
             Assert.IsInstanceOf(typeof(ViewResult), result);
-            _TipRepo.Received().GetTips(1, "date_desc");
-            _TipRepo.Received().GetCourse(1);
+            await _TipRepo.Received().GetTips(1, "date_desc");
+            await _TipRepo.Received().GetCourse(1);
             Assert.That((int)((ViewResult)result).ViewData["CourseId"] == c.CourseId);
             Assert.That((string)((ViewResult)result).ViewData["CourseName"] == c.CourseName);
             Assert.That((string)((ViewResult)result).ViewData["NoTip"] == "har desværre ingen tips..");
@@ -80,14 +79,14 @@ namespace Projekt_StudieTips.Test.Unit
             var result = await _uut.Index(1, "date_desc", 1);
             //Assert
             Assert.IsInstanceOf(typeof(ViewResult), result);
-            _TipRepo.Received().GetTips(1, "date_desc");
+            await _TipRepo.Received().GetTips(1, "date_desc");
             Assert.That((int)((ViewResult)result).ViewData["CourseId"] == TipMock.CourseId);
             Assert.That((string)((ViewResult)result).ViewData["CourseName"] == TipMock.Course.CourseName);
             Assert.IsAssignableFrom<PagedList<Tip>>(((ViewResult)result).ViewData.Model);
         }
 
         [Test]
-        public async Task SearchTip_Null_Term_ReturnsRedirect()
+        public void SearchTip_Null_Term_ReturnsRedirect()
         {
             //Arrange
 
@@ -120,7 +119,7 @@ namespace Projekt_StudieTips.Test.Unit
             var result = _uut.SearchTip("date_desc", 1, search);
             //Assert
             Assert.IsInstanceOf(typeof(ViewResult), result);
-            _TipRepo.Received().GetTipsWithinSearchTerm(search);
+            await _TipRepo.Received().GetTipsWithinSearchTerm(search);
             Assert.That((int)((ViewResult)result).ViewData["CourseId"] == 0);
             Assert.That((string)((ViewResult)result).ViewData["CourseName"] == "Vi kunne ikke finde nogle tips som indeholdte søgsordene.");
         }
@@ -147,7 +146,7 @@ namespace Projekt_StudieTips.Test.Unit
             var result = _uut.SearchTip("date_desc", 1, search);
             //Assert
             Assert.IsInstanceOf(typeof(ViewResult), result);
-            _TipRepo.Received().GetTipsWithinSearchTerm(search);
+            await _TipRepo.Received().GetTipsWithinSearchTerm(search);
             Assert.That((int)((ViewResult)result).ViewData["CourseId"] == TipMock.CourseId);
             Assert.That((string)((ViewResult)result).ViewData["CourseName"] == TipMock.Course.CourseName);
             Assert.IsAssignableFrom<PagedList<Tip>>(((ViewResult)result).ViewData.Model);
@@ -188,7 +187,7 @@ namespace Projekt_StudieTips.Test.Unit
             var result = await _uut.Create(TipMock);
             //Assert
             Assert.IsInstanceOf(typeof(RedirectToActionResult), result);
-            _TipRepo.Received().AddTip(TipMock);
+            await _TipRepo.Received().AddTip(TipMock);
             Assert.AreEqual("Index", ((RedirectToActionResult)result).ActionName);
         }
 
@@ -243,7 +242,7 @@ namespace Projekt_StudieTips.Test.Unit
             //Assert
             Assert.IsInstanceOf(typeof(RedirectToActionResult), result);
             Assert.AreEqual("Index", ((RedirectToActionResult)result).ActionName);
-            _TipRepo.Received().UpdateTip(TipMock);
+            await _TipRepo.Received().UpdateTip(TipMock);
 
         }
 
@@ -256,118 +255,8 @@ namespace Projekt_StudieTips.Test.Unit
             //Assert
             Assert.IsInstanceOf(typeof(RedirectToActionResult), result);
             Assert.AreEqual("Index", ((RedirectToActionResult)result).ActionName);
-            _TipRepo.Received().DeleteTip(1);
+            await _TipRepo.Received().DeleteTip(1);
 
         }
-        //[Test]
-        //public void Redirect_WithPlaintextRoutes_ReturnsRedirectsToCorrectPaths()
-        //{
-
-        //    //Arrange
-        //    const string goTo = "Gå til";
-        //    const string edit = "Rediger";
-        //    const string delete = "Slet";
-
-        //    //Act
-        //    var goToResult = _uut.Redirect(null, goTo) as RedirectToActionResult;
-        //    var editResult = _uut.Redirect(null, edit) as RedirectToActionResult;
-        //    var deleteResult = _uut.Redirect(null, delete) as RedirectToActionResult;
-        //    //Assert
-        //    ;
-        //    Assert.AreEqual("Index", goToResult?.ActionName);
-        //    Assert.AreEqual("Edit", editResult?.ActionName);
-        //    Assert.AreEqual("Delete", deleteResult?.ActionName);
-        //}
-
-        //[Test]
-        //public async Task Edit_WithNoSpecifiedId_Returns_NotFound()
-        //{
-        //    //Arrange
-
-        //    //Act
-        //    var result = await _uut.Edit(id: null);
-        //    //Assert
-        //    Assert.IsInstanceOf<NotFoundResult>(result);
-        //}
-
-        //[Test]
-
-        //public async Task Edit_WithIdMismatch_Returns_NotFound()
-        //{
-        //    //Arrange
-        //    var degree = new Degree() { DegreeId = 0 };
-        //    //Act
-        //    var result = await _uut.Edit(2, degree);
-        //    //Assert
-        //    Assert.IsInstanceOf<NotFoundResult>(result);
-        //}
-
-        //[Test]
-        //public async Task Edit_WithIdMatch_ReturnsRedirectToIndex_AndUpdatesViaRepo()
-        //{
-        //    //Arrange
-        //    var degree = new Degree() { DegreeId = 0 };
-
-        //    //Act
-        //    var result = await _uut.Edit(0, degree);
-        //    //Assert
-
-        //    Assert.IsInstanceOf<RedirectToActionResult>(result);
-        //    Assert.AreEqual("Index", (result as RedirectToActionResult)?.ActionName);
-        //    await _subRepo.Received().UpdateDegree(degree);
-        //}
-
-        //[Test]
-        //public async Task Delete_WithNoId_ReturnsNotFound()
-        //{
-        //    //Arrange
-
-        //    //Act
-        //    var result = await _uut.Delete(id: null);
-        //    //Assert
-        //    Assert.IsInstanceOf<NotFoundResult>(result);
-        //}
-
-        //[Test]
-        //public async Task Delete_WithValidId_ReturnsViewWithDegree()
-        //{
-        //    //Arrange
-        //    var degree = new Degree() { DegreeId = 0 };
-        //    _subRepo.FindDegree(0).Returns(degree);
-        //    //Act
-        //    var result = await _uut.Delete(0);
-        //    //Assert
-        //    Assert.IsInstanceOf<ViewResult>(result);
-        //    _subRepo.Received().FindDegree(0);
-        //    Assert.AreEqual(degree, (result as ViewResult)?.ViewData.Model);
-        //}
-
-        //[Test]
-        //public async Task DeleteConfirmed_WithValidId_ReturnsRedirectToIndex()
-        //{
-        //    //Arrange
-        //    var degree = new Degree() { DegreeId = 0 };
-        //    _subRepo.FindDegree(0).Returns(degree);
-        //    //Act
-        //    var result = await _uut.DeleteConfirmed(0);
-        //    //Assert
-        //    Assert.IsInstanceOf<RedirectToActionResult>(result);
-        //    _subRepo.Received().FindDegree(0);
-        //    _subRepo.Received().RemoveDegree(degree);
-        //    Assert.AreEqual("Index", (result as RedirectToActionResult)?.ActionName);
-        //}
-
-        //[Test]
-        //public async Task DeleteConfirmed_WithInvalidId_ReturnsRedirectToIndex()
-        //{
-        //    //Arrange
-        //    //Act
-        //    var result = await _uut.DeleteConfirmed(-5);
-        //    //Assert
-        //    Assert.IsInstanceOf<RedirectToActionResult>(result);
-        //    Assert.AreEqual("Index", (result as RedirectToActionResult)?.ActionName);
-        //}
-
-
     }
 }
