@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Transactions;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Projekt_StudieTips.Data;
-using Projekt_StudieTips.Models;
-using Projekt_StudieTips.Repository;
 using PagedList;
+using Projekt_StudieTips.Repository;
+using System;
+using System.Threading.Tasks;
 
 namespace Projekt_StudieTips.Controllers
 {
@@ -33,33 +25,33 @@ namespace Projekt_StudieTips.Controllers
         public async Task<IActionResult> Index(string sortOrder, int? page)
         {
             var context = await _repository.GetUnmoderatedTips();
-            
+
             ViewBag.DateSortParm = sortOrder == "date_desc" ? "date_desc" : "date_asc";
 
             try
+            {
+                if (context.Count == 0)
                 {
-                    if (context.Count == 0)
-                    {
-                        ViewBag.CourseName = "Der er ingen tips at verificere.";
-                    }
+                    ViewBag.CourseName = "Der er ingen tips at verificere.";
                 }
-                catch (InvalidOperationException)
-                {
-                    return NotFound();
-                }
-                int pageSize = 3;
-                int pageNumber = (page ?? 1);
-                if (pageNumber < 1)
-                {
-                    pageNumber = 1;
-                }
+            }
+            catch (InvalidOperationException)
+            {
+                return NotFound();
+            }
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            if (pageNumber < 1)
+            {
+                pageNumber = 1;
+            }
 
 
             return View(context.ToPagedList(pageNumber, pageSize));
         }
 
 
-        
+
         public async Task<IActionResult> VerifyTip(int? id)
         {
             if (id == null)
@@ -80,7 +72,7 @@ namespace Projekt_StudieTips.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-       
+
         public async Task<IActionResult> DenyTip(int id)
         {
 

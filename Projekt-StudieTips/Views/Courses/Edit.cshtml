@@ -38,7 +38,7 @@
         <a asp-action="Index" asp-route-DegreeId="@Model.Course.DegreeId"><p class="h1Degree" style="font-size: 2.5em; color: #fff">Tilbage til kursus</p></a>
     </div>
 
-    </div>
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

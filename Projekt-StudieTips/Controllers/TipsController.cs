@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Transactions;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Projekt_StudieTips.Data;
+using PagedList;
 using Projekt_StudieTips.Models;
 using Projekt_StudieTips.Repository;
-using PagedList;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Projekt_StudieTips.Controllers
 {
@@ -210,7 +206,7 @@ namespace Projekt_StudieTips.Controllers
             {
                 return NotFound();
             }
-           
+
 
             if (ModelState.IsValid)
             {
@@ -276,7 +272,7 @@ namespace Projekt_StudieTips.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _repository.DeleteTip(id);
-            return RedirectToAction("Index", "Tips",  id );
+            return RedirectToAction("Index", "Tips", id);
         }
     }
 }

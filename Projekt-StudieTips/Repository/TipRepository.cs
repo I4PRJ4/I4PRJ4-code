@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Projekt_StudieTips.Data;
+using Projekt_StudieTips.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Projekt_StudieTips.Data;
-using Projekt_StudieTips.Models;
 
 namespace Projekt_StudieTips.Repository
 {

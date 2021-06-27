@@ -3,12 +3,12 @@
     ViewData["Title"] = "Home Page";
 }
 <link rel="stylesheet" href="~/css/site.css" />
-<link rel="stylesheet" href="~/css/searchbar.css"/>
+<link rel="stylesheet" href="~/css/searchbar.css" />
 
 <form class="search-bar" style="font-size: 2em" asp-controller="Tips" asp-action="SearchTip">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <input pattern=".*\S.*" required  asp-for="SearchTerm">
+    <input pattern=".*\S.*" required asp-for="SearchTerm">
     <button class="search-btn" type="submit" value="Søg" asp-for="SearchTerm">
         <span>Søg..</span>
     </button>

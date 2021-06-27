@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Projekt_StudieTips.Controllers;
-using Projekt_StudieTips.Models;
-using System;
+﻿using Projekt_StudieTips.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Projekt_StudieTips.Repository
 {
-    public interface ICourseRepository 
+    public interface ICourseRepository
     {
 
         List<Course> FindCourses(int? id);
@@ -25,6 +21,6 @@ namespace Projekt_StudieTips.Repository
         bool CourseExists(int id);
 
 
-     
+
     }
 }

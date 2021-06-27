@@ -4,31 +4,31 @@
     ViewData["Title"] = "Edit";
 }
 <div class="CenterEverything">
-<h1 class="h1Degree">Redigér uddannelse</h1>
+    <h1 class="h1Degree">Redigér uddannelse</h1>
 
-<hr />
-<div class="row CenterEverything">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="DegreeId" />
-            <div class="form-group">
-                <label  class="control-label h1Degree" style="font-size: 3em">Navn på uddannelse</label>
-                <br/>
-                <input style="font-size: 2em" asp-for="DegreeName" class="form-control" />
-                <span asp-validation-for="DegreeName" class="text-danger"></span>
-            </div>
-            <br/>
-            <div class="form-group">
-                <input type="submit" value="Gem" class="gotobtn" />
-            </div>
-        </form>
+    <hr />
+    <div class="row CenterEverything">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="DegreeId" />
+                <div class="form-group">
+                    <label class="control-label h1Degree" style="font-size: 3em">Navn på uddannelse</label>
+                    <br />
+                    <input style="font-size: 2em" asp-for="DegreeName" class="form-control" />
+                    <span asp-validation-for="DegreeName" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Gem" class="gotobtn" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index"><p class="h1Degree" style="font-size: 2.5em; color: #fff">Tilbage til uddannelser</p></a>
-</div>
+    <div>
+        <a asp-action="Index"><p class="h1Degree" style="font-size: 2.5em; color: #fff">Tilbage til uddannelser</p></a>
+    </div>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -7,20 +7,20 @@
     <h1 class="h1Degree">Slet kursus</h1>
 
     <h3 class="h1Degree" style="font-size: 5em">Er du sikker på du vil slette dette kursus?</h3>
-    <br/>
+    <br />
     <div>
         <span class="h1Degree" style="font-size: 3em; color: #0A8DFF; background-color: rgba(255, 255, 255, 0.8); border-radius: 0.8em; box-shadow: 0 1px 5px #494949; padding: 0.2em 0.5em 0.2em 0.5em; text-shadow: 0px 0px">
             Kursus: @Model.CourseName
         </span>
-        <br/>
-        <br/>
-        <br/>
+        <br />
+        <br />
+        <br />
 
         <form asp-action="Delete">
             <input type="hidden" name="id" value="@Model.CourseId" />
             <input type="submit" value="Slet" class="gotobtn" style="background-color: red" />
-            <br/>
-            <br/>
+            <br />
+            <br />
             <a asp-action="Index" asp-route-DegreeId="@Model.DegreeId"><p class="h1Degree" style="font-size: 2.5em; color: #fff">Tilbage til uddannelser</p></a>
         </form>
     </div>

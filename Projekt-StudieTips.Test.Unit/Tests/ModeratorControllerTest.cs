@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Projekt_StudieTips.Models;
-using Projekt_StudieTips.Controllers;
-using Projekt_StudieTips.Repository;
-using NUnit.Framework;
+﻿using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
-using Microsoft.AspNetCore.Mvc;
+using NUnit.Framework;
 using PagedList;
+using Projekt_StudieTips.Controllers;
+using Projekt_StudieTips.Models;
+using Projekt_StudieTips.Repository;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Projekt_StudieTips.Test.Unit
 {
@@ -43,7 +40,7 @@ namespace Projekt_StudieTips.Test.Unit
             var result = await _uut.Index("date_desc", 1);
 
             // Assert
-            
+
             Assert.IsInstanceOf(typeof(ViewResult), result);
             Assert.IsAssignableFrom<PagedList<Tip>>(((ViewResult)result).ViewData.Model);
         }
@@ -115,7 +112,7 @@ namespace Projekt_StudieTips.Test.Unit
             Assert.IsInstanceOf(typeof(RedirectToActionResult), result);
             Assert.AreEqual("Index", ((RedirectToActionResult)result).ActionName);
             Assert.That(TipMock.IsVerified == true);
-            
+
             _TipRepo.Received().GetTip(1);
             _TipRepo.Received().SaveChanges();
         }
@@ -133,7 +130,7 @@ namespace Projekt_StudieTips.Test.Unit
 
             Assert.IsInstanceOf(typeof(RedirectToActionResult), result);
             Assert.AreEqual("Index", ((RedirectToActionResult)result).ActionName);
-            
+
             _TipRepo.Received().DeleteTip(1);
         }
     }

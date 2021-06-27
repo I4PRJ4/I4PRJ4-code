@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Projekt_StudieTips.Models;
-using Projekt_StudieTips.Controllers;
-using Projekt_StudieTips.Repository;
-using NUnit.Framework;
-using NSubstitute;
 using Microsoft.AspNetCore.Mvc;
-using Projekt_StudieTips.Models.ViewModels;
+using NSubstitute;
+using NUnit.Framework;
+using Projekt_StudieTips.Controllers;
+using Projekt_StudieTips.Models;
+using Projekt_StudieTips.Repository;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Projekt_StudieTips.Test.Unit
 {
@@ -27,7 +23,7 @@ namespace Projekt_StudieTips.Test.Unit
             _courseRepo = Substitute.For<ICourseRepository>();
             _degreeRepo = Substitute.For<IDegreeRepository>();
             _uut = new CoursesController(_courseRepo, _degreeRepo);
-           
+
         }
 
         [Test]
@@ -53,7 +49,7 @@ namespace Projekt_StudieTips.Test.Unit
         public void Index_ReturnsView_WithNull()
         {
             //Arrange
-            
+
 
             //Act
             var result = _uut.Index(null);
@@ -76,7 +72,7 @@ namespace Projekt_StudieTips.Test.Unit
             var editResult = _uut.Redirect(null, edit) as RedirectToActionResult;
             var deleteResult = _uut.Redirect(null, delete) as RedirectToActionResult;
             //Assert
-            
+
             Assert.AreEqual("Index", goToResult?.ActionName);
             Assert.AreEqual("Edit", editResult?.ActionName);
             Assert.AreEqual("Delete", deleteResult?.ActionName);
@@ -180,6 +176,6 @@ namespace Projekt_StudieTips.Test.Unit
             Assert.IsInstanceOf<NotFoundResult>(result);
         }
 
-    
+
     }
 }

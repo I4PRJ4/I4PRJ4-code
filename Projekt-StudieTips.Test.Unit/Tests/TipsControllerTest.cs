@@ -1,13 +1,13 @@
-﻿using NUnit.Framework;
-using Projekt_StudieTips.Models;
-using Projekt_StudieTips.Controllers;
-using Projekt_StudieTips.Repository;
-using NSubstitute;
-using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using NSubstitute;
+using NUnit.Framework;
 using PagedList;
+using Projekt_StudieTips.Controllers;
+using Projekt_StudieTips.Models;
+using Projekt_StudieTips.Repository;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Projekt_StudieTips.Test.Unit
 {
@@ -28,9 +28,9 @@ namespace Projekt_StudieTips.Test.Unit
         public async Task Index_Null_ID_ReturnsRedirect()
         {
             //Arrange
-            
+
             //Act
-            var result = await _uut.Index(null,"date_desc",1);
+            var result = await _uut.Index(null, "date_desc", 1);
             //Assert
             Assert.IsInstanceOf(typeof(RedirectToActionResult), result);
             Assert.AreEqual("Index", ((RedirectToActionResult)result).ActionName);
@@ -44,8 +44,8 @@ namespace Projekt_StudieTips.Test.Unit
             Course c = new();
             c.CourseId = 1;
             c.CourseName = "TestString";
-            
-            _TipRepo.GetTips(1,"date_desc").Returns(tips);
+
+            _TipRepo.GetTips(1, "date_desc").Returns(tips);
             _TipRepo.GetCourse(1).Returns(c);
 
             //Act
@@ -94,7 +94,7 @@ namespace Projekt_StudieTips.Test.Unit
             search.SearchTerm = null;
 
             //Act
-            var result = _uut.SearchTip("date_desc",1, search);
+            var result = _uut.SearchTip("date_desc", 1, search);
             //Assert
             Assert.IsInstanceOf(typeof(RedirectToActionResult), result);
             Assert.AreEqual("Index", ((RedirectToActionResult)result).ActionName);
@@ -158,7 +158,7 @@ namespace Projekt_StudieTips.Test.Unit
             //Arrange
 
             //Act
-            var result = _uut.Create(value:null);
+            var result = _uut.Create(value: null);
             //Assert
             Assert.IsInstanceOf(typeof(NotFoundResult), result);
         }
@@ -223,7 +223,7 @@ namespace Projekt_StudieTips.Test.Unit
             TipMock.TipId = 2;
 
             //Act
-            var result = await _uut.Edit(1,TipMock);
+            var result = await _uut.Edit(1, TipMock);
             //Assert
             Assert.IsInstanceOf(typeof(NotFoundResult), result);
         }

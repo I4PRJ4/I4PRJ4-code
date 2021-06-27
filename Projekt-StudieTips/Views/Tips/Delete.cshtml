@@ -1,88 +1,88 @@
 ﻿@model Projekt_StudieTips.Models.Tip
 
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/tippage.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    @{
-        ViewData["Title"] = "Delete";
+<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/css/tippage.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+@{
+    ViewData["Title"] = "Delete";
 
 
-        var courseName = ViewBag.CourseName;
-        var courseId = ViewBag.CourseId;
-        var noTip = ViewBag.NoTip;
-        var first = "";
-        var end = "";
-        var rmLength = 40;
-    }
+    var courseName = ViewBag.CourseName;
+    var courseId = ViewBag.CourseId;
+    var noTip = ViewBag.NoTip;
+    var first = "";
+    var end = "";
+    var rmLength = 40;
+}
 
-    <div class="CenterEverything">
-        <h1 class="h1Degree">Slet tip</h1>
+<div class="CenterEverything">
+    <h1 class="h1Degree">Slet tip</h1>
 
-        <h3 class="h1Degree" style="font-size: 3em">Er du sikker på, at du vil slette tippet?</h3>
-        <div class="mx-auto widthclass" style="text-align: center;">
-
-
-            @{
-                var text = Model.Text;
-                var textLength = text.Length;
+    <h3 class="h1Degree" style="font-size: 3em">Er du sikker på, at du vil slette tippet?</h3>
+    <div class="mx-auto widthclass" style="text-align: center;">
 
 
-                if (textLength >= rmLength)
-                {
-                    first = text.Substring(0, rmLength);
-                    end = text.Substring(rmLength);
-                }
-                else
-                {
-                    first = text.Substring(0, textLength);
-
-                }
-
-                <div class="post" name="postdiv" style="overflow-wrap: break-word">
-                    <div>
-
-                        <p style="font-size: 1.2em; color:rgba(10,141,255,1.0)">
-                            Bruger: @Model.Username
-                        </p>
+        @{
+            var text = Model.Text;
+            var textLength = text.Length;
 
 
-                        <p style="float: top; font-size: 1em; color:#000">
-                            @Html.DisplayFor(modelItem => Model.Date)
-                        </p>
-                    </div>
-
-
-                    <div class="tiptext2">
-                        <p style="float: top; font-size: 1.8em; color: #000;">
-                            @Html.DisplayFor(modelItem => Model.Headline)
-                        </p>
-                    </div>
-
-                    <div class="tiptext3" style="font-size: 1.3em">
-                        @if (textLength >= rmLength)
-                        {
-                            @(first)<span class="dots">...</span>
-                            <span class="more">@(end)</span>
-                            <button class="read">Vis mere...</button>
-                        }
-                        else
-                        {
-                            @(first)
-                        }
-                    </div>
-                </div>
+            if (textLength >= rmLength)
+            {
+                first = text.Substring(0, rmLength);
+                end = text.Substring(rmLength);
             }
-            <form asp-action="Delete">
-                <input type="hidden" asp-for="TipId" />
-                <input type="submit" value="Slet" class="gotobtn" style="background-color: red" />
-                <br />
-                <br />
-                <a asp-action="Index" asp-route-id="@Model.CourseId">
-                    <p class="h1Degree" style="font-size: 2em; color: #fff">Tilbage</p>
-                </a>
-            </form>
-        </div>
+            else
+            {
+                first = text.Substring(0, textLength);
+
+            }
+
+            <div class="post" name="postdiv" style="overflow-wrap: break-word">
+                <div>
+
+                    <p style="font-size: 1.2em; color:rgba(10,141,255,1.0)">
+                        Bruger: @Model.Username
+                    </p>
+
+
+                    <p style="float: top; font-size: 1em; color:#000">
+                        @Html.DisplayFor(modelItem => Model.Date)
+                    </p>
+                </div>
+
+
+                <div class="tiptext2">
+                    <p style="float: top; font-size: 1.8em; color: #000;">
+                        @Html.DisplayFor(modelItem => Model.Headline)
+                    </p>
+                </div>
+
+                <div class="tiptext3" style="font-size: 1.3em">
+                    @if (textLength >= rmLength)
+                    {
+                        @(first)<span class="dots">...</span>
+                        <span class="more">@(end)</span>
+                        <button class="read">Vis mere...</button>
+                    }
+                    else
+                    {
+                        @(first)
+                    }
+                </div>
+            </div>
+        }
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="TipId" />
+            <input type="submit" value="Slet" class="gotobtn" style="background-color: red" />
+            <br />
+            <br />
+            <a asp-action="Index" asp-route-id="@Model.CourseId">
+                <p class="h1Degree" style="font-size: 2em; color: #fff">Tilbage</p>
+            </a>
+        </form>
     </div>
+</div>
 @*Javascript der håndterer read more / read less collapse-funktionen på tips*@
 <script>
     $(document).ready(function () {

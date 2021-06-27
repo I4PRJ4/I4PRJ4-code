@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Projekt_StudieTips.Models;
-using Projekt_StudieTips.Controllers;
-using Projekt_StudieTips.Repository;
+﻿using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
-using NSubstitute;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Mvc;
-using Projekt_StudieTips.Data;
+using Projekt_StudieTips.Controllers;
 
 namespace Projekt_StudieTips.Test.Unit
 {

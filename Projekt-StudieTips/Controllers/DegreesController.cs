@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Projekt_StudieTips.Data;
 using Projekt_StudieTips.Models;
 using Projekt_StudieTips.Repository;
+using System;
+using System.Threading.Tasks;
 
 namespace Projekt_StudieTips.Controllers
 {
     public class DegreesController : Controller
     {
-       
+
         private readonly IDegreeRepository _repository;
 
         public DegreesController(IDegreeRepository degreeRepository)
         {
-            
+
             _repository = degreeRepository;
         }
 

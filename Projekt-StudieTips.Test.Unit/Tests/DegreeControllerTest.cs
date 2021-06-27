@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
-using Projekt_StudieTips.Models;
-using Projekt_StudieTips.Controllers;
-using Projekt_StudieTips.Repository;
 using NUnit.Framework;
+using Projekt_StudieTips.Controllers;
+using Projekt_StudieTips.Models;
+using Projekt_StudieTips.Repository;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Projekt_StudieTips.Test.Unit
 {
@@ -73,7 +70,7 @@ namespace Projekt_StudieTips.Test.Unit
             await _subRepo.Received().AddDegree(degree);
             Assert.IsInstanceOf(typeof(RedirectToActionResult), result);
             Assert.AreEqual("Index", result?.ActionName);
-            
+
         }
 
 
@@ -166,7 +163,7 @@ namespace Projekt_StudieTips.Test.Unit
         public async Task Delete_WithValidId_ReturnsViewWithDegree()
         {
             //Arrange
-            var degree = new Degree() {DegreeId = 0};
+            var degree = new Degree() { DegreeId = 0 };
             _subRepo.FindDegree(0).Returns(degree);
             //Act
             var result = await _uut.Delete(0);
