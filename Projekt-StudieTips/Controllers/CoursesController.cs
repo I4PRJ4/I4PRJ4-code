@@ -126,9 +126,9 @@ namespace Projekt_StudieTips.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("CourseId,CourseName,DegreeId")] Course course)
         {
 
-            Course oldCourse = _courseRepository.GetCourse(id);
+            //Course oldCourse = _courseRepository.GetCourse(id);
 
-            await _courseRepository.RemoveCourse(oldCourse);
+            //await _courseRepository.RemoveCourse(oldCourse);
 
             if (ModelState.IsValid)
             {

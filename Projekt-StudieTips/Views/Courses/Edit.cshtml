@@ -9,27 +9,27 @@
 
     <hr />
     <div class="row CenterEverything">
-        <div >
+        <div>
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Course.CourseId" />
                 <div class="form-group CenterEverything">
                     <label class="control-label h1Degree" style="font-size: 3em">Navn på kursus</label>
-                    <input  style="font-size: 2em; width: 50%; text-align: left; background-color: rgba(255,255,255,0.8);" asp-for="Course.CourseName" name="CourseName" id="CourseName" class="form-control CenterEverything" />
-                    <span asp-for="Courses.CourseName" name="CourseName" class="text-danger"></span>
+                    <input style="font-size: 2em; width: 50%; text-align: left; background-color: rgba(255,255,255,0.8);" asp-for="Course.CourseName" class="form-control CenterEverything" />
+                    <span asp-validation-for="Course.CourseName"></span>
                 </div>
                 <label class="control-label h1Degree" style="font-size: 3em">Vælg uddannelse</label>
-                    <div style="transform: scale(0.6); background-color: rgba(255,255,255,0.80);" class="form-group select">
-                        <select name="DegreeId" id="DegreeId">
-                            @foreach (var item in Model.Degrees)
-                            {
-                                <option value="@item.DegreeId">@item.DegreeName</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Gem" class="gotobtn" />
-                    </div>
+                <div style="transform: scale(0.6); background-color: rgba(255,255,255,0.80);" class="form-group select">
+                    <select asp-for="Course.DegreeId">
+                        @foreach (var item in Model.Degrees)
+                        {
+                            <option value="@item.DegreeId">@item.DegreeName</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Gem" class="gotobtn" />
+                </div>
             </form>
         </div>
     </div>
