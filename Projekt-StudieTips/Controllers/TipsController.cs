@@ -120,7 +120,7 @@ namespace Projekt_StudieTips.Controllers
                 return NotFound();
             }
 
-            var tip = _repository.GetTipDetails(id);
+            var tip = await _repository.GetTipDetails(id);
 
             if (tip == null)
             {
